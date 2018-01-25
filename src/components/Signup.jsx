@@ -3,14 +3,14 @@ import React, { Component } from "react"
 import { HashRouter as Router, Route } from 'react-router-dom'
 import TextInput from "./TextInput.jsx"
 import Bttn from "./Bttn.jsx"
-import Signup from "./Signup.jsx"
+import LoginSignup from "./LoginSignup.jsx"
 
-export default class LoginSignup extends Component {
+export default class Signup extends Component {
 
   constructor() {
     super()
     this.state = {
-      signup: false
+      login: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -18,37 +18,33 @@ export default class LoginSignup extends Component {
   handleClick(evt) {
     evt.preventDefault()
     this.setState({
-      signup: true
+      login: true
     })
   }
 
-  render () {
+  render() {
 
     const handleClick = this.handleClick
 
     return(
       <div>
         {
-          (this.state.signup)
+          (this.state.login)
             ? <div>
                 <Router>
-                  <Route component={Signup} />
+                  <Route component={LoginSignup} />
                 </Router>
               </div>
-            : <div className="login-container">
+            : <div className="sign-up-container">
+                <h3>Create an Account</h3>
                 <h4>email: </h4><TextInput placeholder="email" />
                 <h4>password: </h4><TextInput placeholder="password" />
-                <br />
+                <h4>confirm password: </h4><TextInput placeholder="confirm password" />
+                <Bttn value="Create Account" />
 
-                <Bttn value="Log In" />
-                <br />
-
-                {/* make this a link */}
-                <Bttn value="Sign Up" onClick={handleClick} />
-                <br />
-
-                {/* make this a link */}
-                <Bttn value="Sign Up with Google" />
+                <div>
+                  <Bttn value="Go Back to Log In" onClick={handleClick} />
+                </div>
               </div>
         }
       </div>
