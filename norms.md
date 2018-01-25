@@ -1,4 +1,4 @@
-# Beanie Babies Dream Land Norms
+# XCORP!!!
 
 ## Standard Norms
 - Share the mic
@@ -13,41 +13,26 @@
 - Disagreements many, arguments few
 
 ## Additional Norms
-- Say what you're thinking, instead of deferring or not having an opinion about a topic.
+- Say what you're thinking, advocate for yourself
 
-## How We Work As A Team
-1. What does this group do when two or more members disagree (ex. on a technical approach, a technology choice, etc)?
-Do you vote? Does the whole group get involved? Do you get someone else to decide?
+- try to write "self-documenting" code - when in doubt, leave a comment 
+Be able to explain your code to the group so that we can all eventually understand all parts of the application. es-lint, no semi-colons
 
-*Each party can make their case and the whole group can vote. Consult fellow when there's a tie or we need more info.*
+- when disagreements arise and can't be settled between parties easily 
+each can make their case and the whole group can vote. Consult fellow/instructor when there's a tie or we need more info.
 
-2. What does this group do when a member is frustrated?
-What strategy do you use to talk about it? What do you do if you're the frustrated person? What do you do if you're the person someone is frustrated with? Imagine a situation where Person A thinks that Person B is not pulling their weight - write a script for how you think that conversation should go.
+- if someone is frustrated:
+For the person who is frustrated: try to understand why and if/what your group can do for you to help.
+For the group: consider offering to unload some of their workload, to pair, or just checking in
+For all: avoid hostile, assumptive, or accusatory language. take space/time if heated (don't let things escalate)
 
-*Any discussions should be with the whole group.*
+- have someone review your PR before merging to master. potentially mutliple parties if the work touches multiple points in the code. Test immediately after the merge. And have the team pull from master as soon as any bugs from the merge are fixed
 
-*Person A - "Do you want to pair program or split your work load? It seems like you have some bandwidth. Are you stuck on something, or do you need more work. I notice you haven't committed in a while."*
+- after 15 min of "productive struggle" reach out to other memmber(s) of the group. if still unresolved escalate to help ticket etc. Make sure to have covered your bases by referring to previous lectures, workshops, documentation, stackoverflow, Google!
 
-3. What does this group do when we merge our work together?
-Do we do it together? Do we require sign off from someone else?
+- incorporate pairing as much as possible. encourage learning and communication between group members. pairs can choose their own pairing norms (ie timers, roles)
 
-*We'll have the reviewer merge the branch. If there's a problem, we'll involve the whole team. Changes can stay between pusher and reviewer.*
 
-4. When does this group ask for help?
-After 10 minutes? 15? 20? After everybody's tried to solve the problem? What strategies do we use before we ask for help?
+- Stay in touch on Slack about any and all after-hours work. You don't need to wait for a reply to a Slack message to start on a feature, but make sure to check slack and announce your intentions before beginning. Try to have an evening stand-up/check-in to pre-plan as much as possible outside work. 
 
-*15 minute rule after at least 2 people have worked on the problem. Consult each other, consult fellow.*
-
-5. How do we pair? What do we do when two group members pair with each other?
-Do members of a pair decide their own norms? Do they do things like keep a timer to switch positions? How often do we switch partners?
-
-*We'll pair if 2 people really want to work on something, or if someone is stuck. We'll discuss at Stand Up if pairing is needed or wanted for that day. The pairs can decide on norms.*
-
-6. How does this group approach work "after hours" (i.e. after normal class hours and weekends)?
-Is it okay to work on your own after hours? How do we keep the group informed? Do we only work after hours when we can pair? When the entire group is present?
-
-*Keep each other informed on Slack, keep after-hours features small and doable. You don't need a reply to a Slack message to start on a feature. Friday afternoon/evening stand up to discuss weekend plans.*
-
-7. What time does this group have daily stand up?
-
-*We'll have Stand Up after REACTO and before the day's work begins.*
+- Daily Stand Ups first thing and last thing
