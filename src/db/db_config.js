@@ -1,22 +1,16 @@
 const firebase = require("firebase");
+require('./secrets')
 // Required for side-effects
 require("firebase/firestore");
 //import registerServiceWorker from '../registerServiceWorker';
 
-/*process.env.APIKEY =  “AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc”;
-process.env.AUTHDOMAIN =  “exquisitecorpse-84ff1.firebaseapp.com”;
-process.env.DATABASEURL =  “https://exquisitecorpse-84ff1.firebaseio.com“;
-process.env.PROJECTID = “exquisitecorpse-84ff1”;
-process.env.STORAGEBUCKET = “exquisitecorpse-84ff1.appspot.com”;
-process.env.MESSAGINGSENDERID = “349662282106”;*/
-
 var config = {
-  apiKey: 'AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc',
-  authDomain: 'exquisitecorpse-84ff1.firebaseapp.com',
-  databaseURL: 'https://exquisitecorpse-84ff1.firebaseio.com',
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  databaseURL: process.env.DATABASEURL,
   projectId: 'exquisitecorpse-84ff1',
-  storageBucket: 'exquisitecorpse-84ff1.appspot.com',
-  messagingSenderId: '349662282106'
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGINGSENDERID
 }
 
 
