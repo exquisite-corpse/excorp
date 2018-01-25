@@ -13,19 +13,29 @@ export default class Signup extends Component {
       login: false
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleClick(evt) {
     evt.preventDefault()
     this.setState({
-      login: true
+      login: true,
+      input: ''
     })
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
+    const email = evt.target.email.value
+    const password = evt.target.password.value
+    console.log('email: ', email)
+    console.log('password: ', password)
   }
 
   render() {
 
     const handleClick = this.handleClick
-
+    let input = this.input
     return(
       <div>
         {
@@ -37,11 +47,24 @@ export default class Signup extends Component {
               </div>
             : <div className="sign-up-container">
                 <h3>Create an Account</h3>
-                <h4>email: </h4><TextInput placeholder="email" />
-                <h4>password: </h4><TextInput placeholder="password" />
-                <h4>confirm password: </h4><TextInput placeholder="confirm password" />
-                <Bttn value="Create Account" />
-
+                <form name="sign-up-form" onSubmit={this.handleSubmit}>
+                  <h4>email: </h4>
+                    <TextInput
+                      name="email"
+                      type="text"
+                      value={input}
+                      // onChange={handleChange}
+                      placeholder="email" />
+                  <h4>password: </h4>
+                    <TextInput
+                      name="password"
+                      type="text"
+                      value={input}
+                      // onChange={handleChange}
+                      placeholder="password" />
+                  {/* <h4>confirm password: </h4><TextInput placeholder="confirm password" /> */}
+                  <Bttn type="submit" value="Create Account" />
+                </form>
                 <div>
                   <Bttn value="Go Back to Log In" onClick={handleClick} />
                 </div>
