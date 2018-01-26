@@ -5,7 +5,7 @@ require("firebase/firestore");
 //import registerServiceWorker from '../registerServiceWorker';
 
 var config = {
-  apiKey: process.env.APIKEY,
+  apiKey: 'AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc',
   authDomain: process.env.AUTHDOMAIN,
   databaseURL: process.env.DATABASEURL,
   projectId: 'exquisitecorpse-84ff1',

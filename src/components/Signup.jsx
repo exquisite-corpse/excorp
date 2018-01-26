@@ -4,6 +4,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import TextInput from "./TextInput.jsx"
 import Bttn from "./Bttn.jsx"
 import LoginSignup from "./LoginSignup.jsx"
+import firebase from 'firebase'
 
 export default class Signup extends Component {
 
@@ -28,6 +29,13 @@ export default class Signup extends Component {
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
+    // create a password-based account
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      console.log('in firebase auth')
+      var errorCode = error.errorCode
+      var errorMessage = error.message
+      console.log(errorCode, errorMessage)
+    })
     console.log('email: ', email)
     console.log('password: ', password)
   }
