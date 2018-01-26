@@ -1,11 +1,19 @@
+import db from './db/db_config';
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import LoginSignup from './components/LoginSignup.jsx';
 import NavBar from './components/NavBar.jsx'
 
+
 class App extends Component {
+
   render() {
+    db.collection("kat").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+      });
+  });
     return (
       <div className="App">
         <h1>Exquisite Corpse</h1>
