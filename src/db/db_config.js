@@ -1,5 +1,5 @@
 const firebase = require("firebase");
-require('./secrets')
+// require('./secrets')
 // Required for side-effects
 require("firebase/firestore");
 //import registerServiceWorker from '../registerServiceWorker';
@@ -12,8 +12,6 @@ var config = {
   storageBucket: process.env.STORAGEBUCKET,
   messagingSenderId: process.env.MESSAGINGSENDERID
 }
-
-
 
 firebase.initializeApp(config);
 var db = firebase.firestore();

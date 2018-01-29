@@ -16,8 +16,8 @@ class Drawing extends Component {
 
   componentDidMount() {
     const canvas = document.createElement("canvas");
-    canvas.width = 300;
-    canvas.height = 300;
+    canvas.width = 700;
+    canvas.height = 350;
     const context = canvas.getContext("2d");
 
     this.setState({ canvas, context });
@@ -34,7 +34,7 @@ class Drawing extends Component {
   };
 
   handleExportClick = () => {
-    console.log(this.stageRef.getStage().toDataURL());
+    // console.log(this.stageRef.getStage().toDataURL());
   }
 
   handleMouseMove = ({ evt }) => {
@@ -84,8 +84,8 @@ class Drawing extends Component {
       <Image
         image={canvas}
         ref={node => (this.image = node)}
-        width={300}
-        height={300}
+        width={700}
+        height={350}
         stroke="blue"
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
@@ -98,7 +98,27 @@ class Drawing extends Component {
 export default class DWgDetail extends Component {
   constructor(props){
     super(props);
-    this.state = {imageSrc: '', snippetSrc: ''}
+    this.state = {
+      imageSrc: '',
+      snippetSrc: ''
+    }
+  }
+
+  componentDidMount() {
+    const me = this
+    var docRef = db.collection('photos').doc('tHlyrlBNY9y9wzoitJzd');
+
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+          console.log('Document data:', doc.data());
+          me.setState({ snippetSrc: doc.data().src })
+      } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+      }
+    }).catch(function(error) {
+      console.log('Error getting document:', error);
+    });
   }
 
   handleExportClick = () => {
@@ -107,7 +127,7 @@ export default class DWgDetail extends Component {
       //snippetSrc: this.refs.cropper.crop()
     });
     {this.state.imgSrc && console.log(this.state.imgSrc)
-      db.collection('photos').doc('photo5').set({
+      db.collection('photos').doc().set({
         src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
       })
       .then(function() {
@@ -119,21 +139,33 @@ export default class DWgDetail extends Component {
   }
   }
   render() {
+    const snippet = this.state.snippetSrc
 
+    // const panelSource = this.props.previousPanel // render our snippet
+
+    // const drawingId = this.props.drawingId // drawing Id
 
     return (
       <div onContextMenu={e => e.preventDefault()}>
-        <Stage   width={700} height={700} ref={node => {
-          this.stageRef = node
-          }}>
-          <Layer>
-            <Drawing />
-          </Layer>
-        </Stage>
-        <button style={{ position: 'absolute', top: '0'}} onClick={this.handleExportClick}>Export stage</button>
-        {this.state.imgSrc&&
-        <Img src={this.state.imgSrc}/>}
 
+        <div className="stage-container">
+
+          <img className="snippet" src={snippet} />
+          <Stage className="Stage" width={700} height={500} ref={node => {
+            this.stageRef = node
+            }}>
+
+            <Layer>
+
+              <Drawing />
+            </Layer>
+          </Stage>
+
+
+
+        </div>
+
+        <button onClick={this.handleExportClick}>Export stage</button>
       </div>
     );
   }
