@@ -106,7 +106,8 @@ export default class DWgDetail extends Component {
       imgSrc: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
       //snippetSrc: this.refs.cropper.crop()
     });
-    {this.state.imgSrc && console.log(this.state.imgSrc)
+    {
+      // this.state.imgSrc && console.log(this.state.imgSrc)
       db.collection('photos').doc('photo5').set({
         src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
       })
