@@ -10,3 +10,5 @@ import * as firebase from 'firebase'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
+
+export default firebase

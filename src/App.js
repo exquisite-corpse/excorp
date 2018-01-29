@@ -1,10 +1,12 @@
 import db from './db/db_config';
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {DwgDetail, PanelDetail} from './components/index';
 import Img from 'react-image';
+import LoginSignup from './components/LoginSignup.jsx';
+import NavBar from './components/NavBar.jsx'
 
 class App extends Component {
 constructor(){
@@ -35,9 +37,11 @@ constructor(){
       </Router>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Capstone</h1>
+          <h1 className="App-title">Exquisite Corpse</h1>
         </header>
         <Img src='https://firebasestorage.googleapis.com/v0/b/exquisitecorpse-84ff1.appspot.com/o/panel4.png?alt=media&token=df75821d-d32a-468b-b30b-2d9bc63eec2c'/>
+        <LoginSignup />
+        <NavBar />
       </div>
     );
   }
