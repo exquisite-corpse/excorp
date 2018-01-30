@@ -15,7 +15,8 @@ export default class Signup extends Component {
       email: '',
       password: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSignup = this.handleSignup.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
     this.changeHandler = this.changeHandler.bind(this)
   }
 
@@ -26,9 +27,37 @@ export default class Signup extends Component {
     stObj[evt.target.name] = evt.target.value
     this.setState(stObj)
   }
+  handleLogin(evt) {
+    evt.preventDefault()
+    console.log("i'm doing shit")
+    const email = evt.target.email.value
+    const password = evt.target.password.value
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then( () => {
+      return  firebase.auth().signInWithEmailAndPassword(email, password)
+      // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
+      .catch(function(error) {
+        // Handle Errors here.
+        console.log("I'm also getting in here")
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      })
+      .then(user => 
+        {
+          console.log(firebase.auth().currentUser.uid)
+          window.location.href = "/gallery"
+        })
+    })
+    .catch(err => { 
+      console.log("bad err inside handle login")
+      const errorCode = err.code
+      const errorMessage = errorMessage
+    })
+    
 
-  handleSubmit(evt) {
-    // console.log("###########################HANDLE SUBMIT")
+  }
+  handleSignup(evt) {
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
@@ -42,10 +71,13 @@ export default class Signup extends Component {
       console.log(errorCode, errorMessage)
     })
     .then((createdUser) => {
-      console.log("###########################: ", createdUser)
+      //firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
       db.collection("users").add({
         email: email,
         useruid: createdUser.uid
+      }).then(something => {
+        console.log(this.history)
+        window.location.href = "/gallery"
       })
     })
     .catch(function(error) {
@@ -62,7 +94,7 @@ export default class Signup extends Component {
         <br/>
           <h3>{ signUpTrueBool?  "Sign Up" : "Log In" }</h3>
           <br/>
-              <form name="signup-login-form" onSubmit={this.handleSubmit}>
+              <form name="signup-login-form" onSubmit={ signUpTrueBool ? this.handleSignup : this.handleLogin}>
 
           <div className="authFields">
                   <TextInput

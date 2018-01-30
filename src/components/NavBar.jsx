@@ -26,6 +26,9 @@ const NavBar = () => {
         <li className="nav-item">
           <Link to="/profile">Profile</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/new">Create a New Game</Link>
+        </li>
       </ul>
 
     </div>
