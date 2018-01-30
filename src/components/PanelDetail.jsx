@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import {Redirect} from 'react-router-dom';
 import { Stage, Layer, Rect, Image, Group } from "react-konva";
+import CreatePanel from './CreatePanel'
 import Img from 'react-image';
 import db from '../db/db_config';
 //import {Cropper} from 'react-croppy';
@@ -101,7 +103,11 @@ export default class DWgDetail extends Component {
     this.state = {
       imageSrc: '',
       snippetSrc: '',
-      submitted: false
+      submitted: false,
+      drawingDone: false,
+      drawingId: '',
+      panelId:'',
+      createPanel: false
     }
     this.handleExportClick = this.handleExportClick.bind(this)
   }
@@ -124,39 +130,53 @@ export default class DWgDetail extends Component {
   // }
 
   handleExportClick = () => {
-    var me = this
     // ******- sumbit a panel
     //   ******- completed: true
 
     //   - ******* if orderNum === 3, mark this drawing is complete
 
-    //   - if orderNum !== 3, create a new panel
+
+    const panelId = this.props.match.params.panelId
+
+    const panelRef = db.collection('panels').doc(`${panelId}`)
+    this.setState({panelId: panelRef})
+    let orderNum = 0
+    let drawingId = ''
+    panelRef.get().then(doc => {
+       orderNum = doc.data().orderNum
+       drawingId = doc.data().drawingId.path.split('/')[1]
+       this.setState({orderNum: orderNum })
+
+      panelRef.update({
+        src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1),
+        completed: true
+
+      })
+      this.setState({imageSrc: this.stageRef.getStage().toDataURL('image/jpeg', 0.1), submitted: true})
+    }).then(() => {
+
+    const drawingRef = db.collection('drawings').doc(`${drawingId}`)
+    this.setState({drawingId: drawingRef })
+    drawingRef.get().then(doc => {
+
+      if (orderNum === doc.data().panelCount) {
+        // change drawingId.complete = true
+        drawingRef.update({
+          completed: true
+        })
+        this.setState({drawingDone: true})
+      } else {
+          //   - if orderNum !== 3, create a new panel
     //     - add selected user(friend) id to this new panel
     //       - add this panel to this drawing's panels collection
     //       - add this panel to selected user's(friend) panels collection
     //       - set completed to false
     //       - orderNum is current orderNum + 1
     //       - previousPanel is current panelId
-    const panelId = me.props.match.params.panelId
-    var panelRef = db.collection('panels').doc(`${panelId}`)
-    panelRef.get().then(function(doc) {
-      var orderNum = doc.data().orderNum
-      var drawingId = doc.data().drawingId.path.split('/')[1]
-      panelRef.update({
-        src: me.stageRef.getStage().toDataURL('image/jpeg', 0.1),
-        completed: true
-      })
-      me.setState({imageSrc: me.stageRef.getStage().toDataURL('image/jpeg', 0.1), submitted: true})
-
-      if (orderNum === 3) {
-        // change drawingId.complete = true
-        db.collection('drawings').doc(`${drawingId}`).update({
-          completed: true
-        })
-      } else {
-
+    this.setState({createPanel: true})
       }
-    })
+    })})
+
 
 
 
@@ -188,18 +208,26 @@ export default class DWgDetail extends Component {
   render() {
     const snippet = this.state.snippetSrc
     const submitted = this.state.submitted
+    const drawingDone = this.state.drawingDone
+    const drawingId = this.state.drawingId
+    const panelId = this.state.panelId
+    const createPanel = this.state.createPanel
+    const src = this.state.imageSrc
+    const orderNum = this.state.orderNum
+    console.log('skhfj', createPanel);
     // const panelSource = this.props.previousPanel // render our snippet
     // const drawingId = this.props.drawingId // drawing Id
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
         <div className="stage-container">
-
-
-              { submitted
+       {createPanel
+             ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId ={panelId} src={src}/>
+             :
+               submitted
                 ? <div>
-                {  this.state.imageSrc&&
-                <Img src={this.state.imageSrc}/> }
+                {  src &&
+                <Img src={src}/> }
                   <h3>Panel Rendered</h3>
                   </div>
                 : <div>
@@ -214,6 +242,12 @@ export default class DWgDetail extends Component {
                 <button onClick={this.handleExportClick}>Submit Panel</button>
                 </div>
               }
+             {
+               drawingDone &&
+               <Redirect to={`/drawings/${drawingId}`} />
+             }
+
+
 
 
 

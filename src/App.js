@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import logo from './logo.svg'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import {DwgDetail, PanelDetail, Landing, NavBar} from './components/index'
+import {DwgDetail, PanelDetail, Landing, NavBar, CreatePanel} from './components/index'
 import Img from 'react-image'
 
 class App extends Component {
@@ -42,8 +42,9 @@ constructor(){
         <Router >
         <div>
           <div>
-            <Route exact path="/drawing" component={DwgDetail} />
+            <Route exact path="/drawing/:drawingId" component={DwgDetail} />
             <Route exact path="/panels/:panelId" component={PanelDetail} />
+            <Route exact path= "/createPanel" component={CreatePanel} />
           </div>
 
 
