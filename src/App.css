@@ -78,9 +78,9 @@ form div {
   justify-content: center;
   z-index: 1;
   top: -155px;
-  background-color: orange;
+  /* background-color: orange; */
   position: relative;
-  padding: 0;
+  /* padding: 0; */
 }
 
 .snippet {
