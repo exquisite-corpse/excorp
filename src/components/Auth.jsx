@@ -11,6 +11,8 @@ import db from '../db/db_config'
 
 
 const allUsers = db.collection('users')
+const emailProvider = new firebase.auth.EmailAuthProvider()
+
 
 export default class Signup extends Component {
 
@@ -34,10 +36,10 @@ export default class Signup extends Component {
   }
   handleLogin(evt) {
     evt.preventDefault()
-    console.log("i'm doing shit")
     const email = evt.target.email.value
     const password = evt.target.password.value
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then( () => {
       return  firebase.auth().signInWithEmailAndPassword(email, password)
       // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
@@ -51,7 +53,7 @@ export default class Signup extends Component {
       .then(user =>
         {
           console.log(firebase.auth().currentUser.uid)
-          window.location.href = "/gallery"
+          //window.location.href = "/gallery"
         })
     })
     .catch(err => {
@@ -132,3 +134,35 @@ export default class Signup extends Component {
 }
 
 }
+
+
+
+
+
+
+// evt.preventDefault()
+//     console.log("i'm doing shit")
+//     const email = evt.target.email.value
+//     const password = evt.target.password.value
+//     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+//     .then( () => {
+//       return  firebase.auth().signInWithEmailAndPassword(email, password)
+//       // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
+//       .catch(function(error) {
+//         // Handle Errors here.
+//         console.log("I'm also getting in here")
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         // ...
+//       })
+//       .then(user => 
+//         {
+//           console.log(firebase.auth().currentUser.uid)
+//           //window.location.href = "/gallery"
+//         })
+//     })
+//     .catch(err => { 
+//       console.log("bad err inside handle login")
+//       const errorCode = err.code
+//       const errorMessage = errorMessage
+//     })
