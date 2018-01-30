@@ -34,10 +34,29 @@ export default class Signup extends Component {
       console.log('in firebase auth')
       var errorCode = error.errorCode
       var errorMessage = error.message
-      console.log(errorCode, errorMessage)
+      console.log('error code: ', errorCode, 'error message: ', errorMessage)
     })
-    console.log('email: ', email)
-    console.log('password: ', password)
+
+    // console log the user uid and pass that into the newly created user in firestore as the id
+
+    // save users to Firebase db
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+
+    //     // if user state changes and user exists, check Firebase for user
+    //     const userReference = db.ref(`users/${user.uid}`)
+    //     userReference.once('value', snapshot => {
+    //       if (!snapshot.val()) {
+    //         // user doesn't exist, create user entry
+    //         userReference.set({
+    //           email: user.email,
+    //           displayName: user.displayName
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
+
   }
 
   render() {

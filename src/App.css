@@ -26,3 +26,23 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.stage-container {
+  position: relative;
+}
+
+.Stage {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  top: -155px;
+  background-color: orange;
+  position: relative;
+  padding: 0;
+}
+
+.snippet {
+  z-index: 2;
+  position: relative;
+  clip-path: inset(330px 0px 0px 0px);
+}

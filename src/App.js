@@ -11,8 +11,8 @@ import NavBar from './components/NavBar.jsx'
 class App extends Component {
 constructor(){
   super();
-  this.state ={
-    src:''
+  this.state = {
+    src: ''
   }
 }
   render() {
@@ -31,7 +31,7 @@ constructor(){
     docRef.get().then((doc) => {
       if (doc.exists) {
         doc.data().photo.get()
-        .then(photo => console.log(photo.data().src));
+        // .then(photo => console.log(photo.data().src));
         //this.setState({src: doc.data().src})
     } else {
         // doc.data() will be undefined in this case
