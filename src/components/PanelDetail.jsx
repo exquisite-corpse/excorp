@@ -128,6 +128,9 @@ export default class DWgDetail extends Component {
     });
     {this.state.imgSrc && console.log(this.state.imgSrc)
       db.collection('photos').doc().set({
+    {
+      // this.state.imgSrc && console.log(this.state.imgSrc)
+      db.collection('photos').doc('photo5').set({
         src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
       })
       .then(function() {
