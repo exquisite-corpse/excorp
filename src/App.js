@@ -43,7 +43,7 @@ constructor(){
         <div>
           <div>
             <Route exact path="/drawing" component={DwgDetail} />
-            <Route exact path="/panel" component={PanelDetail} />
+            <Route exact path="/panels/:panelId" component={PanelDetail} />
           </div>
 
 
