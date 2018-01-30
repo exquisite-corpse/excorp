@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "firebase": "^4.9.0",
     "konva": "^1.7.6",
     "react": "^16.2.0",
