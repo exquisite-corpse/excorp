@@ -176,3 +176,16 @@ export default class DWgDetail extends Component {
 // import React, { Component } from "react"
 // import { Link } from "react-router-dom"
 // import {SOMECOMPONENT} from "./index.jsx"
+
+// - sumbit a panel
+//   - completed: true
+
+//   - if orderNum === 3, mark this drawing is complete
+
+//   - if orderNum !== 3, create a new panel
+//     - add selected user(friend) id to this new panel
+//       - add this panel to this drawing's panels collection
+//       - add this panel to selected user's(friend) panels collection
+//       - set completed to false
+//       - orderNum is current orderNum + 1
+//       - previousPanel is current panelId
