@@ -127,8 +127,8 @@ export default class DWgDetail extends Component {
       //snippetSrc: this.refs.cropper.crop()
     });
     {this.state.imgSrc && console.log(this.state.imgSrc)
-      db.collection('photos').doc().set({
-    {
+      db.collection('photos').doc().set({})}
+
       // this.state.imgSrc && console.log(this.state.imgSrc)
       db.collection('photos').doc('photo5').set({
         src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
@@ -140,14 +140,11 @@ export default class DWgDetail extends Component {
         console.error("Error writing document: ", error);
     });
   }
-  }
+
   render() {
     const snippet = this.state.snippetSrc
-
     // const panelSource = this.props.previousPanel // render our snippet
-
     // const drawingId = this.props.drawingId // drawing Id
-
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
@@ -173,6 +170,7 @@ export default class DWgDetail extends Component {
     );
   }
 }
+
 
 //render(<DwgDetail />, document.getElementById("root"));
 // "use strict";
