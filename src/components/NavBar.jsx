@@ -1,9 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
 // import {Wips, CreateGame, Profile } from "./index"
-// import { Wips } from "./Wips.jsx"
-// import { CreateGame } from "./CreateGame.jsx"
-// import { Profile } from "./Profile.jsx"
+
+// shouldnt render on landing page
 
 const NavBar = () => {
   return(
@@ -29,6 +28,11 @@ const NavBar = () => {
         <li className="nav-item">
           <Link to="/new">Create a New Game</Link>
         </li>
+
+        <li className="nav-item">
+          <Link to="/logout">Log Out</Link>
+        </li>
+
       </ul>
 
     </div>

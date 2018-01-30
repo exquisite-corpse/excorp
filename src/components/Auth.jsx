@@ -1,10 +1,15 @@
 import React, { Component } from "react"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import TextInput from "./TextInput.jsx"
-import Bttn from "./Bttn.jsx"
+import {TextInput, Bttn, GoogleAuth} from "./index"
 import firebase from 'firebase'
-
 import db from '../db/db_config'
+
+
+// const provider = new firebase.auth.GoogleAuthProvider()
+// provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
+
+
+
 const allUsers = db.collection('users')
 
 export default class Signup extends Component {
@@ -43,18 +48,18 @@ export default class Signup extends Component {
         var errorMessage = error.message;
         // ...
       })
-      .then(user => 
+      .then(user =>
         {
           console.log(firebase.auth().currentUser.uid)
           window.location.href = "/gallery"
         })
     })
-    .catch(err => { 
+    .catch(err => {
       console.log("bad err inside handle login")
       const errorCode = err.code
       const errorMessage = errorMessage
     })
-    
+
 
   }
   handleSignup(evt) {
@@ -92,6 +97,9 @@ export default class Signup extends Component {
 
         <div>
         <br/>
+
+          <Bttn className="btn btn-success" type="submit" value={ "signup/login with Google"} onClick={GoogleAuth} />
+
           <h3>{ signUpTrueBool?  "Sign Up" : "Log In" }</h3>
           <br/>
               <form name="signup-login-form" onSubmit={ signUpTrueBool ? this.handleSignup : this.handleLogin}>

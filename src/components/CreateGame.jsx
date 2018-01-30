@@ -36,28 +36,28 @@ export default class CreateGame extends Component {
     }
 
     startGame(){
-        const allDrawings = db.collection('drawings')
-        const allPanels = db.collection('panels')
-        let currentUser
-        //console.log("what is my query?", firebase.auth().currentUser.uid)
-        db.collection('users').where('useruid', '==', `${firebase.auth().currentUser.uid}`).get()
-        .then(user => {
-            console.log("what is my user???")
-            if (user.exists){
-                console.log("what is this here?: ",user.data())
-                currentUser = user.data()
-            }else{
-                console.log("fuck you")
-            }
-        })
-        console.log(allDrawings, allPanels, currentUser )
-        
+        // const allDrawings = db.collection('drawings')
+        // const allPanels = db.collection('panels')
+        // let currentUser
+        // //console.log("what is my query?", firebase.auth().currentUser.uid)
+        // db.collection('users').where('useruid', '==', `${firebase.auth().currentUser.uid}`).get()
+        // .then(user => {
+        //     console.log("what is my user???")
+        //     if (user.exists){
+        //         console.log("what is this here?: ",user.data())
+        //         currentUser = user.data()
+        //     }else{
+        //         console.log("fuck you")
+        //     }
+        // })
+        // console.log(allDrawings, allPanels, currentUser )
+
         // when we create a new game
         // - create a new drawing in AllDrawings with fields (with set: category, panelNum, createdAt, completed:false, title)
         // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
         // - grab this drawing's id
         //add this drawing as a ref currentUser's drawings collection
-        
+
         // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
         //   - add a ref to this panel into this drawing's panels collection
         //   - add  a ref to this panel into currentUser's panels collection
