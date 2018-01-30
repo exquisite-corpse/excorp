@@ -28,11 +28,23 @@ export default class CreateGame extends Component {
             category: "",
             panelCount: 3,
             createdAt: Date.now(), //works?
-            completed: false
+            completed: false,
+            user: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
+    }
+    componentDidMount(){
+        this.unsubscribe = firebase.auth().onAuthStateChanged( user => {
+            if(user){
+                this.setState({user})
+            }
+
+        }) 
+    }
+    componentWillUnmount(){
+        this.unsubscribe()
     }
 
     startGame(){
@@ -96,10 +108,13 @@ export default class CreateGame extends Component {
     }
 
     render() {
+        console.log("firebase auth(): ", firebase.auth())
+        console.log("current user: ", firebase.auth().currentUser)
+        console.log("my state's user: ", this.state.user.uid)
 
-        console.log("this is the session???", firebase.auth.Auth.Persistence.SESSION, "what type?", typeof firebase.auth.Auth.Persistence.SESSION)
-        //let signUpTrueBool = this.props.signup
-        this.startGame()
+        // console.log("this is the session???", firebase.auth.Auth.Persistence.SESSION, "what type?", typeof firebase.auth.Auth.Persistence.SESSION)
+        // //let signUpTrueBool = this.props.signup
+        // this.startGame()
         return (
 
             <div>
