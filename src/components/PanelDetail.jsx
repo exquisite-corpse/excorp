@@ -15,12 +15,18 @@ class Drawing extends Component {
   }
 
   componentDidMount() {
+    // const rv = document.createElement('img')
+    // rv.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
     const canvas = document.createElement("canvas");
     canvas.width = 700;
     canvas.height = 350;
     const context = canvas.getContext("2d");
+    //context.drawImage(rv,33, 71, 104, 124, 21, 20, 87, 104)
     this.setState({ canvas, context });
+
   }
+
+
 
   handleMouseDown = () => {
     this.setState({ isDrawing: true });
@@ -72,9 +78,19 @@ class Drawing extends Component {
   };
 
   render() {
-    const { canvas } = this.state;
 
+
+    const { canvas, context } = this.state;
+    console.log(context)
+    const rv = document.createElement("IMG")
+    window.onload = function() {
+
+      rv.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
+      context && context.drawImage(rv,0, 71, 104, 124, 21, 20, 87, 104)
+    }
+    window.onload();
     return (
+
       <Image
         image={canvas}
         ref={node => (this.image = node)}
@@ -85,6 +101,8 @@ class Drawing extends Component {
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}
       />
+
+
     );
   }
 }
@@ -140,6 +158,7 @@ export default class DWgDetail extends Component {
       })
   })
   }
+
 
   render() {
     const snippet = this.state.snippetSrc
