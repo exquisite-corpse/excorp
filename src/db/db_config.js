@@ -1,19 +1,19 @@
-const firebase = require("firebase");
-// require('./secrets')
-// Required for side-effects
-require("firebase/firestore");
-//import registerServiceWorker from '../registerServiceWorker';
+const firebase = require("firebase")
+require("firebase/firestore")
+require("firebase/auth")
+
 
 var config = {
   apiKey: 'AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc',
-  authDomain: process.env.AUTHDOMAIN,
-  databaseURL: process.env.DATABASEURL,
+  authDomain: 'exquisitecorpse-84ff1.firebaseapp.com',
+  databaseURL: 'https://exquisitecorpse-84ff1.firebaseio.com',
   projectId: 'exquisitecorpse-84ff1',
-  storageBucket: process.env.STORAGEBUCKET,
-  messagingSenderId: process.env.MESSAGINGSENDERID
+  storageBucket: 'exquisitecorpse-84ff1.appspot.com',
+  messagingSenderId: '349662282106'
 }
 
-firebase.initializeApp(config);
-var db = firebase.firestore();
 
-export default db;
+firebase.initializeApp(config)
+const db = firebase.firestore()
+
+export default db
