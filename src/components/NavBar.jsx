@@ -17,7 +17,7 @@ const NavBar = () => {
         </li>
 
         <li className="nav-item">
-          <Link to="/new-drawing">New Drawing</Link>
+          <Link to="/new">New Drawing</Link>
         </li>
 
         <li className="nav-item">
