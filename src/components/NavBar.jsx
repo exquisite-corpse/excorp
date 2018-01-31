@@ -30,6 +30,7 @@ const NavBar = () => {
         <li className="nav-item">
           <Link to="/logout">Log Out</Link>
         </li>
+        <li>
           <Link to="/panel">Panel Detail</Link>
         </li>
       </ul>
