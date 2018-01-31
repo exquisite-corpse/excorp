@@ -1,8 +1,9 @@
 import db from './db/db_config'
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut} from './components/index'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut, CreatePanel} from './components/index'
+
 import Img from 'react-image'
 
 class App extends Component {
@@ -14,14 +15,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter >
+        <Router >
           <div>
-        <header className="App-header">
+            <header className="App-header">
               <h1 className="App-title">Exquisite Corpse</h1>
             </header>
             <NavBar />
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/drawing/:drawingId" component={DwgDetail} />
+              <Route exact path="/panels/:panelId" component={PanelDetail} />
+              <Route exact path= "/createPanel" component={CreatePanel} />
               <Route exact path="/drawing" component={DwgDetail} />
               <Route exact path="/panel" component={PanelDetail} />
               <Route exact path="/gallery" component={Gallery} />
@@ -29,7 +33,7 @@ class App extends Component {
               <Route exact path="/logout" component={LogOut} />
             </Switch>
             </div>
-        </BrowserRouter>
+        </Router>
       </div>
     )
   }
