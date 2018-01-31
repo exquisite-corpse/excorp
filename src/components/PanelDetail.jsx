@@ -5,7 +5,6 @@ import { Stage, Layer, Rect, Image, Group } from "react-konva";
 import CreatePanel from './CreatePanel'
 import Img from 'react-image';
 import db from '../db/db_config';
-//import {Cropper} from 'react-croppy';
 
 class Drawing extends Component {
   constructor(props) {
@@ -13,7 +12,6 @@ class Drawing extends Component {
     this.state = {
       isDrawing: false,
     }
-    this.handleExportClick = this.handleExportClick.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +19,6 @@ class Drawing extends Component {
     canvas.width = 700;
     canvas.height = 350;
     const context = canvas.getContext("2d");
-
     this.setState({ canvas, context });
   }
 
@@ -33,16 +30,11 @@ class Drawing extends Component {
 
   handleMouseUp = () => {
     this.setState({ isDrawing: false });
-  };
-
-  handleExportClick = () => {
-    // console.log(this.stageRef.getStage().toDataURL());
   }
 
   handleMouseMove = ({ evt }) => {
     const { context, isDrawing } = this.state;
 
-//     console.log('evt', evt.buttons);
 
     if (isDrawing) {
       context.strokeStyle = "black";
@@ -112,29 +104,7 @@ export default class DWgDetail extends Component {
     this.handleExportClick = this.handleExportClick.bind(this)
   }
 
-  // componentDidMount() {
-  //   const me = this
-  //   var docRef = db.collection('photos').doc('tHlyrlBNY9y9wzoitJzd');
-
-  //   docRef.get().then(function(doc) {
-  //     if (doc.exists) {
-  //         console.log('Document data:', doc.data());
-  //         me.setState({ snippetSrc: doc.data().src })
-  //     } else {
-  //         // doc.data() will be undefined in this case
-  //         console.log('No such document!');
-  //     }
-  //   }).catch(function(error) {
-  //     console.log('Error getting document:', error);
-  //   });
-  // }
-
   handleExportClick = () => {
-    // ******- sumbit a panel
-    //   ******- completed: true
-
-    //   - ******* if orderNum === 3, mark this drawing is complete
-
 
     const panelId = this.props.match.params.panelId
 
@@ -160,50 +130,16 @@ export default class DWgDetail extends Component {
     drawingRef.get().then(doc => {
 
       if (orderNum === doc.data().panelCount) {
-        // change drawingId.complete = true
         drawingRef.update({
           completed: true
         })
         this.setState({drawingDone: true})
       } else {
-          //   - if orderNum !== 3, create a new panel
-    //     - add selected user(friend) id to this new panel
-    //       - add this panel to this drawing's panels collection
-    //       - add this panel to selected user's(friend) panels collection
-    //       - set completed to false
-    //       - orderNum is current orderNum + 1
-    //       - previousPanel is current panelId
-    this.setState({createPanel: true})
+        this.setState({createPanel: true})
       }
-    })})
-
-
-
-
+      })
+  })
   }
-
-
-
-
-  //   // below is hard coded
-  //   this.setState({
-  //     imgSrc: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
-  //     //snippetSrc: this.refs.cropper.crop()
-  //   });
-  //   {this.state.imgSrc && console.log(this.state.imgSrc)
-  //     db.collection('photos').doc().set({})}
-
-  //     // this.state.imgSrc && console.log(this.state.imgSrc)
-  //     db.collection('photos').doc('photo5').set({
-  //       src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
-  //     })
-  //     .then(function() {
-  //       console.log("Document successfully written!");
-  //   })
-  //   .catch(function(error) {
-  //       console.error("Error writing document: ", error);
-  //   });
-  // }
 
   render() {
     const snippet = this.state.snippetSrc
@@ -214,9 +150,7 @@ export default class DWgDetail extends Component {
     const createPanel = this.state.createPanel
     const src = this.state.imageSrc
     const orderNum = this.state.orderNum
-    console.log('skhfj', createPanel);
-    // const panelSource = this.props.previousPanel // render our snippet
-    // const drawingId = this.props.drawingId // drawing Id
+
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
@@ -246,21 +180,8 @@ export default class DWgDetail extends Component {
                drawingDone &&
                <Redirect to={`/drawings/${drawingId}`} />
              }
-
-
-
-
-
-
-
-
         </div>
-
-
       </div>
     );
   }
 }
-
-
-//render(<DwgDetail />, document.getElementById("root"));
