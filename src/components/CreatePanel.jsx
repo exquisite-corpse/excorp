@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import db from '../db/db_config';
 import Bttn from './Bttn'
+import firebase from 'firebase'
 
 export default class CreatePanel extends Component {
   constructor(props){
@@ -8,13 +9,31 @@ export default class CreatePanel extends Component {
     this.state = {
       author:'',
       snippet: props.src,
-      panelCreated: false
+      panelCreated: false,
+      user: {}
     }
   }
+
+  componentDidMount() {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({user})
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
+
   handleChange = (e) => {
     e.preventDefault();
     this.setState({author:e.target.value});
   }
+
+    //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
+    //    ***** CODE WHEN USERS IS ACCESSIBLE - add this panel to selected user's(friend) panels collection
+
 
    handleSubmit = (e) => {
      e.preventDefault();
