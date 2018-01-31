@@ -1,8 +1,6 @@
 import React from "react"
-import { Link } from "react-router-dom"
-// import {Wips, CreateGame, Profile } from "./index"
-
-// shouldnt render on landing page
+import { Link, BrowserRouter as Router} from "react-router-dom"
+import {Wips, CreateGame, Profile, PanelDetail } from "./index"
 
 const NavBar = () => {
   return(
@@ -32,7 +30,9 @@ const NavBar = () => {
         <li className="nav-item">
           <Link to="/logout">Log Out</Link>
         </li>
-
+        <li>
+          <Link to="/panel">Panel Detail</Link>
+        </li>
       </ul>
 
     </div>
