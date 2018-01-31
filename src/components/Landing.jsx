@@ -9,38 +9,38 @@ export default class LoginSignup extends Component {
   constructor() {
     super()
     this.state = {
-      signup: true,
-      login: false
+      signup: false,
+      login: true
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.handleSignupClick = this.handleSignupClick.bind(this)
+    this.handleLoginClick = this.handleLoginClick.bind(this)
   }
 
-  handleClick(evt) {
+  handleSignupClick(evt) {
     evt.preventDefault()
     this.setState({
-      signup: !this.state.signup,
-      login: this.state.signup
+      signup: true,
+      login: false
+    })
+  }
+  handleLoginClick(evt) {
+    evt.preventDefault()
+    this.setState({
+      signup: false,
+      login: true
     })
   }
 
   render () {
-
-    const handleClick = this.handleClick
-
     return(
       <div>
         <span>
 
-          <Bttn value="Sign Up" onClick={handleClick} />
-          <Bttn value="Log In" onClick={handleClick} />
-
-          {/* make this a link
-          <Bttn value="Sign Up with Google" />
-          */}
-
+          <Bttn value="Sign Up" onClick={this.handleSignupClick} />
+          <Bttn value="Log In" onClick={this.handleLoginClick} />
         </span>
         <br/>
-        <Auth className="BIGAUTH" signup={this.state.signup} />
+        <Auth className="Auth" signup={this.state.signup} />
       </div>
     )
   }

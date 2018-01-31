@@ -26,57 +26,67 @@ export default class CreateGame extends Component {
         this.state = {
             title: "",
             category: "",
-            panelCount: 3,
-            createdAt: Date.now(), //works?
-            completed: false,
             user: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
     }
-    componentDidMount(){
-        this.unsubscribe = firebase.auth().onAuthStateChanged( user => {
-            if(user){
-                this.setState({user})
+    componentDidMount() {
+        // db.collection('users').doc('D1Dwr8o9ZmucTfCRWg0f').get()
+        // .then((mrbear) => console.log("mr bear sut", mrbear.data()))
+        this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ user })
             }
 
-        }) 
+        })
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.unsubscribe()
     }
 
-    startGame(){
+    startGame() {
+        console.log(this.state)
         const allDrawings = db.collection('drawings')
         const allPanels = db.collection('panels')
-        let currentUser
-        //console.log("what is my query?", firebase.auth().currentUser.uid)
-        db.collection('users').where('useruid', '==', `${firebase.auth().currentUser.uid}`).get()
-        .then(user => {
-            console.log("what is my user???")
-            if (user.exists){
-                console.log("what is this here?: ",user.data())
-                currentUser = user.data()
-            }else{
-                console.log("Nope")
-            }
-        })
-        console.log(allDrawings, allPanels, currentUser )
-        
-        // when we create a new game
-        // - create a new drawing in AllDrawings with fields (with set: category, panelNum, createdAt, completed:false, title)
-        // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
-        // - grab this drawing's id
-        //add this drawing as a ref currentUser's drawings collection
-        
+        const userDocRef = db.collection('users').doc(this.state.user.uid)
+        let userId = this.state.user.uid
+        let drawingId
+        let drawingDocRef
+        const setObj = {
+            panelCount: 3,
+            createdAt: Date.now(), //this does NOT work
+            completed: false,
+            category: this.state.category,
+            title: this.state.title,
+            artists: [userDocRef]
+        }
+        //create a new drawing with the above obj as its fields 
+        allDrawings.add(setObj)
+            .then(docRef => {
+                drawingDocRef = docRef
+                // drawingId = docRef.id
+                //console.log(docRef.id)
+                //add this drawing as a ref currentUser's drawings collection
+                console.log()
+                userDocRef.add([docRef])
+            })
+            .then(() => {
+                db.collection('users').doc('D1Dwr8o9ZmucTfCRWg0f').get()
+                .then((mrbear) => console.log(mrbear.data()))
+            })
+            .catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+
+
         // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
         //   - add a ref to this panel into this drawing's panels collection
         //   - add  a ref to this panel into currentUser's panels collection
 
     }
     changeHandler(evt) {
-        //evt.preventDefault()
         const stObj = {}
         stObj[evt.target.name] = evt.target.value
         this.setState(stObj)
@@ -84,37 +94,11 @@ export default class CreateGame extends Component {
 
     handleSubmit(evt) {
         evt.preventDefault()
-        //   const email = evt.target.email.value
-        //   const password = evt.target.password.value
-        //   // create a password-based account
-
-        //   firebase.auth().createUserWithEmailAndPassword(email, password)
-        //   .catch(function(error) {
-        //     console.log('in firebase auth')
-        //     const errorCode = error.errorCode
-        //     const errorMessage = error.message
-        //     console.log(errorCode, errorMessage)
-        //   })
-        //   .then((createdUser) => {
-        //     console.log("###########################: ", createdUser)
-        //     db.collection("users").add({
-        //       email: email,
-        //       useruid: createdUser.uid
-        //     })
-        //   })
-        //   .catch(function(error) {
-        //     console.error("Error adding document: ", error)
-        //   })
+        this.startGame()
     }
 
     render() {
-        console.log("firebase auth(): ", firebase.auth())
-        console.log("current user: ", firebase.auth().currentUser)
-        console.log("my state's user: ", this.state.user.uid)
-
-        // this.startGame()
         return (
-
             <div>
                 <br />
                 <h3>Create a New Game</h3>
@@ -134,7 +118,7 @@ export default class CreateGame extends Component {
                         <select
                             id="category-select"
                             name="category"
-                            onChange={this.handleSelection}
+                            onChange={this.changeHandler}
                         >
                             <option value="animal">Animal</option>
                             <option value="nature">Nature</option>

@@ -10,7 +10,11 @@ export default function SignOut () {
     // An error happened.
     console.log("an error happened inside of SignOut")
   })
-
+  .then(() => {
+    window.setTimeout(()=>{
+      window.location.href = "/"
+    }, 3000)
+  })
   return(
       <div>
       <br/>

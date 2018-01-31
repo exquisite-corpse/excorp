@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import {TextInput, Bttn, GoogleAuth} from "./index"
+import { TextInput, Bttn, GoogleAuth } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
 
@@ -20,7 +20,8 @@ export default class Signup extends Component {
     super()
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      username: ''
     }
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
@@ -28,7 +29,7 @@ export default class Signup extends Component {
   }
 
 
-  changeHandler (evt) {
+  changeHandler(evt) {
     evt.preventDefault
     const stObj = {}
     stObj[evt.target.name] = evt.target.value
@@ -40,27 +41,26 @@ export default class Signup extends Component {
     const password = evt.target.password.value
     firebase.auth().signInWithEmailAndPassword(email, password)
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .then( () => {
-      return  firebase.auth().signInWithEmailAndPassword(email, password)
-      // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
-      .catch(function(error) {
-        // Handle Errors here.
-        console.log("I'm also getting in here")
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
+      .then(() => {
+        return firebase.auth().signInWithEmailAndPassword(email, password)
+          // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
+          .catch(function (error) {
+            // Handle Errors here.
+            console.log("I'm also getting in here")
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          })
+          .then(user => {
+            console.log(firebase.auth().currentUser.uid)
+            window.location.href = "/gallery"
+          })
       })
-      .then(user =>
-        {
-          console.log(firebase.auth().currentUser.uid)
-          //window.location.href = "/gallery"
-        })
-    })
-    .catch(err => {
-      console.log("bad err inside handle login")
-      const errorCode = err.code
-      const errorMessage = errorMessage
-    })
+      .catch(err => {
+        console.log("bad err inside handle login")
+        const errorCode = err.code
+        const errorMessage = errorMessage
+      })
 
 
   }
@@ -68,70 +68,80 @@ export default class Signup extends Component {
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
+    const username = evt.target.username.value
     // create a password-based account
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .catch(function(error) {
-      console.log('in firebase auth')
-      const errorCode = error.errorCode
-      const errorMessage = error.message
-      console.log(errorCode, errorMessage)
-    })
-    .then((createdUser) => {
-      //firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
-      db.collection("users").add({
-        email: email,
-        useruid: createdUser.uid
-      }).then(something => {
-        console.log(this.history)
-        window.location.href = "/gallery"
+      // .catch(function (error) {
+      //   console.log('in firebase auth')
+      //   const errorCode = error.errorCode
+      //   const errorMessage = error.message
+      //   console.log(errorCode, errorMessage)
+      // })
+      .then((createdUser) => {
+        //firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
+        console.log(createdUser.uid)
+        db.collection("users").doc(createdUser.uid).set({
+          email: email,
+          username: username
+        })
+          .then(something => {
+            console.log(this.history)
+            window.location.href = "/gallery"
+          })
       })
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error)
-    })
+      .catch(function (error) {
+        console.error("Error adding document: ", error)
+      })
   }
 
   render() {
     let signUpTrueBool = this.props.signup
 
-    return(
+    return (
 
-        <div>
-        <br/>
+      <div>
+        <br />
 
-          <Bttn className="btn btn-success" type="submit" value={ "signup/login with Google"} onClick={GoogleAuth} />
+        <Bttn className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth} />
 
-          <h3>{ signUpTrueBool?  "Sign Up" : "Log In" }</h3>
-          <br/>
-              <form name="signup-login-form" onSubmit={ signUpTrueBool ? this.handleSignup : this.handleLogin}>
+        <form name="signup-login-form" onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}>
 
           <div className="authFields">
-                  <TextInput
-                    label= "email: "
-                    name="email"
-                    type="text"
-                    value={this.state.email}
-                    onChange={this.changeHandler}
-                    placeholder="email"
-                  />
+            <TextInput
+              label="email: "
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.changeHandler}
+              placeholder="email"
+            />
+            {signUpTrueBool &&
+              <TextInput
+                label="username: "
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.changeHandler}
+                placeholder="username"
+              />}
 
-                  <TextInput
-                    label= "password: "
-                    name="password"
-                    type="text"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    placeholder="password"
-                  />
+            <TextInput
+              label="password: "
+              name="password"
+              type="text"
+              value={this.state.password}
+              onChange={this.changeHandler}
+              placeholder="password"
+            />
           </div>
-                  <br/>
-                  <Bttn className="btn btn-success" type="submit" value={ signUpTrueBool ? "Create Account" : "Log In"} />
-            </form>
+          <br />
+          <Bttn className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"} />
+        </form>
       </div>
 
     )
-}
+  }
 
 }
 
