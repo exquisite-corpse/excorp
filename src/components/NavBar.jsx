@@ -1,9 +1,10 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, BrowserRouter as Router} from "react-router-dom"
 // import {Wips, CreateGame, Profile } from "./index"
 // import { Wips } from "./Wips.jsx"
 // import { CreateGame } from "./CreateGame.jsx"
 // import { Profile } from "./Profile.jsx"
+import PanelDetail from './PanelDetail'
 
 const NavBar = () => {
   return(
@@ -25,6 +26,9 @@ const NavBar = () => {
 
         <li className="nav-item">
           <Link to="/profile">Profile</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/panel">Panel Detail</Link>
         </li>
       </ul>
 
