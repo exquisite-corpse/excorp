@@ -9,7 +9,7 @@ provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
 
 
 export default function GoogleAuth () {
-  console.log("I LOVE BUTTS AND I CANNNOT LIE")
+  console.log("I'm in the google auth function")
 
 firebase.auth().signInWithPopup(provider).then(function(result) {
   // This gives you a Google Access Token. You can use it to access the Google API.
