@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import db from '../db/db_config'
 import Img from 'react-image'
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+import firebase from 'firebase'
 // import {SOMECOMPONENT} from "./index.jsx"
 
 // all panels completed false with my user id
@@ -21,18 +22,27 @@ export default class Wips extends Component {
   constructor() {
     super()
     this.state = {
-      incompletePanels: []
+      incompletePanels: [{
+        id: '',
+        src:''
+      }],
+      user: {}
     }
   }
   componentDidMount() {
-    let array = [1,2,3]
     let temp = []
-    const userRef = db.collection('users').doc('CQ19BlLP178AUUwZSiTg')
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({user})
+      }
+    })
+
+    const userRef = db.collection('users').doc(`${this.state.user.uid}`)
     let notCompletedPanelsRef = db.collection('panels').where('completed', '==', false).where('author', '==', userRef).get().then((snapshot) => {
       snapshot.forEach(doc => {
-        let src = doc.data().src
-        temp.push(src)
-        console.log('here src', temp)
+        let panel = doc.data()
+        console.log(doc.id)
+        temp.push(panel)
         this.setState({incompletePanels: temp})
       })
     })
@@ -40,23 +50,25 @@ export default class Wips extends Component {
       console.log('error getting docs: ', err)
 
     })
-    // console.log('in mount', temp)
 
-    // console.log(temp[doc.id])
   }
 
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
   render() {
-    this.state.incompletePanels && console.log('on state: ', this.state.incompletePanels)
+    console.log(this.state.user)
     const incompletePanels = this.state.incompletePanels
     return(
       <div>
       <h2>in whips</h2>
+
       {
-        incompletePanels && incompletePanels.map(src => {
-          // <h2>{panel}</h2>
-          // console.log(panel)
-          src && <Img src={src} />
-        })
+        incompletePanels && incompletePanels.map((panel, index) => { return(
+             <Link to = {`/panels/${panel.id}`}>
+                <Img key={index} src={panel.src} />
+             </Link>
+        )})
       }
       </div>
     )
