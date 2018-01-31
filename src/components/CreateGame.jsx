@@ -60,30 +60,50 @@ export default class CreateGame extends Component {
             completed: false,
             category: this.state.category,
             title: this.state.title,
-            artists: [userDocRef]
         }
         //create a new drawing with the above obj as its fields 
         allDrawings.add(setObj)
             .then(docRef => {
                 drawingDocRef = docRef
-                // drawingId = docRef.id
+                drawingId = docRef.id
                 //console.log(docRef.id)
                 //add this drawing as a ref currentUser's drawings collection
                 console.log()
-                userDocRef.add([docRef])
+                userDocRef.collection('mydwgs').add({ "drawingRef": drawingDocRef })
             })
             .then(() => {
-                db.collection('users').doc('D1Dwr8o9ZmucTfCRWg0f').get()
-                .then((mrbear) => console.log(mrbear.data()))
+                // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
+                drawingDocRef.collection('artists').add({ 'artistRef': userDocRef })
+            })
+            .then(() => {
+                let postData = {
+                    author: userDocRef,
+                    completed: false,
+                    drawingId: drawingDocRef,
+                    orderNum: 1,
+                    src: ''
+                }
+
+                // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
+                allPanels.add(postData)
+                    .then(panelRef => {
+                        //   - add a ref to this panel into this drawing's panels collection
+                        drawingDocRef.collection('panels').add({ 'panel': panelRef })
+                        return panelRef
+                    })
+                    .then(panelRef => {
+
+                        //   - add  a ref to this panel into currentUser's panels collection
+                        userDocRef.collection('panels').add({ 'panel': panelRef })
+                    })
+                    .then(() => {
+                        window.location.href = "/wips"
+                    })
             })
             .catch(function (error) {
                 console.error("Error writing document: ", error);
             });
 
-
-        // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
-        //   - add a ref to this panel into this drawing's panels collection
-        //   - add  a ref to this panel into currentUser's panels collection
 
     }
     changeHandler(evt) {
