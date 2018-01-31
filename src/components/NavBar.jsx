@@ -1,10 +1,6 @@
 import React from "react"
 import { Link, BrowserRouter as Router} from "react-router-dom"
-// import {Wips, CreateGame, Profile } from "./index"
-// import { Wips } from "./Wips.jsx"
-// import { CreateGame } from "./CreateGame.jsx"
-// import { Profile } from "./Profile.jsx"
-import PanelDetail from './PanelDetail'
+import {Wips, CreateGame, Profile, PanelDetail } from "./index"
 
 const NavBar = () => {
   return(
@@ -28,6 +24,12 @@ const NavBar = () => {
           <Link to="/profile">Profile</Link>
         </li>
         <li className="nav-item">
+          <Link to="/new">Create a New Game</Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/logout">Log Out</Link>
+        </li>
           <Link to="/panel">Panel Detail</Link>
         </li>
       </ul>
