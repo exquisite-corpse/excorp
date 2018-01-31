@@ -81,7 +81,7 @@ export default class CreateGame extends Component {
                     completed: false,
                     drawingId: drawingDocRef,
                     orderNum: 1,
-                    src: ''
+                    src: 'https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2017/10/terrier-puppy.jpg?itok=rIgh3ArV&fc=50,50'
                 }
 
                 // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)

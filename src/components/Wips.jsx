@@ -34,10 +34,8 @@ export default class Wips extends Component {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({user})
-      }
-    })
-
-    const userRef = db.collection('users').doc(`${this.state.user.uid}`)
+        console.log("checking this.state.user.uid", this.state.user.uid)
+        const userRef = db.collection('users').doc(`${this.state.user.uid}`)
     let notCompletedPanelsRef = db.collection('panels').where('completed', '==', false).where('author', '==', userRef).get().then((snapshot) => {
       snapshot.forEach(doc => {
         let panel = doc.data()
@@ -50,6 +48,9 @@ export default class Wips extends Component {
       console.log('error getting docs: ', err)
 
     })
+      }
+    })
+  
 
   }
 
@@ -64,9 +65,12 @@ export default class Wips extends Component {
       <h2>in whips</h2>
 
       {
-        incompletePanels && incompletePanels.map((panel, index) => { return(
-             <Link to = {`/panels/${panel.id}`}>
-                <Img key={index} src={panel.src} />
+        incompletePanels && incompletePanels.map((panel, index) => { 
+          console.log("here is  my panel!!!!", panel)
+          
+          return(
+             <Link key={index} to={`/panels/${panel.id}`}>
+                <Img src={panel.src} />
              </Link>
         )})
       }
