@@ -13,15 +13,28 @@ export default class CreatePanel extends Component {
       panelCreated: false,
       user: {},
       panelId: '',
-      redirected: false
+      redirected: false,
+      users:[{
+        id:'',
+        name:''
+      }]
     }
   }
 
   componentDidMount() {
+    let temp = []
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({user})
       }
+      const usersRef = db.collection('users')
+      usersRef.get().then(snapshot => {
+
+        snapshot.forEach((doc) => {
+          temp.push({id:doc.id, name:doc.data().username})
+          this.setState({users:temp})
+        })
+      })
     })
   }
 
@@ -68,15 +81,16 @@ export default class CreatePanel extends Component {
    }
   render(){
     const redirected = this.state.redirected
+    const users = this.state.users
     return(
       <div>
       <select
         value={this.state.author}
         onChange={this.handleChange}
       >
-       <option value="Orange">friend1</option>
-        <option value="Radish">friend2</option>
-        <option value="Cherry">friend3</option>
+      {
+        users && users.map(user => <option value={user.id}>{user.name}</option>)
+      }
       </select>
       <div>
       <Bttn value="Create New Panel" onClick ={this.handleSubmit}/>

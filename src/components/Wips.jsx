@@ -59,20 +59,26 @@ export default class Wips extends Component {
   }
   render() {
     const incompletePanels = this.state.incompletePanels
+    console.log(incompletePanels[0]);
+    console.log(this.state.user)
     return(
       <div>
 
       {
-        incompletePanels.id !== undefined
+        incompletePanels[0].id !== undefined
         ? <div>
             <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
             <h3>Click on one to begin drawing</h3>
             <br />
             { incompletePanels && incompletePanels.map((panel, index) => {
+              return (
               <Link key={index} to={`/panels/${panel.id}`}>
-                  <Img src={panel.src} />
+                {panel.src !== ''
+                   ?<Img src={panel.src} />
+                  : <h3> Go to your panel</h3>
+                }
               </Link>
-            })}
+            )})}
           </div>
         : <div>
             <h2>You don't have any Works In Progress</h2>
