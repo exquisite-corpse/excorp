@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import db from '../db/db_config';
 import Bttn from './Bttn'
+import {Redirect} from 'react-router-dom';
 import firebase from 'firebase'
 
 export default class CreatePanel extends Component {
@@ -10,7 +11,9 @@ export default class CreatePanel extends Component {
       author:'',
       snippet: props.src,
       panelCreated: false,
-      user: {}
+      user: {},
+      panelId: '',
+      redirected: false
     }
   }
 
@@ -46,7 +49,7 @@ export default class CreatePanel extends Component {
       src: ''
     }
     const postRef = db.collection("panels").doc()
-    console.log(this.props.drawingId.path)
+    this.setState({panelId: postRef.id})
     postRef.set(postData)
     .then(() => {
       console.log('sucsessfully written to db')
@@ -57,12 +60,14 @@ export default class CreatePanel extends Component {
     drawingRef.set({panel:postRef})
     .then(() => {
       console.log('sucsessfully written to db')
+      this.setState({redirected: true})
     })
     .catch((err) => console.log(err))
 
 
    }
   render(){
+    const redirected = this.state.redirected
     return(
       <div>
       <select
@@ -76,6 +81,10 @@ export default class CreatePanel extends Component {
       <div>
       <Bttn value="Create New Panel" onClick ={this.handleSubmit}/>
       </div>
+      {
+        redirected &&
+          <Redirect to={`/wips`} />
+      }
       </div>
     )
   }

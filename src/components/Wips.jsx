@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import db from '../db/db_config'
 import Img from 'react-image'
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import firebase from 'firebase'
 // import {SOMECOMPONENT} from "./index.jsx"
 
@@ -39,8 +39,8 @@ export default class Wips extends Component {
     let notCompletedPanelsRef = db.collection('panels').where('completed', '==', false).where('author', '==', userRef).get().then((snapshot) => {
       snapshot.forEach(doc => {
         let panel = doc.data()
-        console.log(doc.id)
-        temp.push(panel)
+
+        temp.push({src: panel.src, id: doc.id})
         this.setState({incompletePanels: temp})
       })
     })
@@ -50,7 +50,7 @@ export default class Wips extends Component {
     })
       }
     })
-  
+
 
   }
 
@@ -58,21 +58,27 @@ export default class Wips extends Component {
     this.unsubscribe()
   }
   render() {
-    console.log(this.state.user)
     const incompletePanels = this.state.incompletePanels
     return(
       <div>
-      <h2>in whips</h2>
 
       {
-        incompletePanels && incompletePanels.map((panel, index) => { 
-          console.log("here is  my panel!!!!", panel)
-          
-          return(
-             <Link key={index} to={`/panels/${panel.id}`}>
-                <Img src={panel.src} />
-             </Link>
-        )})
+        incompletePanels.id !== undefined
+        ? <div>
+            <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
+            <h3>Click on one to begin drawing</h3>
+            <br />
+            { incompletePanels && incompletePanels.map((panel, index) => {
+              <Link key={index} to={`/panels/${panel.id}`}>
+                  <Img src={panel.src} />
+              </Link>
+            })}
+          </div>
+        : <div>
+            <h2>You don't have any Works In Progress</h2>
+            <Link to={`/new`}>Click here to Create a New Game
+            </Link>
+          </div>
       }
       </div>
     )

@@ -61,7 +61,7 @@ export default class CreateGame extends Component {
             category: this.state.category,
             title: this.state.title,
         }
-        //create a new drawing with the above obj as its fields 
+        //create a new drawing with the above obj as its fields
         allDrawings.add(setObj)
             .then(docRef => {
                 drawingDocRef = docRef
@@ -81,7 +81,7 @@ export default class CreateGame extends Component {
                     completed: false,
                     drawingId: drawingDocRef,
                     orderNum: 1,
-                    src: 'https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2017/10/terrier-puppy.jpg?itok=rIgh3ArV&fc=50,50'
+                    src: ''
                 }
 
                 // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
@@ -95,9 +95,10 @@ export default class CreateGame extends Component {
 
                         //   - add  a ref to this panel into currentUser's panels collection
                         userDocRef.collection('panels').add({ 'panel': panelRef })
+                        return panelRef
                     })
-                    .then(() => {
-                        window.location.href = "/wips"
+                    .then((panelRef) => {
+                        window.location.href = `/panels/${panelRef.id}`
                     })
             })
             .catch(function (error) {

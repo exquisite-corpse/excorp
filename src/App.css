@@ -77,14 +77,13 @@ form div {
   display: flex;
   justify-content: center;
   z-index: 1;
-  top: -155px;
-  /* background-color: orange; */
+  /* top: -155px; */
   position: relative;
-  /* padding: 0; */
 }
 
 .snippet {
   z-index: 2;
   position: relative;
   clip-path: inset(330px 0px 0px 0px);
+  border: 1px solid pink;
 }
