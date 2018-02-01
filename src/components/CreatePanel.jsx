@@ -44,7 +44,8 @@ export default class CreatePanel extends Component {
 
   handleChange = (e) => {
     e.preventDefault();
-    this.setState({author:e.target.value});
+    const userRef = db.collection('users').doc(e.target.value)
+    this.setState({author:userRef});
   }
 
     //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
@@ -53,6 +54,7 @@ export default class CreatePanel extends Component {
 
    handleSubmit = (e) => {
      e.preventDefault();
+     const drwId = this.props.drawingId.path.split('/')[1]
     let postData = {
       author: this.state.author,
       completed:false,
@@ -61,6 +63,7 @@ export default class CreatePanel extends Component {
       previousPanel: this.props.prevPanelId,
       src: ''
     }
+    postData[`${drwId}`] = true
     const postRef = db.collection("panels").doc()
     this.setState({panelId: postRef.id})
     postRef.set(postData)
@@ -69,7 +72,7 @@ export default class CreatePanel extends Component {
     })
     .catch((err) => console.log(err))
 
-    const drawingRef = db.collection("drawings").doc(this.props.drawingId.path.split('/')[1]).collection('panels').doc()
+    const drawingRef = db.collection("drawings").doc().collection('panels').doc(`${drwId}`)
     drawingRef.set({panel:postRef})
     .then(() => {
       console.log('sucsessfully written to db')
@@ -82,6 +85,7 @@ export default class CreatePanel extends Component {
   render(){
     const redirected = this.state.redirected
     const users = this.state.users
+    console.log(this.state.author)
     return(
       <div>
       <select

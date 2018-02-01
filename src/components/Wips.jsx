@@ -65,7 +65,7 @@ export default class Wips extends Component {
       <div>
 
       {
-        incompletePanels[0].id !== undefined
+        incompletePanels[0].id !== ''
         ? <div>
             <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
             <h3>Click on one to begin drawing</h3>

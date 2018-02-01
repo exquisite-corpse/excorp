@@ -171,7 +171,16 @@ export default class DWgDetail extends Component {
     const createPanel = this.state.createPanel
     const src = this.state.imageSrc
     const orderNum = this.state.orderNum
-    console.log('snippet', snippet)
+
+
+        //  window.addEventListener('load', function () {
+
+
+        //        document.getElementsByClassName("Stage").item(0).style.top = "-300px"
+        //        if (snippet === '')
+        //        document.getElementsByClassName("Stage").item(0).style.top = "0px"
+        //  })
+
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
@@ -186,15 +195,17 @@ export default class DWgDetail extends Component {
                   <h3>Panel Rendered</h3>
                   </div>
                 : <div>
-                <img className="snippet" src={snippet} />
-                  <Stage className="Stage" width={700} height={500} ref={node => {
+                {snippet &&
+                 <img className="snippet" src={snippet} />
+                }
+                  <Stage  className="Stage" width={700} height={350} ref={node => {
                   this.stageRef = node
                   }}>
                   <Layer>
                     <Drawing />
                   </Layer>
                 </Stage>
-                <button onClick={this.handleExportClick}>Submit Panel</button>
+                <button className="submit-button" onClick={this.handleExportClick}>Submit Panel</button>
                 </div>
               }
              {
