@@ -10,7 +10,8 @@ export default class CreatePanel extends Component {
       author:'',
       snippet: props.src,
       panelCreated: false,
-      user: {}
+      user: {},
+      allUsers: []
     }
   }
 
@@ -20,6 +21,15 @@ export default class CreatePanel extends Component {
         this.setState({user})
       }
     })
+
+    const allUsers = db.collection('users').doc().get().then(userDocs => {
+      userDocs.forEach(userDoc => {
+        let user = userDoc.data()
+        console.log(user)
+      })
+    })
+
+
   }
 
   componentWillUnmount() {
@@ -49,7 +59,7 @@ export default class CreatePanel extends Component {
     console.log(this.props.drawingId.path)
     postRef.set(postData)
     .then(() => {
-      console.log('sucsessfully written to db')
+      console.log('successfully written to db')
     })
     .catch((err) => console.log(err))
 
