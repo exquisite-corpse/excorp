@@ -33,7 +33,7 @@ const Gallery = ({_user: user}) => {
           <div>
             <h3>All My Finished Drawings</h3>
 
-                  <Map from={allDrawings.where('completed', '==', true) /*.where(`artists.${user.id}`, '==', true).where('completed','==', true) */}
+                  <Map from={allDrawings.where('completed', '==', true) /*.where(`artists.${user.uid}`, '==', true).where('completed','==', true) */}
                     Loading={() => 'Loading...'}
                     Render={Drawing} />
 

@@ -2,13 +2,13 @@
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut, CreatePanel, Wips} from './components/index'
+import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut, CreatePanel, Wips, kbDWG} from './components/index'
 
 // import Img from 'react-image'
 
 class App extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
     }
   }
@@ -32,6 +32,7 @@ class App extends Component {
               <Route exact path="/gallery" component={Gallery} />
               <Route exact path="/new" component={CreateGame} />
               <Route exact path="/logout" component={LogOut} />
+              <Route exact path="/dwg" component={kbDWG} />
             </Switch>
             </div>
         </Router>
