@@ -46,12 +46,13 @@ export default class CreatePanel extends Component {
   handleChange = (e) => {
     e.preventDefault();
     const userRef = db.collection('users').doc(e.target.value)
+    console.log("target value: ", e.target.value)
     this.setState({author:userRef, authorId : e.target.value});
   }
 
     //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
     //    ***** CODE WHEN USERS IS ACCESSIBLE - add this panel to selected user's(friend) panels collection
-
+    // SWXxtpWQ2sNF1pIakcd6npFCqiZ2
 
    handleSubmit = (e) => {
      e.preventDefault();
@@ -69,7 +70,6 @@ export default class CreatePanel extends Component {
     const postRef = db.collection("panels").doc()
     this.setState({panelId: postRef.id})
     postRef.set(postData)
-    console.log(postRef.id)
     .then(() => {
       console.log('sucsessfully written to db')
     })
@@ -82,6 +82,7 @@ export default class CreatePanel extends Component {
     //   this.setState({redirected: true})
     // })
     // .catch((err) => console.log(err))
+    console.log(this.state.authorId)
     const authorId = this.state.authorId
     const orderNum = this.props.orderNum + 1
     console.log('order', orderNum)
@@ -110,9 +111,9 @@ export default class CreatePanel extends Component {
     return(
       <div>
       <select
-        // value={this.state.author}
         onChange={this.handleChange}
       >
+      <option value="" selected disabled hidden>Select A User From Below</option>
       {
         users && users.map(user => <option value={user.id}>{user.name}</option>)
       }

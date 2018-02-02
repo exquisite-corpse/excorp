@@ -24,7 +24,7 @@ const NavBar = ({_user: user}) => {
         </li>
         <li className="nav-item">
           Hi there, {user.email} (<Link to="/logout">Log Out</Link>)
-          <Link to="/logout">Log Out</Link>
+          <Link to="/logout"></Link>
         </li>
       </ul>
     </div>

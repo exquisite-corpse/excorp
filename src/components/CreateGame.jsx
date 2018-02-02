@@ -31,7 +31,7 @@ class CreateGame extends Component {
         let userId = user.uid
 
         const panel = await allPanels.add({
-            author: user.uid,
+            author: db.collection('users').doc(user.uid),
             completed: false,
             orderNum: 1,
             //do we need to send empty src?
