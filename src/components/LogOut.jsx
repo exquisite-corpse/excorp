@@ -1,23 +1,24 @@
-import React, { Component } from "react"
-
+import React from "react"
 import firebase from 'firebase'
 
 export default function SignOut () {
 
-  firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-  }).catch(function(error) {
-    // An error happened.
-    console.log("an error happened inside of SignOut")
-  })
-  .then(() => {
-    window.setTimeout(()=>{
-      window.location.href = "/"
-    }, 3000)
-  })
+  firebase.auth().signOut()
+   .then(() => {
+      window.setTimeout(()=>{
+        // fix this redirect
+        window.location.href = "/"
+      }, 1500)
+    })
+   .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.Message
+        console.log(errorCode, errorMessage)
+    })
+
   return(
       <div>
-      <br/>
+        <br/>
         <p>You have been signed out! Ok byeeee!</p>
       </div>
     )

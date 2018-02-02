@@ -1,13 +1,10 @@
-// "use strict";
 import React, { Component } from "react"
 import { Bttn, TextInput } from "./index"
 import firebase from 'firebase'
-// import { Link } from "react-router-dom"
-// import {SOMECOMPONENT} from "./index.jsx"
 import db from '../db/db_config'
-// const allDrawings = db.collection('drawings')
-// firebase.auth().currentUser.uid
+import {withAuth} from 'fireview'
 
+// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 // when we create a new game
 // - create a new drawing in AllDrawings with fields (with set: category, panelNum, createdAt, completed:false, title)
@@ -19,93 +16,94 @@ import db from '../db/db_config'
 //   - add a ref to this panel into this drawing's panels collection
 //   - add  a ref to this panel into currentUser's panels collection
 
-export default class CreateGame extends Component {
-
+class CreateGame extends Component {
     constructor() {
         super()
         this.state = {
             title: "",
             category: "",
-            user: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
     }
-    componentDidMount() {
-        // db.collection('users').doc('D1Dwr8o9ZmucTfCRWg0f').get()
-        // .then((mrbear) => console.log("mr bear sut", mrbear.data()))
-        this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({ user })
-            }
 
-        })
-    }
-    componentWillUnmount() {
-        this.unsubscribe()
-    }
-
-    startGame() {
+    async startGame() {
+        const {_user: user} = this.props
+        if (!user) return alert('must be logged in')
         console.log(this.state)
         const allDrawings = db.collection('drawings')
         const allPanels = db.collection('panels')
-        const userDocRef = db.collection('users').doc(this.state.user.uid)
-        let userId = this.state.user.uid
+        const userDocRef = db.collection('users').doc(user.uid)
+        let userId = user.uid
         let drawingId
         let drawingDocRef
-        const setObj = {
+
+        const panel = await allPanels.add({
+            author: user.uid,
+            completed: false,
+            src: '',
+        })
+
+        const drawing = await allDrawings.add({
             panelCount: 3,
-            createdAt: Date.now(), //this does NOT work
+            createdAt: Date.now(), //this is a unix timestamp
             completed: false,
             category: this.state.category,
             title: this.state.title,
-        }
-        //create a new drawing with the above obj as its fields 
-        allDrawings.add(setObj)
-            .then(docRef => {
-                drawingDocRef = docRef
-                drawingId = docRef.id
-                //console.log(docRef.id)
-                //add this drawing as a ref currentUser's drawings collection
-                console.log()
-                userDocRef.collection('mydwgs').add({ "drawingRef": drawingDocRef })
-            })
-            .then(() => {
-                // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
-                drawingDocRef.collection('artists').add({ 'artistRef': userDocRef })
-            })
-            .then(() => {
-                let postData = {
-                    author: userDocRef,
-                    completed: false,
-                    drawingId: drawingDocRef,
-                    orderNum: 1,
-                    src: 'https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2017/10/terrier-puppy.jpg?itok=rIgh3ArV&fc=50,50'
-                }
-
-                // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
-                allPanels.add(postData)
-                    .then(panelRef => {
-                        //   - add a ref to this panel into this drawing's panels collection
-                        drawingDocRef.collection('panels').add({ 'panel': panelRef })
-                        return panelRef
-                    })
-                    .then(panelRef => {
-
-                        //   - add  a ref to this panel into currentUser's panels collection
-                        userDocRef.collection('panels').add({ 'panel': panelRef })
-                    })
-                    .then(() => {
-                        window.location.href = "/wips"
-                    })
-            })
-            .catch(function (error) {
-                console.error("Error writing document: ", error);
-            });
+            artists: {
+                [userId]: true
+            },
+            panels: {
+                [panel.id]: 1
+            }
+        })
+        console.log('created drawing', drawing.id)
 
 
+        // //create a new drawing with the above obj as its fields
+        // allDrawings.add(setObj)
+        //     .then(docRef => {
+        //         drawingDocRef = docRef
+        //         drawingId = docRef.id
+        //         //add this drawing as a ref currentUser's drawings collection
+        //         userDocRef.collection('mydwgs').add({ "drawingRef": drawingDocRef })
+        //     })
+        //     .then(() => {
+        //         // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
+        //         drawingDocRef.collection('artists').add({ 'artistRef': userDocRef })
+        //     })
+        //     .then(() => {
+        //         let postData = {
+        //             author: userDocRef,
+        //             completed: false,
+        //             drawingId: drawingDocRef,
+        //             orderNum: 1,
+        //             src: ''
+        //         }
+        //         postData[`${drawingId}`] = true
+        //         // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
+        //        return allPanels.add(postData)
+        //     })
+        //     .then(panelRef => {
+        //         //   - add a ref to this panel into this drawing's panels collection
+        //         drawingDocRef.collection('panels').add({ 'panel': panelRef })
+        //         return panelRef
+        //     })
+        //     .then(panelRef => {
+        //         //   - add  a ref to this panel into currentUser's panels collection
+        //         return userDocRef.collection('panels').add({ 'panel': panelRef })
+        //     })
+        //     .then(() => {
+        //         return window.location.href = "/wips"
+        //      })
+        //     .catch(error => {
+        //         const errorCode = error.code
+        //         const errorMessage = error.Message
+        //         console.log(errorCode, errorMessage)
+        //     })
     }
+
     changeHandler(evt) {
         const stObj = {}
         stObj[evt.target.name] = evt.target.value
@@ -154,3 +152,5 @@ export default class CreateGame extends Component {
     }
 
 }
+
+export default withAuth(CreateGame)

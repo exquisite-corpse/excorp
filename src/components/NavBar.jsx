@@ -1,8 +1,10 @@
 import React from "react"
 import { Link, BrowserRouter as Router} from "react-router-dom"
 import {Wips, CreateGame, Profile, PanelDetail } from "./index"
+import {withAuth} from 'fireview'
 
-const NavBar = () => {
+const NavBar = ({_user: user}) => {
+  if (!user) return null
   return(
 
     <div className="navbar-container">
@@ -26,20 +28,18 @@ const NavBar = () => {
         <li className="nav-item">
           <Link to="/new">Create a New Game</Link>
         </li>
-
         <li className="nav-item">
-          <Link to="/logout">Log Out</Link>
-        </li>
-        <li>
           <Link to="/panel">Panel Detail</Link>
         </li>
+        <li className="nav-item">
+          Hi there, {user.displayName} (<Link to="/logout">Log Out</Link>)
+        </li>
       </ul>
-
     </div>
   )
 }
 
-export default NavBar
+export default withAuth(NavBar)
 
 
 

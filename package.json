@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0",
     "firebase": "^4.9.0",
     "firebaseui": "^2.5.1",
+    "fireview": "0.0.5",
     "konva": "^1.7.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

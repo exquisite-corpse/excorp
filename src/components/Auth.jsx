@@ -4,12 +4,6 @@ import { TextInput, Bttn, GoogleAuth } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
 
-
-// const provider = new firebase.auth.GoogleAuthProvider()
-// provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
-
-
-
 const allUsers = db.collection('users')
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
@@ -28,13 +22,13 @@ export default class Signup extends Component {
     this.changeHandler = this.changeHandler.bind(this)
   }
 
-
   changeHandler(evt) {
     evt.preventDefault
     const stObj = {}
     stObj[evt.target.name] = evt.target.value
     this.setState(stObj)
   }
+
   handleLogin(evt) {
     evt.preventDefault()
     const email = evt.target.email.value
@@ -43,55 +37,40 @@ export default class Signup extends Component {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then(() => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
-          // firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
-          .catch(function (error) {
-            // Handle Errors here.
-            console.log("I'm also getting in here")
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-          })
-          .then(user => {
-            console.log(firebase.auth().currentUser.uid)
-            window.location.href = "/gallery"
-          })
       })
-      .catch(err => {
-        console.log("bad err inside handle login")
-        const errorCode = err.code
-        const errorMessage = errorMessage
+      .then(user => {
+        console.log(firebase.auth().currentUser.uid)
+        // fix this redirect
+        window.location.href = "/gallery"
       })
-
-
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.Message
+        console.log(errorCode, errorMessage)
+      })
   }
+
   handleSignup(evt) {
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
     const username = evt.target.username.value
-    // create a password-based account
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      // .catch(function (error) {
-      //   console.log('in firebase auth')
-      //   const errorCode = error.errorCode
-      //   const errorMessage = error.message
-      //   console.log(errorCode, errorMessage)
-      // })
       .then((createdUser) => {
-        //firebase.firestore().collection('users').doc(currentUser.uid).set(currentUser)
-        console.log(createdUser.uid)
-        db.collection("users").doc(createdUser.uid).set({
+        return db.collection("users").doc(createdUser.uid).set({
           email: email,
           username: username
         })
-          .then(something => {
-            console.log(this.history)
-            window.location.href = "/gallery"
-          })
       })
-      .catch(function (error) {
-        console.error("Error adding document: ", error)
+      .then(something => {
+        // fix this redirect
+        window.location.href = "/gallery"
+      })
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.Message
+        console.log(errorCode, errorMessage)
       })
   }
 
@@ -161,17 +140,17 @@ export default class Signup extends Component {
 //       .catch(function(error) {
 //         // Handle Errors here.
 //         console.log("I'm also getting in here")
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
+//         var errorCode = error.code
+//         var errorMessage = error.message
 //         // ...
 //       })
-//       .then(user => 
+//       .then(user =>
 //         {
 //           console.log(firebase.auth().currentUser.uid)
 //           //window.location.href = "/gallery"
 //         })
 //     })
-//     .catch(err => { 
+//     .catch(err => {
 //       console.log("bad err inside handle login")
 //       const errorCode = err.code
 //       const errorMessage = errorMessage
