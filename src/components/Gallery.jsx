@@ -1,7 +1,7 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import { DwgItem, Bttn, TextInput } from "./index"
-import firebase from 'firebase'
+import React from "react"
+// import { Link } from "react-router-dom"
+// import { DwgItem, Bttn, TextInput } from "./index"
+// import firebase from 'firebase'
 import db from '../db/db_config'
 
 import {Map, withAuth} from 'fireview'
@@ -45,10 +45,10 @@ const Gallery = ({_user: user}) => {
       )
   }
 
-const Debug = props => {
-  console.log(props)
-  return '' + props
-}
+// const Debug = props => {
+//   console.log(props)
+//   return '' + props
+// }
 
 
 export default withAuth(Gallery)

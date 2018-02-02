@@ -1,6 +1,6 @@
 import React from "react"
-import { Link, BrowserRouter as Router} from "react-router-dom"
-import {Wips, CreateGame, Profile, PanelDetail } from "./index"
+import { Link } from "react-router-dom"
+// import {Wips, CreateGame, Profile, PanelDetail } from "./index"
 import {withAuth} from 'fireview'
 
 const NavBar = ({_user: user}) => {

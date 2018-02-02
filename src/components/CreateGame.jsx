@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Bttn, TextInput } from "./index"
-import firebase from 'firebase'
+// import firebase from 'firebase'
 import db from '../db/db_config'
 import {withAuth} from 'fireview'
 
@@ -34,10 +34,10 @@ class CreateGame extends Component {
         console.log(this.state)
         const allDrawings = db.collection('drawings')
         const allPanels = db.collection('panels')
-        const userDocRef = db.collection('users').doc(user.uid)
+        // const userDocRef = db.collection('users').doc(user.uid)
         let userId = user.uid
-        let drawingId
-        let drawingDocRef
+        // let drawingId
+        // let drawingDocRef
 
         const panel = await allPanels.add({
             author: user.uid,

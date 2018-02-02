@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { BrowswerRouter as Router, Route } from 'react-router-dom'
-import TextInput from "./TextInput.jsx"
+// import { BrowswerRouter as Router, Route } from 'react-router-dom'
+// import TextInput from "./TextInput.jsx"
 import Bttn from "./Bttn.jsx"
 import Auth from "./Auth.jsx"
 // import db from '../db/db_config'

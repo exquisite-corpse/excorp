@@ -1,10 +1,10 @@
-import db from './db/db_config'
+// import db from './db/db_config'
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut, CreatePanel, Wips} from './components/index'
 
-import Img from 'react-image'
+// import Img from 'react-image'
 
 class App extends Component {
   constructor() {
