@@ -199,7 +199,7 @@ export default class DWgDetail extends Component {
                 : <div>
                 {snippet
                 ?<div>
-                 <img className="snippet" src={snippet} />
+                 <img className="snippet" src={snippet} width="700"/>
 
                   <Stage  className="Stage" width={700} height={350} ref={node => {
                   this.stageRef = node

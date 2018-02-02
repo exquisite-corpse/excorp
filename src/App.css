@@ -103,3 +103,9 @@ form div {
   top: 100px;
   position: relative;
 }
+
+.dwg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

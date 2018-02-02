@@ -10,7 +10,7 @@ const allDrawings = db.collection('drawings')
 
 const Panel = (props) => {
   const { src } = props
-  return <img src={src} />
+  return <img src={src} height="350"/>
 }
 
 function sortedPanelIds(dwgsPanels) {
