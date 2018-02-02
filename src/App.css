@@ -75,21 +75,31 @@ form div {
 
 .Stage {
   display: flex;
+  align-content: center;
   justify-content: center;
   z-index: 3;
-  top: 265px;
-  position: fixed;
+  top: -300px;
+  position: relative;
 }
 
 .snippet {
   z-index: 0;
   position: relative;
   clip-path: inset(330px 0px 0px 0px);
-  top: -340px;
+  top: -300px;
   bottom: -150px;
 }
 
 .submit-button {
   top: 700px;
   position: fixed;
+}
+
+.Stage-no-snippet {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  z-index: 3;
+  top: 100px;
+  position: relative;
 }

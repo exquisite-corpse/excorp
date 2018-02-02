@@ -195,9 +195,10 @@ export default class DWgDetail extends Component {
                   <h3>Panel Rendered</h3>
                   </div>
                 : <div>
-                {snippet &&
+                {snippet
+                ?<div>
                  <img className="snippet" src={snippet} />
-                }
+
                   <Stage  className="Stage" width={700} height={350} ref={node => {
                   this.stageRef = node
                   }}>
@@ -205,9 +206,22 @@ export default class DWgDetail extends Component {
                     <Drawing />
                   </Layer>
                 </Stage>
+                </div>
+                : <Stage  className="Stage-no-snippet" width={700} height={350} ref={node => {
+                  this.stageRef = node
+                  }}>
+                  <Layer>
+                    <Drawing />
+                  </Layer>
+                </Stage>
+
+              }
+
                 <button className="submit-button" onClick={this.handleExportClick}>Submit Panel</button>
                 </div>
               }
+
+
              {
                drawingDone &&
                <Redirect to={`/drawings/${drawingId}`} />
