@@ -111,6 +111,7 @@ export default class DWgDetail extends Component {
     let orderNum = 0
     panelRef.get().then(doc => {
       orderNum = doc.data().orderNum
+      this.setState({orderNum: orderNum })
       if (orderNum !== 1) {
         previousPanelId = doc.data().previousPanel.path.split('/')[1]
       }
@@ -136,7 +137,6 @@ export default class DWgDetail extends Component {
     panelRef.get().then(doc => {
        orderNum = doc.data().orderNum
        drawingId = doc.data().drawingId.path.split('/')[1]
-       this.setState({orderNum: orderNum })
 
       panelRef.update({
         src: this.stageRef.getStage().toDataURL('image/jpeg', 0.1),
@@ -185,6 +185,8 @@ export default class DWgDetail extends Component {
       <div onContextMenu={e => e.preventDefault()}>
 
         <div className="stage-container">
+
+        <h1>{`You're on panel ${orderNum} of 3`}</h1>
        {createPanel
              ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId={panelId} src={src}/>
              :
