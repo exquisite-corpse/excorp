@@ -15,18 +15,12 @@ class Drawing extends Component {
   }
 
   componentDidMount() {
-    // const rv = document.createElement('img')
-    // rv.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
     const canvas = document.createElement("canvas");
     canvas.width = 700;
     canvas.height = 350;
     const context = canvas.getContext("2d");
-    //context.drawImage(rv,33, 71, 104, 124, 21, 20, 87, 104)
     this.setState({ canvas, context });
-
   }
-
-
 
   handleMouseDown = () => {
     this.setState({ isDrawing: true });
@@ -78,19 +72,9 @@ class Drawing extends Component {
   };
 
   render() {
+    const { canvas } = this.state;
 
-
-    const { canvas, context } = this.state;
-    console.log(context)
-    const rv = document.createElement("IMG")
-    window.onload = function() {
-
-      rv.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
-      context && context.drawImage(rv,0, 71, 104, 124, 21, 20, 87, 104)
-    }
-    window.onload();
     return (
-
       <Image
         image={canvas}
         ref={node => (this.image = node)}
@@ -101,8 +85,6 @@ class Drawing extends Component {
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}
       />
-
-
     );
   }
 }
@@ -122,6 +104,27 @@ export default class DWgDetail extends Component {
     this.handleExportClick = this.handleExportClick.bind(this)
   }
 
+  componentDidMount() {
+    const panelId = this.props.match.params.panelId
+    const panelRef = db.collection('panels').doc(`${panelId}`)
+    let previousPanelId = ''
+    let orderNum = 0
+    panelRef.get().then(doc => {
+      orderNum = doc.data().orderNum
+      if (orderNum !== 1) {
+        previousPanelId = doc.data().previousPanel.path.split('/')[1]
+      }
+      return previousPanelId
+    })
+    .then((previousPanelId) => {
+      if (previousPanelId !== '') {
+      let previousPanelRef = db.collection('panels').doc(`${previousPanelId}`)
+        previousPanelRef.get().then(doc => {
+          this.setState({snippetSrc: doc.data().src})
+        })
+      }}
+    )
+  }
   handleExportClick = () => {
 
     const panelId = this.props.match.params.panelId
@@ -159,7 +162,6 @@ export default class DWgDetail extends Component {
   })
   }
 
-
   render() {
     const snippet = this.state.snippetSrc
     const submitted = this.state.submitted
@@ -170,12 +172,21 @@ export default class DWgDetail extends Component {
     const src = this.state.imageSrc
     const orderNum = this.state.orderNum
 
+
+        //  window.addEventListener('load', function () {
+
+
+        //        document.getElementsByClassName("Stage").item(0).style.top = "-300px"
+        //        if (snippet === '')
+        //        document.getElementsByClassName("Stage").item(0).style.top = "0px"
+        //  })
+
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
         <div className="stage-container">
        {createPanel
-             ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId ={panelId} src={src}/>
+             ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId={panelId} src={src}/>
              :
                submitted
                 ? <div>
@@ -184,17 +195,33 @@ export default class DWgDetail extends Component {
                   <h3>Panel Rendered</h3>
                   </div>
                 : <div>
-                <img className="snippet" src={snippet} />
-                  <Stage className="Stage" width={700} height={500} ref={node => {
+                {snippet
+                ?<div>
+                 <img className="snippet" src={snippet} />
+
+                  <Stage  className="Stage" width={700} height={350} ref={node => {
                   this.stageRef = node
                   }}>
                   <Layer>
                     <Drawing />
                   </Layer>
                 </Stage>
-                <button onClick={this.handleExportClick}>Submit Panel</button>
+                </div>
+                : <Stage  className="Stage-no-snippet" width={700} height={350} ref={node => {
+                  this.stageRef = node
+                  }}>
+                  <Layer>
+                    <Drawing />
+                  </Layer>
+                </Stage>
+
+              }
+
+                <button className="submit-button" onClick={this.handleExportClick}>Submit Panel</button>
                 </div>
               }
+
+
              {
                drawingDone &&
                <Redirect to={`/drawings/${drawingId}`} />

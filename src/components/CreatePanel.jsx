@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import db from '../db/db_config';
 import Bttn from './Bttn'
+import {Redirect} from 'react-router-dom';
 import firebase from 'firebase'
 
 export default class CreatePanel extends Component {
@@ -10,15 +11,30 @@ export default class CreatePanel extends Component {
       author:'',
       snippet: props.src,
       panelCreated: false,
-      user: {}
+      user: {},
+      panelId: '',
+      redirected: false,
+      users:[{
+        id:'',
+        name:''
+      }]
     }
   }
 
   componentDidMount() {
+    let temp = []
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({user})
       }
+      const usersRef = db.collection('users')
+      usersRef.get().then(snapshot => {
+
+        snapshot.forEach((doc) => {
+          temp.push({id:doc.id, name:doc.data().username})
+          this.setState({users:temp})
+        })
+      })
     })
   }
 
@@ -28,7 +44,8 @@ export default class CreatePanel extends Component {
 
   handleChange = (e) => {
     e.preventDefault();
-    this.setState({author:e.target.value});
+    const userRef = db.collection('users').doc(e.target.value)
+    this.setState({author:userRef});
   }
 
     //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
@@ -37,6 +54,7 @@ export default class CreatePanel extends Component {
 
    handleSubmit = (e) => {
      e.preventDefault();
+     const drwId = this.props.drawingId.path.split('/')[1]
     let postData = {
       author: this.state.author,
       completed:false,
@@ -45,37 +63,46 @@ export default class CreatePanel extends Component {
       previousPanel: this.props.prevPanelId,
       src: ''
     }
+    postData[`${drwId}`] = true
     const postRef = db.collection("panels").doc()
-    console.log(this.props.drawingId.path)
+    this.setState({panelId: postRef.id})
     postRef.set(postData)
     .then(() => {
       console.log('sucsessfully written to db')
     })
     .catch((err) => console.log(err))
 
-    const drawingRef = db.collection("drawings").doc(this.props.drawingId.path.split('/')[1]).collection('panels').doc()
+    const drawingRef = db.collection("drawings").doc().collection('panels').doc(`${drwId}`)
     drawingRef.set({panel:postRef})
     .then(() => {
       console.log('sucsessfully written to db')
+      this.setState({redirected: true})
     })
     .catch((err) => console.log(err))
 
 
    }
   render(){
+    const redirected = this.state.redirected
+    const users = this.state.users
+    console.log(this.state.author)
     return(
       <div>
       <select
         value={this.state.author}
         onChange={this.handleChange}
       >
-       <option value="Orange">friend1</option>
-        <option value="Radish">friend2</option>
-        <option value="Cherry">friend3</option>
+      {
+        users && users.map(user => <option value={user.id}>{user.name}</option>)
+      }
       </select>
       <div>
       <Bttn value="Create New Panel" onClick ={this.handleSubmit}/>
       </div>
+      {
+        redirected &&
+          <Redirect to={`/wips`} />
+      }
       </div>
     )
   }
