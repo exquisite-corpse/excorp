@@ -1,30 +1,39 @@
-import React, { Component } from "react"
+import React from 'react'
 import firebase from 'firebase'
-
+import db from '../db/db_config'
 
 const provider = new firebase.auth.GoogleAuthProvider()
 provider.addScope('profile')
 provider.addScope('email')
 
-export default function GoogleAuth () {
+const allUsers = db.collection('users')
+
+// window.auth = firebase.auth()
+
+export default function GoogleAuth (evt) {
+  evt.preventDefault()
   firebase.auth().signInWithRedirect(provider)
-  // Then, you can also retrieve the Google provider's OAuth token by calling getRedirectResult when your page loads:
-  firebase.auth().getRedirectResult().then(function(result) {
+}
+
+
+firebase.auth().getRedirectResult()
+  .then(result => {
     if (result.credential) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = result.credential.accessToken;
-      // ...
+      const googleToken = result.credential.accessToken
+      const user = result.user
+      console.log('Logged in', user)
+      allUsers.doc(user.uid).set({
+        email: user.email,
+        username: user.displayName,
+        googleToken,
+      }, {merge: true})
     }
-    // The signed-in user info.
-    const user = result.user
   })
   .catch(function(error) {
-    // Handle Errors here.
     const errorCode = error.code
     const errorMessage = error.message
-    // The email of the user's account used.
     const email = error.email
-    // The firebase.auth.AuthCredential type that was used.
     const credential = error.credential
+    console.log(errorCode, errorMessage)
+    console.log(email, credential)
   })
-}
