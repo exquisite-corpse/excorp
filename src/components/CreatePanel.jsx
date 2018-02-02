@@ -17,7 +17,8 @@ export default class CreatePanel extends Component {
       users:[{
         id:'',
         name:''
-      }]
+      }],
+      authorId:''
     }
   }
 
@@ -45,7 +46,7 @@ export default class CreatePanel extends Component {
   handleChange = (e) => {
     e.preventDefault();
     const userRef = db.collection('users').doc(e.target.value)
-    this.setState({author:userRef});
+    this.setState({author:userRef, authorId : e.target.value});
   }
 
     //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
@@ -72,14 +73,32 @@ export default class CreatePanel extends Component {
     })
     .catch((err) => console.log(err))
 
-    const drawingRef = db.collection("drawings").doc().collection('panels').doc(`${drwId}`)
-    drawingRef.set({panel:postRef})
+    // const drawingRef = db.collection("drawings").doc().collection('panels').doc(`${drwId}`)
+    // drawingRef.set({panel:postRef})
+    // .then(() => {
+    //   console.log('sucsessfully written to db')
+    //   this.setState({redirected: true})
+    // })
+    // .catch((err) => console.log(err))
+    const authorId = this.state.authorId
+    const orderNum = this.props.orderNum + 1
+    console.log('order', orderNum)
+    const panelId = postRef.id
+    const drawingRef2 = db.collection("drawings").doc(`${drwId}`)
+    drawingRef2.set({
+      artists:{
+      [authorId] : true
+    },
+    panels : {
+      [`${panelId}`] : orderNum
+    }
+
+  }, {merge: true})
     .then(() => {
       console.log('sucsessfully written to db')
       this.setState({redirected: true})
     })
     .catch((err) => console.log(err))
-
 
    }
   render(){
@@ -89,7 +108,7 @@ export default class CreatePanel extends Component {
     return(
       <div>
       <select
-        value={this.state.author}
+        // value={this.state.author}
         onChange={this.handleChange}
       >
       {
