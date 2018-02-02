@@ -10,18 +10,12 @@ const NavBar = ({_user: user}) => {
     <div className="navbar-container">
 
       <ul id="nav-links">
-        <li className="nav-item">
-           <Link to="/wips">Search/Friends</Link>
+      <li className="nav-item">
+           <Link to="/gallery">Completed Drawings</Link>
         </li>
-
         <li className="nav-item">
            <Link to="/wips">WIPs</Link>
         </li>
-
-        <li className="nav-item">
-          <Link to="/new">New Drawing</Link>
-        </li>
-
         <li className="nav-item">
           <Link to="/profile">Profile</Link>
         </li>
@@ -29,10 +23,7 @@ const NavBar = ({_user: user}) => {
           <Link to="/new">Create a New Game</Link>
         </li>
         <li className="nav-item">
-          <Link to="/panel">Panel Detail</Link>
-        </li>
-        <li className="nav-item">
-          Hi there, {user.displayName} (<Link to="/logout">Log Out</Link>)
+          Hi there, {user.email} (<Link to="/logout">Log Out</Link>)
         </li>
       </ul>
     </div>

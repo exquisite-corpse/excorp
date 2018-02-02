@@ -3,18 +3,9 @@ import { Bttn, TextInput } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
 import {withAuth} from 'fireview'
+//switch redirects to use browser history...
+// import {BrowserHistory} from 'react-router-dom'
 
-// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-
-// when we create a new game
-// - create a new drawing in AllDrawings with fields (with set: category, panelNum, createdAt, completed:false, title)
-// - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
-// - grab this drawing's id
-//add this drawing as a ref currentUser's drawings collection
-
-// - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
-//   - add a ref to this panel into this drawing's panels collection
-//   - add  a ref to this panel into currentUser's panels collection
 
 class CreateGame extends Component {
     constructor() {
@@ -29,20 +20,22 @@ class CreateGame extends Component {
     }
 
     async startGame() {
+        //we get this user from fireview's withauth
         const {_user: user} = this.props
-        if (!user) return alert('must be logged in')
-        console.log(this.state)
+        if (!user) { 
+            alert('must be logged in')
+            window.location.href = "/"
+        }
         const allDrawings = db.collection('drawings')
         const allPanels = db.collection('panels')
-        const userDocRef = db.collection('users').doc(user.uid)
         let userId = user.uid
-        let drawingId
-        let drawingDocRef
 
         const panel = await allPanels.add({
             author: user.uid,
             completed: false,
-            src: '',
+            //do we need to send empty src?
+            //can we instead not have one?
+            src: ''
         })
 
         const drawing = await allDrawings.add({
@@ -58,50 +51,9 @@ class CreateGame extends Component {
                 [panel.id]: 1
             }
         })
+        //do we need more error handling here?
         console.log('created drawing', drawing.id)
-
-
-        // //create a new drawing with the above obj as its fields
-        // allDrawings.add(setObj)
-        //     .then(docRef => {
-        //         drawingDocRef = docRef
-        //         drawingId = docRef.id
-        //         //add this drawing as a ref currentUser's drawings collection
-        //         userDocRef.collection('mydwgs').add({ "drawingRef": drawingDocRef })
-        //     })
-        //     .then(() => {
-        //         // - create a new collection within this drawing called artists with a reference to currentUser's uid to this drawing's artist collection
-        //         drawingDocRef.collection('artists').add({ 'artistRef': userDocRef })
-        //     })
-        //     .then(() => {
-        //         let postData = {
-        //             author: userDocRef,
-        //             completed: false,
-        //             drawingId: drawingDocRef,
-        //             orderNum: 1,
-        //             src: ''
-        //         }
-        //         postData[`${drawingId}`] = true
-        //         // - create a new panel in AllPanels (set: completed to false, orderNum is 1, author is a ref to currentUser)
-        //        return allPanels.add(postData)
-        //     })
-        //     .then(panelRef => {
-        //         //   - add a ref to this panel into this drawing's panels collection
-        //         drawingDocRef.collection('panels').add({ 'panel': panelRef })
-        //         return panelRef
-        //     })
-        //     .then(panelRef => {
-        //         //   - add  a ref to this panel into currentUser's panels collection
-        //         return userDocRef.collection('panels').add({ 'panel': panelRef })
-        //     })
-        //     .then(() => {
-        //         return window.location.href = "/wips"
-        //      })
-        //     .catch(error => {
-        //         const errorCode = error.code
-        //         const errorMessage = error.Message
-        //         console.log(errorCode, errorMessage)
-        //     })
+        return window.location.href = "/wips"
     }
 
     changeHandler(evt) {
@@ -147,7 +99,6 @@ class CreateGame extends Component {
                     <Bttn className="btn btn-success" type="submit" value="make a new game" />
                 </form>
             </div>
-
         )
     }
 

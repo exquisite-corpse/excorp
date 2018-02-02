@@ -8,11 +8,10 @@ provider.addScope('email')
 
 const allUsers = db.collection('users')
 
-window.auth = firebase.auth()
+// window.auth = firebase.auth()
 
 export default function GoogleAuth (evt) {
   evt.preventDefault()
-
   firebase.auth().signInWithRedirect(provider)
 }
 
@@ -23,7 +22,7 @@ firebase.auth().getRedirectResult()
       const googleToken = result.credential.accessToken
       const user = result.user
       console.log('Logged in', user)
-      db.collection("users").doc(user.uid).set({
+      allUsers.doc(user.uid).set({
         email: user.email,
         username: user.displayName,
         googleToken,
@@ -38,14 +37,3 @@ firebase.auth().getRedirectResult()
     console.log(errorCode, errorMessage)
     console.log(email, credential)
   })
-
-
-
-// firebase.auth().onAuthStateChanged(user => {
-//             if (user) {
-//                 db.collection("users").doc(user.uid).set({
-//                   email: user.email,
-//                   username: "testy"
-//                 })
-//             }
-//       })
