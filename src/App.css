@@ -19,12 +19,12 @@ form div {
   display: inline-block;
   margin: 1em;
 }
-
-
+*/
 .navbar-container{
-  display: inline-block;
-  margin: 1em;
-}*/
+  /* display: inline-block;
+  margin: 1em; */
+  background-color: #222
+}
 
 .nav-item {
   margin: 1em;
@@ -33,11 +33,16 @@ form div {
   /*text-align-last: all;*/
   text-decoration: none;
   font-family: 'Roboto Slab', serif;
+  color: white;
 }
 
 
 .nav-item :hover {
   color: #D2F5FF;
+}
+
+.nav-item a:link {
+  color: white;
 }
 
 .App {
@@ -51,7 +56,7 @@ form div {
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 80px;
   padding: 20px;
   color: white;
 }
