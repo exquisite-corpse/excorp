@@ -55,6 +55,7 @@ export default class CreatePanel extends Component {
    handleSubmit = (e) => {
      e.preventDefault();
      const drwId = this.props.drawingId.path.split('/')[1]
+     console.log("this.state.author: ", this.state.author)
     let postData = {
       author: this.state.author,
       completed:false,
@@ -67,6 +68,7 @@ export default class CreatePanel extends Component {
     const postRef = db.collection("panels").doc()
     this.setState({panelId: postRef.id})
     postRef.set(postData)
+    console.log(postRef.id)
     .then(() => {
       console.log('sucsessfully written to db')
     })

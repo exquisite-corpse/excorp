@@ -33,6 +33,7 @@ class CreateGame extends Component {
         const panel = await allPanels.add({
             author: user.uid,
             completed: false,
+            orderNum: 1,
             //do we need to send empty src?
             //can we instead not have one?
             src: ''
@@ -51,9 +52,13 @@ class CreateGame extends Component {
                 [panel.id]: 1
             }
         })
+
+        const update = await allPanels.doc(panel.id).set({drawingId: allDrawings.doc(drawing.id)}, {merge: true})
+
         //do we need more error handling here?
         console.log('created drawing', drawing.id)
-        return window.location.href = "/wips"
+        console.log('added drawing ref to panel', panel.id)
+        return window.location.href = `/panels/${panel.id}`
     }
 
     changeHandler(evt) {
