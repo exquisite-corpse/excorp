@@ -37,7 +37,7 @@ export default class Wips extends Component {
         console.log("checking this.state.user.uid", this.state.user.uid)
         const userRef = db.collection('users').doc(`${this.state.user.uid}`)
 
-        let notCompletedPanelsRef = db.collection('panels').where('completed', '==', false).where('author', '==', user.uid).get().then((snapshot) => {
+        let notCompletedPanelsRef = db.collection('panels').where('completed', '==', false).where('author', '==', userRef).get().then((snapshot) => {
           snapshot.forEach(doc => {
             let panel = doc.data()
 

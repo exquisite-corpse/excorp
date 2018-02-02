@@ -224,7 +224,7 @@ export default class DWgDetail extends Component {
 
              {
                drawingDone &&
-               <Redirect to={`/drawings/${drawingId}`} />
+               <Redirect to={'/gallery'} />
              }
         </div>
       </div>

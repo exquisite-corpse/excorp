@@ -8,8 +8,6 @@ provider.addScope('email')
 
 const allUsers = db.collection('users')
 
-// window.auth = firebase.auth()
-
 export default function GoogleAuth (evt) {
   evt.preventDefault()
   firebase.auth().signInWithRedirect(provider)
@@ -27,6 +25,7 @@ firebase.auth().getRedirectResult()
         username: user.displayName,
         googleToken,
       }, {merge: true})
+      window.location.href = "/gallery"
     }
   })
   .catch(function(error) {
