@@ -25,7 +25,6 @@ firebase.auth().getRedirectResult()
         username: user.displayName,
         googleToken,
       }, {merge: true})
-      window.location.href = "/gallery"
     }
   })
   .catch(function(error) {
