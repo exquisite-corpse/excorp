@@ -2,6 +2,38 @@ import React, {Component} from "react"
 // import * from 'immutable'
 import Immutable from 'immutable'
 
+// touch events:
+// onTouchCancel onTouchEnd onTouchMove onTouchStart
+
+// mouse events:
+// onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit
+// onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
+// onMouseMove onMouseOut onMouseOver onMouseUp
+
+// form events:
+// onChange onInput onInvalid onSubmit
+
+
+
+// class App extends React.Component {
+//   contructor() {
+//     super();
+//   }
+
+//   swiped = () => {
+//     console.log("Swiped")
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         <div className='swipe-card' onTouchStart={this.swiped}>Swipe Me</div>
+//       </div>
+//     )
+//   }
+// }
+
+
 export default class kbDWG extends React.Component {
 
   constructor() {
@@ -26,6 +58,7 @@ export default class kbDWG extends React.Component {
   }
 
   handleMouseDown(mouseEvent) {
+    console.log("HANDLEDOWN EVENT :", mouseEvent)
     if (mouseEvent.button != 0) {
       return
     }
@@ -54,11 +87,13 @@ export default class kbDWG extends React.Component {
     this.setState({ isDrawing: false })
   }
 
-  relativeCoordinatesForEvent(mouseEvent) {
+  relativeCoordinatesForEvent(evt) {
+    console.log("RELCOOORDEVT:", evt)
+    // if (evt)
     const boundingRect = this.refs.drawArea.getBoundingClientRect()
     return new Immutable.Map({
-      x: mouseEvent.clientX - boundingRect.left,
-      y: mouseEvent.clientY - boundingRect.top,
+      x: evt.clientX - boundingRect.left,
+      y: evt.clientY - boundingRect.top,
     })
   }
 
@@ -68,8 +103,9 @@ export default class kbDWG extends React.Component {
       <div
         className="drawArea"
         ref="drawArea"
-        onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove}
+        onTouchStart={this.handleMouseDown} onMouseDown={this.handleMouseDown}
+        onTouchMove={this.handleMouseMove}  onMouseMove={this.handleMouseMove}
+        onTouchEnd={this.handleMouseUp}
       >
 
         <Drawing lines={this.state.lines} />
