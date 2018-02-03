@@ -119,7 +119,7 @@ export default class CreatePanel extends Component {
       }
       </select>
       <div>
-      <Bttn value="Create New Panel" onClick ={this.handleSubmit}/>
+      <Bttn value="Send Your Panel!" onClick ={this.handleSubmit}/>
       </div>
       {
         redirected &&

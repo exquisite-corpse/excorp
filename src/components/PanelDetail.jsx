@@ -10,7 +10,7 @@ class Drawing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDrawing: false,
+      isDrawing: false
     }
   }
 
@@ -99,7 +99,9 @@ export default class DWgDetail extends Component {
       drawingDone: false,
       drawingId: '',
       panelId:'',
-      createPanel: false
+      createPanel: false,
+      category: '',
+      title: ''
     }
     this.handleExportClick = this.handleExportClick.bind(this)
   }
@@ -125,6 +127,20 @@ export default class DWgDetail extends Component {
         })
       }}
     )
+    .then(()=> {
+      panelRef.get()
+      .then(doc => {
+        let category 
+        let title
+        const currentDrawing = doc.data().drawingId
+        currentDrawing.get().then(doc => {
+          category = doc.data().category
+          title = doc.data().title
+          this.setState({category, title})
+        })
+      })
+
+    })
   }
   handleExportClick = () => {
 
@@ -149,7 +165,7 @@ export default class DWgDetail extends Component {
     const drawingRef = db.collection('drawings').doc(`${drawingId}`)
     this.setState({drawingId: drawingRef })
     drawingRef.get().then(doc => {
-
+      console.log(doc.data())
       if (orderNum === doc.data().panelCount) {
         drawingRef.update({
           completed: true
@@ -163,30 +179,19 @@ export default class DWgDetail extends Component {
   }
 
   render() {
+    const {submitted,drawingDone,drawingId,panelId,createPanel,orderNum} = this.state
     const snippet = this.state.snippetSrc
-    const submitted = this.state.submitted
-    const drawingDone = this.state.drawingDone
-    const drawingId = this.state.drawingId
-    const panelId = this.state.panelId
-    const createPanel = this.state.createPanel
     const src = this.state.imageSrc
-    const orderNum = this.state.orderNum
-
-
-        //  window.addEventListener('load', function () {
-
-
-        //        document.getElementsByClassName("Stage").item(0).style.top = "-300px"
-        //        if (snippet === '')
-        //        document.getElementsByClassName("Stage").item(0).style.top = "0px"
-        //  })
 
     return (
       <div onContextMenu={e => e.preventDefault()}>
 
         <div className="stage-container">
 
-        <h1>{`You're on panel ${orderNum} of 3`}</h1>
+      {!submitted ? <div><h1>{`Drawing Title: ${this.state.title} Category: ${this.state.category}`}</h1><h1>{`You're on panel ${orderNum} of 3`}</h1></div> : 
+      <h1>Pass your panel to the next player!</h1>
+    
+    }
        {createPanel
              ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId={panelId} src={src}/>
              :
