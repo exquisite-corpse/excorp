@@ -14,34 +14,15 @@ import Immutable from 'immutable'
 // onChange onInput onInvalid onSubmit
 
 
-
-// class App extends React.Component {
-//   contructor() {
-//     super();
-//   }
-
-//   swiped = () => {
-//     console.log("Swiped")
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <div className='swipe-card' onTouchStart={this.swiped}>Swipe Me</div>
-//       </div>
-//     )
-//   }
-// }
-
-
 export default class kbDWG extends React.Component {
 
   constructor() {
     super()
 
     this.state = {
-      lines: new Immutable.List(),
-      isDrawing: false
+    lines: [],
+    currentLine:[],
+    isDrawing: false
     }
 
     this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -51,87 +32,151 @@ export default class kbDWG extends React.Component {
 
   componentDidMount() {
     document.addEventListener("mouseup", this.handleMouseUp)
+    document.addEventListener("touchend", this.handleMouseup)
+    document.addEventListener("touchcancel", this.handleMouseup)
   }
 
   componentWillUnmount() {
     document.removeEventListener("mouseup", this.handleMouseUp)
+    document.removeEventListener("touchend", this.handleMouseup)
+    document.removeEventListener("touchcancel", this.handleMouseup)
   }
 
-  handleMouseDown(mouseEvent) {
-    console.log("HANDLEDOWN EVENT :", mouseEvent)
-    if (mouseEvent.button != 0) {
+  handleMouseDown(evt) {
+    // console.log("HANDLEDOWN EVENT :", evt.type)
+    if ((evt.button != 0) && (evt.type != "touchstart" )) {
       return
     }
 
-    const point = this.relativeCoordinatesForEvent(mouseEvent)
+    const point = this.relativeCoordinatesForEvent(evt)
+    // console.log("MAKING SURE I HAVE POINT: ", point)
+    // console.log("CURRENT STATE OF LINES: ", this.state.lines)
 
-    this.setState(prevState => ({
-      lines: prevState.lines.push(new Immutable.List([point])),
+    this.setState({
+      currentLine: Object.assign([], [...this.state.currentLine, point]) ,
       isDrawing: true
-    }))
+    })
+
+    // console.log("STATE IN AFTER PUSH IN MOUSEDOWN EVENT: ", this.state)
   }
 
-  handleMouseMove(mouseEvent) {
+
+  handleMouseMove(evt) {
+    evt.preventDefault()
     if (!this.state.isDrawing) {
       return
     }
 
-    const point = this.relativeCoordinatesForEvent(mouseEvent)
+    // console.log("ARE WE EVER GETTING TO MOUSE MOVE")
+    const point = this.relativeCoordinatesForEvent(evt)
+    // console.log("MAKING SURE I HAVE POINT: ", point)
 
-    this.setState(prevState =>  ({
-      lines: prevState.lines.updateIn([prevState.lines.size - 1], line => line.push(point))
-    }))
+    // console.log("STATE INSIDE OF MOUSEMOVE EVENT: ", this.state)
+
+    this.setState( {
+      currentLine: Object.assign([], [...this.state.currentLine, point])
+      // lines: [...this.state.lines, point]
+    })
+    // console.log("I'M THE STATE INSIDE HANDLE MOUSEMOVE: ", this.state)
   }
 
-  handleMouseUp() {
-    this.setState({ isDrawing: false })
+  handleMouseUp(evt) {
+    console.log("IN MOUSE DOWN , evt ==> : ", evt)
+    this.setState({
+      lines: Object.assign([], [...this.state.lines, this.state.currentLine]),
+      currentLine: [],
+      isDrawing: false
+    })
+
+    console.log("MOUSEUP/END THIS.STATE = > ", this.state)
   }
 
   relativeCoordinatesForEvent(evt) {
-    console.log("RELCOOORDEVT:", evt)
-    // if (evt)
+    // console.log(evt.type)
+
+    let CLIENTX
+    let CLIENTY
+
+    if (evt.type === "touchstart") {
+      CLIENTX = evt.touches[0].clientX
+      CLIENTY = evt.touches[0].clientY
+    }
+
+    if (evt.type === "mousedown"){
+      CLIENTX = evt.clientX
+      CLIENTY = evt.clientY
+    }
+
+     if (evt.type === "touchmove"){
+      CLIENTX = evt.touches[0].clientX
+      CLIENTY = evt.touches[0].clientY
+    }
+
+    if (evt.type === "mousemove"){
+      CLIENTX = evt.clientX
+      CLIENTY = evt.clientY
+    }
+
     const boundingRect = this.refs.drawArea.getBoundingClientRect()
-    return new Immutable.Map({
-      x: evt.clientX - boundingRect.left,
-      y: evt.clientY - boundingRect.top,
-    })
+
+    let coordObj= {
+      x: CLIENTX - boundingRect.left,
+      y: CLIENTY - boundingRect.top,
+    }
+    return coordObj
   }
 
   render() {
     return (
     <div> <p> my panel </p>
       <div
+
+        // width= "700px"
+        // height="350px"
+
+
         className="drawArea"
         ref="drawArea"
-        onTouchStart={this.handleMouseDown} onMouseDown={this.handleMouseDown}
-        onTouchMove={this.handleMouseMove}  onMouseMove={this.handleMouseMove}
+        onTouchStart={this.handleMouseDown}
+        onMouseDown={this.handleMouseDown}
+
+        onTouchMove={this.handleMouseMove}
+        onMouseMove={this.handleMouseMove}
+
         onTouchEnd={this.handleMouseUp}
       >
 
-        <Drawing lines={this.state.lines} />
+        <Drawing allLines={this.state.lines} />
       </div>
     </div>
     )
   }
 }
 
-function Drawing({ lines }) {
+function Drawing({allLines}) {
+  console.log( "ALL LINES : ", allLines)
+
   return (
     <svg  className="drawing">
-      {lines.map((line, index) => (
-        <DrawingLine key={index} line={line} />
-      ))}
+      {
+        allLines.map((singleLine, idx) => (
+        <DrawingLine key={idx} line={singleLine} />
+      ))
+      }
     </svg>
   )
 }
 
-function DrawingLine({ line }) {
+function DrawingLine({line}) {
+  console.log("LINE : ", line)
+
   const pathData = "M " +
-    line
-      .map(p => {
-        return `${p.get('x')} ${p.get('y')}`
+      line
+      .map(segment => {
+        return `${segment.x} ${segment.y}`
       })
-      .join(" L ");
+      .join(" L ")
+  // console.log("PATH DATA!", pathData)
 
   return <path className="path" d={pathData} />
 }
