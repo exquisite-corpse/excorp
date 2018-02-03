@@ -40,7 +40,12 @@ const Gallery = ({ _user: user }) => {
       <h3>All My Finished Drawings</h3>
     <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)} 
         Loading={() => 'Loading...'}
-        Render={Drawing} /> 
+        Render={Drawing} 
+        Empty={() => <div>
+          <h2>You don't have any finished drawings</h2>
+          <Link to={`/new`}>Click here to Create a New Game
+        </Link>
+        </div>}/> 
     </div>
   )
 }
