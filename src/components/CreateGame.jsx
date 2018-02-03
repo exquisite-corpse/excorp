@@ -98,6 +98,7 @@ class CreateGame extends Component {
                             <option value="animal">Animal</option>
                             <option value="nature">Nature</option>
                             <option value="monster">Monster</option>
+                            <option value="freeplay">Freeplay</option>
                         </select>
                     </div>
                     <br />
