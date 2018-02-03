@@ -30,7 +30,12 @@ console.log("drawing props: ", props)
 const artistIdsArr = Object.keys(props.artists)
 console.log("artists on drawing: ", artistIdsArr)
 const result = panels
- ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br/><br/><br/><br/><br/><h4>{`Title: ${title} Category: ${category}`}</h4><br/>{
+ ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br/><br/><br/><br/><br/><h4>{`Title: ${title} Category: ${category} Artists: `}
+ {
+   artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
+   Empty={() => 'Empty.'}
+   Render={(props) => `${props.username}`} />)
+ }</h4><br/>{
   sortedPanelIds(panels)
        .map(id => <Map key={id} from={allPanels.doc(id)}
              Empty={() => 'Empty.'}
