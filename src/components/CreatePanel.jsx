@@ -8,6 +8,7 @@ export default class CreatePanel extends Component {
   constructor(props){
     super(props);
     this.state = {
+      nextArtist: '',
       author:'',
       snippet: props.src,
       panelCreated: false,
@@ -47,7 +48,10 @@ export default class CreatePanel extends Component {
     e.preventDefault();
     const userRef = db.collection('users').doc(e.target.value)
     console.log("target value: ", e.target.value)
-    this.setState({author:userRef, authorId : e.target.value});
+    this.setState({author : userRef})
+    this.setState({authorId : e.target.value})
+    console.log("!!!!USER REF!!!!!!", this.state.author)
+    console.log("!!!!Author ID!!!!!!", this.state.authorId)
   }
 
     //    ****** CODE WHEN USERS IS ACCESSIBLE - add selected user(friend) id to this new panel ---
@@ -64,14 +68,17 @@ export default class CreatePanel extends Component {
       drawingId: this.props.drawingId,
       orderNum:this.props.orderNum +1,
       previousPanel: this.props.prevPanelId,
-      src: ''
+      src: '',
+      [this.state.authorId]: true,
+      [drwId]: true
     }
-    postData[`${drwId}`] = true
+    //console.log("in create panel the postData obj", postData)
     const postRef = db.collection("panels").doc()
     this.setState({panelId: postRef.id})
-    postRef.set(postData)
-    .then(() => {
-      console.log('sucsessfully written to db')
+   return postRef.set(postData)
+    .then((posted) => {
+      console.log(posted)
+      console.log('sucsessfully wrote the new panel to the db')
     })
     .catch((err) => console.log(err))
 
@@ -93,12 +100,12 @@ export default class CreatePanel extends Component {
       [authorId] : true
     },
     panels : {
-      [`${panelId}`] : orderNum
+      [panelId] : orderNum
     }
 
   }, {merge: true})
     .then(() => {
-      console.log('sucsessfully written to db')
+      console.log('This isnt happening????')
       this.setState({redirected: true})
     })
     .catch((err) => console.log(err))
@@ -107,7 +114,7 @@ export default class CreatePanel extends Component {
   render(){
     const redirected = this.state.redirected
     const users = this.state.users
-    console.log(this.state.author)
+    //console.log(this.state.author)
     return(
       <div>
       <select

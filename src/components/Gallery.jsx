@@ -34,7 +34,7 @@ const result = panels
  {
    artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
    Empty={() => 'Empty.'}
-   Render={(props) => `${props.username}`} />)
+   Render={(props) => ` ${props.username} `} />)
  }</h4><br/>{
   sortedPanelIds(panels)
        .map(id => <Map key={id} from={allPanels.doc(id)}

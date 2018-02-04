@@ -5,8 +5,6 @@ import db from '../db/db_config'
 import {withAuth} from 'fireview'
 //switch redirects to use browser history...
 // import {BrowserHistory} from 'react-router-dom'
-
-
 class CreateGame extends Component {
     constructor() {
         super()
@@ -18,7 +16,7 @@ class CreateGame extends Component {
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
     }
-
+    
     async startGame() {
         //we get this user from fireview's withauth
         const {_user: user} = this.props
@@ -34,6 +32,7 @@ class CreateGame extends Component {
             author: db.collection('users').doc(user.uid),
             completed: false,
             orderNum: 1,
+            [user.uid]: true,
             //do we need to send empty src?
             //can we instead not have one?
             src: ''
@@ -58,6 +57,7 @@ class CreateGame extends Component {
         //do we need more error handling here?
         console.log('created drawing', drawing.id)
         console.log('added drawing ref to panel', panel.id)
+        debugger
         return window.location.href = `/panels/${panel.id}`
     }
 
