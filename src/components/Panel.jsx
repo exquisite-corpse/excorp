@@ -125,8 +125,10 @@ export default class Panel extends Component {
     }
 
     handleSubmit = (e) => {
+        const imageSrc= this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
+        console.log("IMAGE FUCKING SOURCE : ", imageSrc.slice(0,100))
         e.preventDefault()
-        allPanels.doc(this.state.panel.id).set({src: "FIX THIS!!!!"/*add the src*/})
+        allPanels.doc(this.state.panel.id).set({src: imageSrc, completed:true}, {merge: true})
         .then(() => 
         //before settng state:
         //check if it's the last one 
@@ -145,18 +147,28 @@ export default class Panel extends Component {
                      <div>
                         {snippetSrc.length
                             ? <div>
-                                <img className="snippet" src={snippetSrc} width="700" />
-                                <Stage className="Stage" width={700} height={350} ref={node => {
-                                    this.stageRef = node
-                                }}>
-                                    <Layer>
-                                        <Drawing />
-                                    </Layer>
+                                <img 
+                                className="snippet" 
+                                src={snippetSrc} 
+                                width="700" 
+                                />
+                                <Stage 
+                                className="Stage" 
+                                width={700} 
+                                height={350} 
+                                ref={node => {this.stageRef = node }}
+                                >
+                                <Layer>
+                                    <Drawing />
+                                </Layer>
                                 </Stage>
                             </div>
-                            : <Stage className="Stage-no-snippet" width={700} height={350} ref={node => {
-                                this.stageRef = node
-                            }}>
+                            : <Stage 
+                                className="Stage-no-snippet" 
+                                width={700} 
+                                height={350} 
+                                ref={node => {this.stageRef = node }}
+                                >
                                 <Layer>
                                     <Drawing />
                                 </Layer>
