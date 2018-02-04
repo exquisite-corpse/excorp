@@ -134,7 +134,7 @@ export default class Panel extends Component {
         //and if it is update drawing {complete: true}
         //instead redirect to /gallery
           if (this.state.panel.orderNum == this.state.drawing.panelCount){
-            allDrawings.doc(`${drawing.id}`).set({completed:true},{merge:true})
+            allDrawings.doc(`${this.state.drawing.id}`).set({completed:true},{merge:true})
             .then(() => window.location.href = `/gallery`)
           }
         this.setState({submitted: true})
