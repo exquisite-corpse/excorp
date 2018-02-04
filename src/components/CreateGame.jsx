@@ -30,11 +30,13 @@ class CreateGame extends Component {
 
         const panel = await allPanels.add({
             author: db.collection('users').doc(user.uid),
+            createdAt: Date.now(), //this is a unix timestamp
             completed: false,
             orderNum: 1,
             [user.uid]: true,
             //do we need to send empty src?
             //can we instead not have one?
+            //consider adding category and title onto panel for easier work??
             src: ''
         })
 
@@ -52,12 +54,14 @@ class CreateGame extends Component {
             }
         })
 
-        const update = await allPanels.doc(panel.id).set({drawingId: allDrawings.doc(drawing.id)}, {merge: true})
+        const updatePanel = await allPanels.doc(panel.id).set({drawingId: allDrawings.doc(drawing.id), id:panel.id}, {merge: true})
+
+        const updateDrawing = await allDrawings.doc(drawing.id).set({id: drawing.id}, {merge: true})
 
         //do we need more error handling here?
         console.log('created drawing', drawing.id)
         console.log('added drawing ref to panel', panel.id)
-        debugger
+        
         return window.location.href = `/panels/${panel.id}`
     }
 
