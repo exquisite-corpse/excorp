@@ -57,23 +57,26 @@ export default class Signup extends Component {
     const username = evt.target.username.value
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((createdUser) => {
-        return db.collection("users").doc(createdUser.uid).set({
+      .then(createdUser => {
+        console.log("Firetore auth created a new user with an id of: ", createdUser.uid)
+        return db.collection("users").doc(`${createdUser.uid}`).set({
           email: email,
-          username: username
+          username: username,
+          id: createdUser.uid
         })
       })
-      .then(newUserDoc => allUsers.doc(newUserDoc.id).set({
-        id: newUserDoc.id
-      }, {merge: true}))
+      .then(newUserDoc => {
+        console.log("what I'm returning after creating user", newUserDoc.id)
+      })
       .then(something => {
         // fix this redirect
+        debugger
         window.location.href = "/gallery"
       })
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.Message
-        console.log(errorCode, errorMessage)
+        console.log(error)
       })
   }
 

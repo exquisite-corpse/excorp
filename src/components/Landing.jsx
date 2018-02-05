@@ -1,12 +1,11 @@
 import React, { Component } from "react"
 import { BrowswerRouter as Router, Route } from 'react-router-dom'
-import TextInput from "./TextInput.jsx"
-import Bttn from "./Bttn.jsx"
-import Auth from "./Auth.jsx"
+import {TextInput, Bttn, Auth} from './index'
 import db from '../db/db_config'
 import firebase from 'firebase'
+import {withAuth} from 'fireview'
 
-export default class LoginSignup extends Component {
+class LoginSignup extends Component {
 
   constructor() {
     super()
@@ -17,28 +16,6 @@ export default class LoginSignup extends Component {
     this.handleSignupClick = this.handleSignupClick.bind(this)
     this.handleLoginClick = this.handleLoginClick.bind(this)
   }
-
-  componentDidMount(){
-    firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-              console.log("IHAVE A USER!!!!: ", user)
-              if(!db.collection("users").doc(user.uid) ){
-
-                db.collection("users").doc(user.uid).set({
-                  email: user.email,
-                  // username: "MEEEEE?????"
-                  username: user.displayName
-                }).catch(err=>{
-                  console.log(err.code, err.message)
-                })
-
-            }
-            }
-      })
-
-  }
-
-
 
   handleSignupClick(evt) {
     evt.preventDefault()
@@ -56,10 +33,16 @@ export default class LoginSignup extends Component {
   }
 
   render () {
+    if (this.props._user){
+    db.collection('users').doc(`${this.props._user.id}`).get()
+    .then (user => {
+      if (user) window.location.href = '/gallery'
+    })
+  }
+
     return(
       <div>
         <span>
-
           <Bttn value="Sign Up" onClick={this.handleSignupClick} />
           <Bttn value="Log In" onClick={this.handleLoginClick} />
         </span>
@@ -69,3 +52,5 @@ export default class LoginSignup extends Component {
     )
   }
 }
+
+export default withAuth(LoginSignup)

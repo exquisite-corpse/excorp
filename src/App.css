@@ -70,7 +70,7 @@ form div {
 
 .submit-button {
   top: 700px;
-  position: fixed;
+  position: relative;
 }
 
 .Stage-no-snippet {

@@ -26,7 +26,7 @@ firebase.auth().getRedirectResult()
         googleToken,
       }, {merge: true})
       .then(newUserDoc => allUsers.doc(user.uid).set({
-        id: newUserDoc.id
+        id: user.uid
       }, {merge: true}))
     }
   })

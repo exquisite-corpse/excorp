@@ -9,8 +9,8 @@ class CreateGame extends Component {
     constructor() {
         super()
         this.state = {
-            title: "",
-            category: "",
+            title: "Untitled",
+            category: "Animal",
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
@@ -99,10 +99,10 @@ class CreateGame extends Component {
                             name="category"
                             onChange={this.changeHandler}
                         >
-                            <option value="animal">Animal</option>
-                            <option value="nature">Nature</option>
-                            <option value="monster">Monster</option>
-                            <option value="freeplay">Freeplay</option>
+                            <option value="Animal">Animal</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Monster">Monster</option>
+                            <option value="Freeplay">Freeplay</option>
                         </select>
                     </div>
                     <br />

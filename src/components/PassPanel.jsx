@@ -20,7 +20,7 @@ class PassPanel extends Component {
 
 handleChange = (e) => {
   e.preventDefault()
-  //console.log("Chosen next artist: ", e.target.value)
+  console.log("Currently chosen next artist: ", e.target.value)
   this.setState({nextArtistId: e.target.value})
 }
 
@@ -57,7 +57,7 @@ async createAndPassPanel() {
   }, { merge: true })
 
   console.log(`created new panel with an artist of ${this.state.nextArtistId} and a panel id of ${newPanel.id} for the drawing ${this.props.drawing.id}`)
-  debugger
+  //debugger
   return window.location.href = `/wips`
 }
 
