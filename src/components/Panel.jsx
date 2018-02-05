@@ -4,93 +4,94 @@ import { Redirect } from 'react-router-dom'
 import { Stage, Layer, Rect, Image, Group } from "react-konva"
 import Img from 'react-image'
 import db from '../db/db_config'
-import {PassPanel} from "./index"
+import {PassPanel, Drawing} from "./index"
+import {withAuth} from 'fireview'
 const allPanels = db.collection('panels')
 const allDrawings = db.collection('drawings')
 
-class Drawing extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isDrawing: false
-        }
-    }
-    componentDidMount() {
-        const canvas = document.createElement("canvas")
-        canvas.width = 700
-        canvas.height = 350
-        const context = canvas.getContext("2d")
-        this.setState({ canvas, context })
-    }
+// class Drawing extends Component {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             isDrawing: false
+//         }
+//     }
+//     componentDidMount() {
+//         const canvas = document.createElement("canvas")
+//         canvas.width = 700
+//         canvas.height = 350
+//         const context = canvas.getContext("2d")
+//         this.setState({ canvas, context })
+//     }
 
-    handleMouseDown = () => {
-        this.setState({ isDrawing: true })
-        const stage = this.image.getStage()
-        this.lastPointerPosition = stage.getPointerPosition()
-    }
+//     handleMouseDown = () => {
+//         this.setState({ isDrawing: true })
+//         const stage = this.image.getStage()
+//         this.lastPointerPosition = stage.getPointerPosition()
+//     }
 
-    handleMouseUp = () => {
-        this.setState({ isDrawing: false })
-    }
+//     handleMouseUp = () => {
+//         this.setState({ isDrawing: false })
+//     }
 
-    handleMouseMove = ({ evt }) => {
-        const { context, isDrawing } = this.state
+//     handleMouseMove = ({ evt }) => {
+//         const { context, isDrawing } = this.state
 
 
-        if (isDrawing) {
-            context.strokeStyle = "black"
-            context.lineJoin = "round"
-            context.lineWidth = 3
+//         if (isDrawing) {
+//             context.strokeStyle = "black"
+//             context.lineJoin = "round"
+//             context.lineWidth = 3
 
-            if (evt.buttons === 1) {
-                // draw
-                context.globalCompositeOperation = "source-over"
-            } else if (evt.buttons === 2) {
-                // erase
-                context.globalCompositeOperation = "destination-out"
-            }
-            context.beginPath()
+//             if (evt.buttons === 1) {
+//                 // draw
+//                 context.globalCompositeOperation = "source-over"
+//             } else if (evt.buttons === 2) {
+//                 // erase
+//                 context.globalCompositeOperation = "destination-out"
+//             }
+//             context.beginPath()
 
-            var localPos = {
-                x: this.lastPointerPosition.x - this.image.x(),
-                y: this.lastPointerPosition.y - this.image.y()
-            }
-            context.moveTo(localPos.x, localPos.y)
+//             var localPos = {
+//                 x: this.lastPointerPosition.x - this.image.x(),
+//                 y: this.lastPointerPosition.y - this.image.y()
+//             }
+//             context.moveTo(localPos.x, localPos.y)
 
-            const stage = this.image.getStage()
+//             const stage = this.image.getStage()
 
-            var pos = stage.getPointerPosition()
-            localPos = {
-                x: pos.x - this.image.x(),
-                y: pos.y - this.image.y()
-            }
-            context.lineTo(localPos.x, localPos.y)
-            context.closePath()
-            context.stroke()
-            this.lastPointerPosition = pos
-            this.image.getLayer().draw()
-        }
-    }
+//             var pos = stage.getPointerPosition()
+//             localPos = {
+//                 x: pos.x - this.image.x(),
+//                 y: pos.y - this.image.y()
+//             }
+//             context.lineTo(localPos.x, localPos.y)
+//             context.closePath()
+//             context.stroke()
+//             this.lastPointerPosition = pos
+//             this.image.getLayer().draw()
+//         }
+//     }
 
-    render() {
-        const { canvas } = this.state
+//     render() {
+//         const { canvas } = this.state
 
-        return (
-            <Image
-                image={canvas}
-                ref={node => (this.image = node)}
-                width={700}
-                height={350}
-                stroke="blue"
-                onMouseDown={this.handleMouseDown}
-                onMouseUp={this.handleMouseUp}
-                onMouseMove={this.handleMouseMove}
-            />
-        )
-    }
-}
+//         return (
+//             <Image
+//                 image={canvas}
+//                 ref={node => (this.image = node)}
+//                 width={700}
+//                 height={350}
+//                 stroke="blue"
+//                 onMouseDown={this.handleMouseDown}
+//                 onMouseUp={this.handleMouseUp}
+//                 onMouseMove={this.handleMouseMove}
+//             />
+//         )
+//     }
+// }
 
-export default class Panel extends Component {
+class Panel extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -101,24 +102,23 @@ export default class Panel extends Component {
         }
         //this.handleSubmit = this.handleSubmit.bind(this)
     }
-    // componentWillMount() {
-    //     const panelId = this.props.match.params.panelId
-    //     const panelRef = allPanels.doc(`${panelId}`).get()
-    //         .then(doc => {
-    //             if ((doc.data().completed == 'true') || (doc.data().this.props._user.uid)) {
-
-    //             }
-    //         })
-    // }
-
     componentDidMount() {
+        const user = this.props._user
         let panel
         let drawing
         const panelId = this.props.match.params.panelId
+        if (!user) console.log('I have no user')
+
         const panelRef = allPanels.doc(`${panelId}`).get()
             .then(doc => {
+                if (doc.data() && user){
                 panel = doc.data()
+                if ((panel.completed == 'true') || (!panel[`${user.uid}`])){
+                    if (!user) window.location.href = '/gallery'
+                }
                 return panel
+            }
+            window.location.href = '/gallery'
             })
             .then(myPanel => {
                 console.log(myPanel.drawingId)
@@ -139,13 +139,10 @@ export default class Panel extends Component {
 
     handleSubmit = (e) => {
         const imageSrc= this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
-        //console.log("IMAGE FUCKING SOURCE : ", imageSrc.slice(0,100))
         e.preventDefault()
         allPanels.doc(this.state.panel.id).set({src: imageSrc, completed:true}, {merge: true})
         .then(() => {
-        //check if it's the last one 
-        //and if it is update drawing {complete: true}
-        //instead redirect to /gallery
+        //checking if it's the last one 
           if (this.state.panel.orderNum == this.state.drawing.panelCount){
             allDrawings.doc(`${this.state.drawing.id}`).set({completed:true},{merge:true})
             .then(() => window.location.href = `/gallery`)
@@ -202,3 +199,4 @@ export default class Panel extends Component {
 }
 
 
+export default withAuth(Panel)
