@@ -23,6 +23,9 @@ const NavBar = ({_user: user}) => {
           <Link to="/new">Create a New Game</Link>
         </li>
         <li className="nav-item">
+          <Link to="/users">Search for users</Link>
+        </li>
+        <li className="nav-item">
           Hi there, {user.email} (<Link to="/logout">Log Out</Link>)
           <Link to="/logout"></Link>
         </li>
