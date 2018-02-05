@@ -11,7 +11,8 @@ class PassPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        nextArtistId: {}
+        nextArtistId: "",
+        artistSelected: false
     }
     this.createAndPassPanel = this.createAndPassPanel.bind(this)
     //this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,12 +22,11 @@ class PassPanel extends Component {
 handleChange = (e) => {
   e.preventDefault()
   console.log("Currently chosen next artist: ", e.target.value)
-  this.setState({nextArtistId: e.target.value})
+  this.setState({nextArtistId: e.target.value, artistSelected: true})
 }
 
 async createAndPassPanel() {
     console.log(this.state.nextArtistId)
-    //debugger
   let postData = {
     author: db.collection('users').doc(`${this.state.nextArtistId}`),
     completed: false,
@@ -40,7 +40,8 @@ async createAndPassPanel() {
     createdAt: Date.now()
     //consider adding category and title onto panel for easier work??
   }
-
+  console.log("checking post data contents in create and pass", postData.author, this.state.nextArtistId)
+  debugger
   const newPanel = await db.collection("panels").add(postData)
 
   //console.log("this is supposed to be the new panel :/ ", newPanel.id)
@@ -67,6 +68,7 @@ handleSubmit = (e) => {
 }
 
 render(){
+  console.log(this.state.artistSelected)
     return (
         <div>
             <br />
@@ -75,6 +77,7 @@ render(){
             <form name="pass-your-panel" onSubmit={this.handleSubmit}>
                 <div className="users-select">
                     <select  onChange={this.handleChange} name="nextArtist">
+                    <option value="" selected disabled hidden>Select A User From Below</option>
                         <Map from={ db.collection('users')}
                             Loading={() => 'Loading...'}
                             Render={Options}
@@ -82,7 +85,9 @@ render(){
                     </select>
                 </div>
                 <br />
-                <Bttn className="btn btn-success" type="submit" value="pass your panel" />
+                { this.state.artistSelected ? <Bttn className="btn btn-success" type="submit" value="pass your panel" /> :
+              <button type="button" disabled>Please choose the next artist!</button>
+              }
             </form>
         </div>
     )
@@ -92,6 +97,6 @@ export default withAuth(PassPanel)
 
 
 const Options = (props) => {
-    //console.log(props)
+    console.log("this option has a value of: ", props.id)
     return <option key={props.id} value={props.id}>{props.username}</option>
   }
