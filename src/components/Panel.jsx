@@ -109,8 +109,12 @@ export default class Panel extends Component {
         const panelRef = allPanels.doc(`${panelId}`).get()
             .then(doc => {
                 panel = doc.data()
+                return panel
             })
-            .then(() => panel.drawingId.get())
+            .then(myPanel => {
+                //console.log(myPanel)
+                return allDrawings.doc(myPanel.drawingId).get()
+            })
             .then(drawingDoc => drawing = drawingDoc.data())
             .then(() => {
                 if (panel.previousPanel){
@@ -126,7 +130,7 @@ export default class Panel extends Component {
 
     handleSubmit = (e) => {
         const imageSrc= this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
-        console.log("IMAGE FUCKING SOURCE : ", imageSrc.slice(0,100))
+        //console.log("IMAGE FUCKING SOURCE : ", imageSrc.slice(0,100))
         e.preventDefault()
         allPanels.doc(this.state.panel.id).set({src: imageSrc, completed:true}, {merge: true})
         .then(() => {

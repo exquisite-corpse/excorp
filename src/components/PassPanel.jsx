@@ -11,7 +11,7 @@ class PassPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        nextArtist: {}
+        nextArtistId: {}
     }
     this.createAndPassPanel = this.createAndPassPanel.bind(this)
     //this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,20 +20,22 @@ class PassPanel extends Component {
 
 handleChange = (e) => {
   e.preventDefault()
-  console.log(e.target.value)
-  this.setState({nextArtist: e.target.value})
+  //console.log("Chosen next artist: ", e.target.value)
+  this.setState({nextArtistId: e.target.value})
 }
 
 async createAndPassPanel() {
+    //console.log(this.state.nextArtistId)
+    //debugger
   let postData = {
-    author: db.collection('users').doc(`${this.state.nextArtist.id}`),
+    author: db.collection('users').doc(this.state.nextArtistId),
     completed: false,
     drawingId: this.props.drawing.id,
     orderNum: this.props.panel.orderNum + 1,
     //this should really be just the id
     previousPanel: db.collection('panels').doc(`${this.props.panel.id}`),
     src: '',
-    [this.state.nextArtist.id]: true,
+    [this.state.nextArtistId]: true,
     [this.props.drawing.id]: true,
     createdAt: Date.now()
     //consider adding category and title onto panel for easier work??
@@ -41,17 +43,21 @@ async createAndPassPanel() {
 
   const newPanel = await db.collection("panels").add(postData)
 
+  //console.log("this is supposed to be the new panel :/ ", newPanel.id)
+
   const addOwnId = await  allPanels.doc(`${newPanel.id}`).set({id: newPanel.id}, {merge: true})
 
   const updateDrawing = await db.collection("drawings").doc(`${this.props.drawing.id}`).set({
     artists: {
-      [this.state.nextArtist.id]: true
+      [this.state.nextArtistId]: true
     },
     panels: {
       [newPanel.id]: this.props.panel.orderNum + 1
     }
   }, { merge: true })
 
+  console.log(`created new panel with an artist of ${this.state.nextArtistId} and a panel id of ${newPanel.id} for the drawing ${this.props.drawing.id}`)
+  //debugger
   return window.location.href = `/wips`
 }
 
@@ -86,5 +92,6 @@ export default withAuth(PassPanel)
 
 
 const Options = (props) => {
-    return <option key={props.uid} value={props}>{props.username}</option>
+    //console.log(props)
+    return <option key={props.id} value={props.id}>{props.username}</option>
   }

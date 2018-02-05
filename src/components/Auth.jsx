@@ -63,6 +63,9 @@ export default class Signup extends Component {
           username: username
         })
       })
+      .then(newUserDoc => allUsers.doc(newUserDoc.id).set({
+        id: newUserDoc.id
+      }, {merge: true}))
       .then(something => {
         // fix this redirect
         window.location.href = "/gallery"
