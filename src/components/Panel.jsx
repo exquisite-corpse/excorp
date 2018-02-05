@@ -101,16 +101,6 @@ export default class Panel extends Component {
         }
         //this.handleSubmit = this.handleSubmit.bind(this)
     }
-    // componentWillMount() {
-    //     const panelId = this.props.match.params.panelId
-    //     const panelRef = allPanels.doc(`${panelId}`).get()
-    //         .then(doc => {
-    //             if ((doc.data().completed == 'true') || (doc.data().this.props._user.uid)) {
-
-    //             }
-    //         })
-    // }
-
     componentDidMount() {
         let panel
         let drawing
@@ -138,9 +128,9 @@ export default class Panel extends Component {
     }
 
     handleSubmit = (e) => {
+        e.preventDefault()
         const imageSrc= this.stageRef.getStage().toDataURL('image/jpeg', 0.1)
         //console.log("IMAGE FUCKING SOURCE : ", imageSrc.slice(0,100))
-        e.preventDefault()
         allPanels.doc(this.state.panel.id).set({src: imageSrc, completed:true}, {merge: true})
         .then(() => {
         //check if it's the last one 

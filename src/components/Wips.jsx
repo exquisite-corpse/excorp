@@ -15,19 +15,23 @@ const Wips = (props) => {
   return (
     <div>
       <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
-    <Map from={allPanels.where('completed', '==', false).where(`${user.uid}`, '==', true)} 
+      <Map from={allPanels.where('completed', '==', false).where(`${user.uid}`, '==', true)}
         Loading={() => 'Loading...'}
-        Render={(props) => { if (props.id) {return <Link key={props.id} to={`/panels/${props.id}`}>
-        {props.src !== ''
-          ? <Img src={props.src} />
-          : <h3> Go to your panel</h3>
-        }
-      </Link>}else {return <h1>Old shitty one without an ID</h1>}}}
+        Render={(props) => {
+          if (props.id) {
+            return <Link key={props.id} to={`/panels/${props.id}`}>
+              {props.src !== ''
+                ? <Img src={props.src} />
+                : <h3> Go to your panel</h3>
+              }
+            </Link>
+          } else { return <h1>Old shitty one without an ID</h1> }
+        }}
         Empty={() => <div>
           <h3>You don't have any works in progress...</h3>
           <Link to={`/new`}>Click here to Create a New Game
         </Link>
-        </div>}/> 
+        </div>} />
     </div>
   )
 }
