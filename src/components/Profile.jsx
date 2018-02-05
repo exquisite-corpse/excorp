@@ -16,9 +16,23 @@ export default class PublicProfile extends Component{
         email:''
       },
       requests:[],
-      friends: []
+      friends: [],
+      profileImages: [
+
+               `https://artofcollage.files.wordpress.com/2013/09/nikkal-exquisite-corpse-e1378737704164.jpg`,
+
+               `http://www.tate.org.uk/art/images/work/P/P78/P78455_9.jpg`,
+
+               `https://i.pinimg.com/originals/de/1e/8a/de1e8ab6635a10448dc4f675b4b35e07.jpg`,
+
+               `https://stefanpoag.files.wordpress.com/2015/09/tryffyd.jpg`,
+
+               `http://jackwitcomb-experimentalstorytelling.weebly.com/uploads/1/4/0/9/14092804/5138755_orig.jpg?0`
+
+             ]
     }
   }
+
   componentDidMount(){
     let temp = [];
     let tempFriends = []
@@ -57,6 +71,13 @@ export default class PublicProfile extends Component{
   })
   }
 
+  pickRandomProfile = () => {
+    let profileImage = this.state.profileImages
+    let length = this.state.profileImages.length
+    let randomNum = Math.floor(Math.random() * Math.floor(length))
+    return profileImage[randomNum]
+  }
+
   handleClick = (request) => {
     const userId = this.state.user.id;
     console.log('aaaa', request)
@@ -78,17 +99,19 @@ export default class PublicProfile extends Component{
     const user = this.state.user
     const requests = this.state.requests
     const friends = this.state.friends
+    const pickRandomProfile = this.pickRandomProfile
     console.log(user)
     return(
       <div >
-      <div>
-        <h3>username: { user.username }</h3>
-     </div>
-     <div className="thumbnail">
-       <h5>
-          <span>mail: { user.email }</span>
-       </h5>
-     </div>
+      <div className="profile-header">
+      <div className="profile-picture">
+        <img src={pickRandomProfile()} />
+      </div>
+      <div className="profile-info">
+        <h5><strong>Name: </strong>{user.name}</h5>
+        <h5><strong>Email: </strong>{user.email}</h5>
+      </div>
+    </div>
      <div className="thumbnail">
      { requests &&
        <h5>
