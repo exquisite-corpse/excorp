@@ -2,7 +2,7 @@ import db from './db/db_config'
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import { DwgDetail, PanelDetail, Landing, NavBar, Gallery, CreateGame, LogOut, CreatePanel, Wips, SearchBar, Profile, PublicProfile} from './components/index'
+import { DwgDetail, Landing, NavBar, Gallery, CreateGame, LogOut, Wips, Panel, SearchBar, Profile, PublicProfile} from './components/index'
 
 import Img from 'react-image'
 
@@ -24,11 +24,9 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/drawing/:drawingId" component={DwgDetail} />
-              <Route exact path="/panels/:panelId" component={PanelDetail} />
-              <Route exact path="/createPanel" component={CreatePanel} />
+              <Route exact path="/panels/:panelId" component={Panel} />
               <Route exact path="/wips" component={Wips} />
               <Route exact path="/drawing" component={DwgDetail} />
-              <Route exact path="/panel" component={PanelDetail} />
               <Route exact path="/gallery" component={Gallery} />
               <Route exact path="/new" component={CreateGame} />
               <Route exact path="/logout" component={LogOut} />

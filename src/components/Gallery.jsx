@@ -24,8 +24,18 @@ function sortedPanelIds(dwgsPanels) {
   return sortedKeyVals.map(([key, value]) => key)
 }
 
-const Drawing = ({panels}) => panels
- ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br/><br/><br/><br/><br/><br/>{
+const Drawing = (props) => {
+const {panels, title, category} = props
+console.log("drawing props: ", props)
+const artistIdsArr = Object.keys(props.artists)
+console.log("artists on drawing: ", artistIdsArr)
+const result = panels
+ ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br/><br/><br/><br/><br/><h4>{`Title: ${title} Category: ${category} Artists: `}
+ {
+   artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
+   Empty={() => 'Empty.'}
+   Render={(props) => ` ${props.username} `} />)
+ }</h4><br/>{
   sortedPanelIds(panels)
        .map(id => <Map key={id} from={allPanels.doc(id)}
              Empty={() => 'Empty.'}
@@ -33,16 +43,19 @@ const Drawing = ({panels}) => panels
    } </div>
  : null
 
+ return result
+  }
+
 const Gallery = ({ _user: user }) => {
   if (!user) return null
   return (
     <div>
-      <h3>All My Finished Drawings</h3>
+      <h2>All My Finished Drawings:</h2>
     <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)} 
         Loading={() => 'Loading...'}
         Render={Drawing} 
         Empty={() => <div>
-          <h2>You don't have any finished drawings</h2>
+          <h3>You don't have any finished drawings</h3>
           <Link to={`/new`}>Click here to Create a New Game
         </Link>
         </div>}/> 

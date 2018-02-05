@@ -5,20 +5,18 @@ import db from '../db/db_config'
 import {withAuth} from 'fireview'
 //switch redirects to use browser history...
 // import {BrowserHistory} from 'react-router-dom'
-
-
 class CreateGame extends Component {
     constructor() {
         super()
         this.state = {
-            title: "",
-            category: "",
+            title: "Untitled",
+            category: "Animal",
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
     }
-
+    
     async startGame() {
         //we get this user from fireview's withauth
         const {_user: user} = this.props
@@ -32,10 +30,13 @@ class CreateGame extends Component {
 
         const panel = await allPanels.add({
             author: db.collection('users').doc(user.uid),
+            createdAt: Date.now(), //this is a unix timestamp
             completed: false,
             orderNum: 1,
+            [user.uid]: true,
             //do we need to send empty src?
             //can we instead not have one?
+            //consider adding category and title onto panel for easier work??
             src: ''
         })
 
@@ -53,11 +54,14 @@ class CreateGame extends Component {
             }
         })
 
-        const update = await allPanels.doc(panel.id).set({drawingId: allDrawings.doc(drawing.id)}, {merge: true})
+        const updatePanel = await allPanels.doc(panel.id).set({drawingId: drawing.id, id:panel.id}, {merge: true})
+
+        const updateDrawing = await allDrawings.doc(drawing.id).set({id: drawing.id}, {merge: true})
 
         //do we need more error handling here?
         console.log('created drawing', drawing.id)
         console.log('added drawing ref to panel', panel.id)
+        
         return window.location.href = `/panels/${panel.id}`
     }
 
@@ -95,10 +99,10 @@ class CreateGame extends Component {
                             name="category"
                             onChange={this.changeHandler}
                         >
-                            <option value="animal">Animal</option>
-                            <option value="nature">Nature</option>
-                            <option value="monster">Monster</option>
-                            <option value="freeplay">Freeplay</option>
+                            <option value="Animal">Animal</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Monster">Monster</option>
+                            <option value="Freeplay">Freeplay</option>
                         </select>
                     </div>
                     <br />
