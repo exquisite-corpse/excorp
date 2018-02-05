@@ -101,6 +101,15 @@ export default class Panel extends Component {
         }
         //this.handleSubmit = this.handleSubmit.bind(this)
     }
+    // componentWillMount() {
+    //     const panelId = this.props.match.params.panelId
+    //     const panelRef = allPanels.doc(`${panelId}`).get()
+    //         .then(doc => {
+    //             if ((doc.data().completed == 'true') || (doc.data().this.props._user.uid)) {
+
+    //             }
+    //         })
+    // }
 
     componentDidMount() {
         let panel

@@ -24,10 +24,8 @@ firebase.auth().getRedirectResult()
         email: user.email,
         username: user.displayName,
         googleToken,
-      }, {merge: true})
-      .then(newUserDoc => allUsers.doc(user.uid).set({
         id: user.uid
-      }, {merge: true}))
+      }, {merge: true})
     }
   })
   .catch(function(error) {
