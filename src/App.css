@@ -58,6 +58,9 @@ form div {
   z-index: 3;
   top: -300px;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .snippet {
@@ -66,11 +69,16 @@ form div {
   clip-path: inset(330px 0px 0px 0px);
   top: -300px;
   bottom: -150px;
-}
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+ }
 
 .submit-button {
-  top: 700px;
-  position: fixed;
+  top: 150px;
+  position: relative;
+  margin-bottom: 100px;
 }
 
 .Stage-no-snippet {
@@ -80,6 +88,9 @@ form div {
   z-index: 3;
   top: 100px;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .dwg-container {
