@@ -74,7 +74,7 @@ export default class Profile extends Component {
             <img src={pickRandomProfile()} />
           </div>
           <div className="profile-info">
-            <h5><strong>Name: </strong>{user.name}</h5>
+            <h5><strong>Name: </strong>{user.username}</h5>
             <h5><strong>Email: </strong>{user.email}</h5>
           </div>
         </div>
