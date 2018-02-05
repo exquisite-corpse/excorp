@@ -112,7 +112,7 @@ export default class Panel extends Component {
                 return panel
             })
             .then(myPanel => {
-                //console.log(myPanel)
+                console.log(myPanel.drawingId)
                 return allDrawings.doc(myPanel.drawingId).get()
             })
             .then(drawingDoc => drawing = drawingDoc.data())
@@ -181,10 +181,9 @@ export default class Panel extends Component {
                                 </Layer>
                             </Stage>
                         }
-                        <button className="submit-button" onClick={this.handleSubmit}>Submit Panel</button>
                     </div>
-                    }
                 </div>
+                <button className="submit-button" onClick={this.handleSubmit}>Submit Panel</button>
             </div>
         )
         return (

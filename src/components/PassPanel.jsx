@@ -57,7 +57,7 @@ async createAndPassPanel() {
   }, { merge: true })
 
   console.log(`created new panel with an artist of ${this.state.nextArtistId} and a panel id of ${newPanel.id} for the drawing ${this.props.drawing.id}`)
-  //debugger
+  debugger
   return window.location.href = `/wips`
 }
 

@@ -54,7 +54,7 @@ class CreateGame extends Component {
             }
         })
 
-        const updatePanel = await allPanels.doc(panel.id).set({drawingId: allDrawings.doc(drawing.id), id:panel.id}, {merge: true})
+        const updatePanel = await allPanels.doc(panel.id).set({drawingId: drawing.id, id:panel.id}, {merge: true})
 
         const updateDrawing = await allDrawings.doc(drawing.id).set({id: drawing.id}, {merge: true})
 
