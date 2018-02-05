@@ -66,6 +66,7 @@ form div {
   clip-path: inset(330px 0px 0px 0px);
   top: -300px;
   bottom: -150px;
+  pointer-events: none
 }
 
 .submit-button {
@@ -86,4 +87,28 @@ form div {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* ------ PROFILE STYLES ------- */
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+}
+.profile-picture img {
+  width: 100px;
+  height: 150px;
+}
+
+.profile-info {
+  padding: 10px;
+  text-align: left;
 }

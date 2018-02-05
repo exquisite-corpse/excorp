@@ -80,7 +80,7 @@ class Drawing extends Component {
         ref={node => (this.image = node)}
         width={700}
         height={350}
-        stroke="blue"
+        stroke="#8294b2"
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}
@@ -130,7 +130,7 @@ export default class DWgDetail extends Component {
     .then(()=> {
       panelRef.get()
       .then(doc => {
-        let category 
+        let category
         let title
         const currentDrawing = doc.data().drawingId
         currentDrawing.get().then(doc => {
@@ -188,9 +188,9 @@ export default class DWgDetail extends Component {
 
         <div className="stage-container">
 
-      {!submitted ? <div><h1>{`Drawing Title: ${this.state.title} Category: ${this.state.category}`}</h1><h1>{`You're on panel ${orderNum} of 3`}</h1></div> : 
+      {!submitted ? <div><h1>{`Drawing Title: ${this.state.title} Category: ${this.state.category}`}</h1><h1>{`You're on panel ${orderNum} of 3`}</h1></div> :
       <h1>Pass your panel to the next player!</h1>
-    
+
     }
        {createPanel
              ? <CreatePanel drawingId={drawingId} orderNum={orderNum} prevPanelId={panelId} src={src}/>

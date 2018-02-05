@@ -55,7 +55,7 @@ export default class Signup extends Component {
     const email = evt.target.email.value
     const password = evt.target.password.value
     const username = evt.target.username.value
-
+    console.log('username at su', username)
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((createdUser) => {
         return db.collection("users").doc(createdUser.uid).set({
