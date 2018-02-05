@@ -25,10 +25,10 @@ handleChange = (e) => {
 }
 
 async createAndPassPanel() {
-    //console.log(this.state.nextArtistId)
+    console.log(this.state.nextArtistId)
     //debugger
   let postData = {
-    author: db.collection('users').doc(this.state.nextArtistId),
+    author: db.collection('users').doc(`${this.state.nextArtistId}`),
     completed: false,
     drawingId: this.props.drawing.id,
     orderNum: this.props.panel.orderNum + 1,
