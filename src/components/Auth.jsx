@@ -70,7 +70,7 @@ export default class Signup extends Component {
       })
       .then(something => {
         // fix this redirect
-        debugger
+        //debugger
         window.location.href = "/gallery"
       })
       .catch(error => {

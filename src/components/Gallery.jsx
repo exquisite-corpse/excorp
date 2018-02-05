@@ -27,6 +27,7 @@ function sortedPanelIds(dwgsPanels) {
 const Drawing = (props) => {
 const {panels, title, category} = props
 console.log("drawing props: ", props)
+
 const artistIdsArr = Object.keys(props.artists)
 console.log("artists on drawing: ", artistIdsArr)
 const result = panels
