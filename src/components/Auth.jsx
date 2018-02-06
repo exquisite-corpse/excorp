@@ -40,7 +40,6 @@ export default class Signup extends Component {
       })
       .then(user => {
         console.log(firebase.auth().currentUser.uid)
-        // fix this redirect
         window.location.href = "/gallery"
       })
       .catch(error => {
@@ -67,10 +66,6 @@ export default class Signup extends Component {
       })
       .then(newUserDoc => {
         console.log("what I'm returning after creating user", newUserDoc.id)
-      })
-      .then(something => {
-        // fix this redirect
-        //debugger
         window.location.href = "/gallery"
       })
       .catch(error => {
@@ -86,10 +81,7 @@ export default class Signup extends Component {
     return (
 
       <div>
-        <br />
-
         <Bttn className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth} />
-
         <form name="signup-login-form" onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}>
           <div className="authFields">
             <TextInput
@@ -123,7 +115,6 @@ export default class Signup extends Component {
           <Bttn className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"} />
         </form>
       </div>
-
     )
   }
 }
