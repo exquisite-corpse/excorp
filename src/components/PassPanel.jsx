@@ -96,7 +96,7 @@ class PassPanel extends Component {
           <div className="users-select">
             <select onChange={this.handleChange} name="nextArtist">
               <option value="" selected disabled hidden>
-                Select A User From Below
+                Select A The Next Artist
               </option>
               <Map
                 from={db.collection("users")}
