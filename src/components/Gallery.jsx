@@ -29,7 +29,7 @@ const Drawing = (props) => {
   const artistIdsArr = Object.keys(props.artists)
   console.log("artists on drawing: ", artistIdsArr)
   const result = panels
-    ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br /><br /><br /><br /><br />
+    ? <div className="container" className="dwg-container">
       {
        title && <div>
           <h3>{title}</h3>
