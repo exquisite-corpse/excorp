@@ -17,6 +17,7 @@ export default class Panel extends Component {
       drawing: {},
       submitted: false
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     let panel
@@ -48,54 +49,54 @@ export default class Panel extends Component {
       })
   }
 
-  handleSubmit = e => {
+  async handleSubmit(e) {
     e.preventDefault()
     const imageSrc = this.stageRef.getStage().toDataURL("image/jpeg", 0.1)
-    allPanels
-      .doc(this.state.panel.id)
-      .set({ src: imageSrc, completed: true }, { merge: true })
-      .then(() => {
-        //check if it's the last one and if it is update drawing {complete: true} and redirect to /gallery
-        if (this.state.panel.orderNum == this.state.drawing.panelCount) {
-          allDrawings
-            .doc(`${this.state.drawing.id}`)
-            .set({ completed: true }, { merge: true })
-            .then(() => (window.location.href = `/gallery`))
-        }
-        this.setState({ submitted: true })
-      })
-  }
 
-  render() {
-    const { snippetSrc, panel, drawing, submitted } = this.state
-    if (!submitted)
-      return (
-        <div onContextMenu={e => e.preventDefault()}>
-          <div className="stage-container">
-            <div>
-              <h1>{`Drawing Title: ${drawing.title} Category: ${
-                drawing.category
+    const panel = await allPanels.doc(this.state.panel.id).set({ src: imageSrc, completed: true }, { merge: true })
+
+    if (this.state.panel.orderNum == this.state.drawing.panelCount) {
+      const drawing = await allDrawings
+        .doc(`${this.state.drawing.id}`).set({ completed: true }, { merge: true })
+
+       window.location.href = `/gallery`
+    }else {
+      this.setState({ submitted: true })
+    }
+}
+
+render() {
+  const { snippetSrc, panel, drawing, submitted } = this.state
+  if (!submitted)
+    return (
+      <div onContextMenu={e => e.preventDefault()}>
+        <div className="stage-container">
+        {
+         drawing.title && <div>
+            <h1>{`Drawing Title: ${drawing.title} Category: ${
+              drawing.category
               }`}</h1>
-              <h1>{`You're on panel ${panel.orderNum} of 3`}</h1>
-            </div>
-            <div>
-              {snippetSrc.length ? (
-                <div>
-                  <img className="snippet" src={snippetSrc} width="700" />
-                  <Stage
-                    className="Stage"
-                    width={700}
-                    height={350}
-                    ref={node => {
-                      this.stageRef = node
-                    }}
-                  >
-                    <Layer>
-                      <Drawing />
-                    </Layer>
-                  </Stage>
-                </div>
-              ) : (
+            <h1>{`You're on panel ${panel.orderNum} of 3`}</h1>
+          </div>
+        }
+          <div>
+            {snippetSrc.length ? (
+              <div>
+                <img className="snippet" src={snippetSrc} width="700" />
+                <Stage
+                  className="Stage"
+                  width={700}
+                  height={350}
+                  ref={node => {
+                    this.stageRef = node
+                  }}
+                >
+                  <Layer>
+                    <Drawing />
+                  </Layer>
+                </Stage>
+              </div>
+            ) : (
                 <Stage
                   className="Stage-no-snippet"
                   width={700}
@@ -109,13 +110,13 @@ export default class Panel extends Component {
                   </Layer>
                 </Stage>
               )}
-            </div>
           </div>
-          <button className="submit-button" onClick={this.handleSubmit}>
-            Submit Panel
-          </button>
         </div>
-      )
-    return <PassPanel panel={panel} drawing={drawing} />
-  }
+        <button className="submit-button" onClick={this.handleSubmit}>
+          Submit Panel
+          </button>
+      </div>
+    )
+  return <PassPanel panel={panel} drawing={drawing} />
+}
 }
