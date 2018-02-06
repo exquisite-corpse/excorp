@@ -85,6 +85,7 @@ export default class Drawing extends Component {
                 onMouseDown={this.handleMouseDown}
                 onMouseUp={this.handleMouseUp}
                 onMouseMove={this.handleMouseMove}
+                onMouseLeave={this.handleMouseUp}
             />
         )
     }
