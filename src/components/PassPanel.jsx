@@ -76,7 +76,6 @@ class PassPanel extends Component {
         this.props.drawing.id
       }`
     )
-    //debugger
     return (window.location.href = `/wips`)
   }
 
@@ -89,9 +88,7 @@ class PassPanel extends Component {
     console.log(this.state.artistSelected)
     return (
       <div>
-        <br />
         <h3>Pass Along Your Panel to the Next Artist</h3>
-        <br />
         <form name="pass-your-panel" onSubmit={this.handleSubmit}>
           <div className="users-select">
             <select onChange={this.handleChange} name="nextArtist">
@@ -106,7 +103,6 @@ class PassPanel extends Component {
               />
             </select>
           </div>
-          <br />
           {this.state.artistSelected ? (
             <Bttn
               className="btn btn-success"

@@ -78,9 +78,7 @@ class CreateGame extends Component {
     render() {
         return (
             <div>
-                <br />
                 <h3>Create a New Game</h3>
-                <br />
                 <form name="create-new-game" onSubmit={this.handleSubmit}>
 
                     <div className="gameFields">
@@ -105,7 +103,6 @@ class CreateGame extends Component {
                             <option value="Freeplay">Freeplay</option>
                         </select>
                     </div>
-                    <br />
                     <Bttn className="btn btn-success" type="submit" value="make a new game" />
                 </form>
             </div>

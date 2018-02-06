@@ -47,7 +47,6 @@ class LoginSignup extends Component {
           <Bttn value="Sign Up" onClick={this.handleSignupClick} />
           <Bttn value="Log In" onClick={this.handleLoginClick} />
         </span>
-        <br/>
         <Auth className="Auth" signup={this.state.signup} />
 
         <div id="myCarousel" className="carousel slide" data-ride="carousel">

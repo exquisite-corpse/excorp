@@ -79,7 +79,6 @@ export default class Signup extends Component {
     let signUpTrueBool = this.props.signup
 
     return (
-
       <div>
         <Bttn className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth} />
         <form name="signup-login-form" onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}>
@@ -111,7 +110,6 @@ export default class Signup extends Component {
               placeholder="password"
             />
           </div>
-          <br />
           <Bttn className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"} />
         </form>
       </div>
