@@ -1,6 +1,5 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
-import { DwgItem, Bttn, TextInput } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
 import { Map, withAuth } from 'fireview'
@@ -14,6 +13,7 @@ const Panel = (props) => {
 }
 
 function sortedPanelIds(dwgsPanels) {
+  //here we want to map through the panels object inside a drawing and sort them by their order
   console.log("SORTED IS RUNNING")
   const keyVals = Object.entries(dwgsPanels)
   const sortedKeyVals = keyVals.sort(([x, a], [y, b]) => {

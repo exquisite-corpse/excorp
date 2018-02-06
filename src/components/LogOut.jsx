@@ -6,7 +6,7 @@ export default function SignOut () {
   firebase.auth().signOut()
    .then(() => {
       window.setTimeout(()=>{
-        // fix this redirect
+        // fix this redirect?
         window.location.href = "/"
       }, 1500)
     })

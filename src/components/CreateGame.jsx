@@ -5,6 +5,7 @@ import db from '../db/db_config'
 import {withAuth} from 'fireview'
 //switch redirects to use browser history...
 // import {BrowserHistory} from 'react-router-dom'
+
 class CreateGame extends Component {
     constructor() {
         super()
@@ -58,10 +59,8 @@ class CreateGame extends Component {
 
         const updateDrawing = await allDrawings.doc(drawing.id).set({id: drawing.id}, {merge: true})
 
-        //do we need more error handling here?
         console.log('created drawing', drawing.id)
-        console.log('added drawing ref to panel', panel.id)
-        
+        console.log('added drawing ref to panel', panel.id)   
         return window.location.href = `/panels/${panel.id}`
     }
 

@@ -1,6 +1,4 @@
 import React from "react"
-// import { Link } from "react-router-dom"
-// import {SOMECOMPONENT} from "./index.jsx"
 
 const Bttn = (props) => {
   return(
