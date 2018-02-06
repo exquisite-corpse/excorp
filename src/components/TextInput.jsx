@@ -5,7 +5,6 @@ const TextInput = (props) => {
   return(
     <div className="input-container">
       <label>{props.label}</label>
-
       <input
         name={props.name}
         type={props.type}
