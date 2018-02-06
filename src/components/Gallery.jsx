@@ -29,10 +29,10 @@ const Drawing = (props) => {
   const artistIdsArr = Object.keys(props.artists)
   console.log("artists on drawing: ", artistIdsArr)
   const result = panels
-    ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br /><br /><br /><br /><br />
+    ? <div className="container" className="dwg-container">
       {
        title && <div>
-          <h3>{title}</h3>
+          <h2>{title}</h2>
           <h5>{`Category: ${category}`}</h5>
           <h5>Artists: </h5>
             {
@@ -42,8 +42,6 @@ const Drawing = (props) => {
             }
         </div>
       }
-
-      <br />
       {
         sortedPanelIds(panels)
           .map(id => <Map key={id} from={allPanels.doc(id)}
