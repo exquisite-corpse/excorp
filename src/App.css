@@ -1,8 +1,8 @@
  body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #222;
 }
 
 form div {
@@ -21,7 +21,6 @@ form div {
   font-family: 'Roboto Slab', serif;
 }
 
-
 .nav-item :hover {
   color: #004d84;
 }
@@ -29,7 +28,6 @@ form div {
 .App {
   text-align: center;
 }
-
 
 .App-header {
   background-color: #222;
@@ -45,7 +43,6 @@ form div {
 .App-intro {
   font-size: large;
 }
-
 
 .stage-container {
   position: relative;
@@ -73,7 +70,7 @@ form div {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
- }
+}
 
 .submit-button {
   top: 150px;
@@ -98,24 +95,26 @@ form div {
   flex-direction: column;
   align-items: center;
 }
-profile-container {
+
+.profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
- }
+}
 
- .profile-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 10px;
- }
- .profile-picture img {
-  width: 100px;
-  height: 150px;
- }
+.profile-header {
+display: flex;
+flex-direction: row;
+justify-content: center;
+padding: 10px;
+}
 
- .profile-info {
-  padding: 10px;
-  text-align: left;
- }
+.profile-picture img {
+width: 100px;
+height: 150px;
+}
+
+.profile-info {
+padding: 10px;
+text-align: left;
+}
