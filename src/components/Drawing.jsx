@@ -46,7 +46,7 @@ export default class Drawing extends Component {
         if (isDrawing) {
             context.strokeStyle = "black"
             context.lineJoin = "round"
-            context.lineWidth = 1
+            context.lineWidth = 2
 
 
             if (evt.buttons === 1) {
@@ -107,6 +107,8 @@ export default class Drawing extends Component {
 
                 onMouseMove={this.handleMouseMove}
                 onTouchMove={this.handleMouseMove}
+
+                onMouseLeave={this.handleMouseUp}
             />
         )
     }

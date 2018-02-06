@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Bttn, TextInput } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
-import {withAuth} from 'fireview'
+import { withAuth } from 'fireview'
 //switch redirects to use browser history...
 // import {BrowserHistory} from 'react-router-dom'
 
@@ -11,17 +11,17 @@ class CreateGame extends Component {
         super()
         this.state = {
             title: "Untitled",
-            category: "Animal",
+            category: "Freeplay",
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.changeHandler = this.changeHandler.bind(this)
         this.startGame = this.startGame.bind(this)
     }
-    
+
     async startGame() {
         //we get this user from fireview's withauth
-        const {_user: user} = this.props
-        if (!user) { 
+        const { _user: user } = this.props
+        if (!user) {
             alert('must be logged in')
             window.location.href = "/"
         }
@@ -55,12 +55,12 @@ class CreateGame extends Component {
             }
         })
 
-        const updatePanel = await allPanels.doc(panel.id).set({drawingId: drawing.id, id:panel.id}, {merge: true})
+        const updatePanel = await allPanels.doc(panel.id).set({ drawingId: drawing.id, id: panel.id }, { merge: true })
 
-        const updateDrawing = await allDrawings.doc(drawing.id).set({id: drawing.id}, {merge: true})
+        const updateDrawing = await allDrawings.doc(drawing.id).set({ id: drawing.id }, { merge: true })
 
         console.log('created drawing', drawing.id)
-        console.log('added drawing ref to panel', panel.id)   
+        console.log('added drawing ref to panel', panel.id)
         return window.location.href = `/panels/${panel.id}`
     }
 
@@ -78,9 +78,7 @@ class CreateGame extends Component {
     render() {
         return (
             <div>
-                <br />
                 <h3>Create a New Game</h3>
-                <br />
                 <form name="create-new-game" onSubmit={this.handleSubmit}>
 
                     <div className="gameFields">
@@ -88,9 +86,8 @@ class CreateGame extends Component {
                             label="title: "
                             name="title"
                             type="text"
-                            value={this.state.title}
                             onChange={this.changeHandler}
-                            placeholder="title"
+                            placeholder="Untitled"
                         />
 
                         <select
@@ -98,13 +95,14 @@ class CreateGame extends Component {
                             name="category"
                             onChange={this.changeHandler}
                         >
+                            <option value="" selected disabled hidden>
+                                Select A Category</option>
                             <option value="Animal">Animal</option>
                             <option value="Nature">Nature</option>
                             <option value="Monster">Monster</option>
                             <option value="Freeplay">Freeplay</option>
                         </select>
                     </div>
-                    <br />
                     <Bttn className="btn btn-success" type="submit" value="make a new game" />
                 </form>
             </div>

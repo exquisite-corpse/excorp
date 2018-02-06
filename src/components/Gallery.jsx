@@ -9,7 +9,7 @@ const allDrawings = db.collection('drawings')
 
 const Panel = (props) => {
   const { src } = props
-  return <img src={src} height="350"/>
+  return <img src={src} height="350" />
 }
 
 function sortedPanelIds(dwgsPanels) {
@@ -23,41 +23,49 @@ function sortedPanelIds(dwgsPanels) {
 }
 
 const Drawing = (props) => {
-const {panels, title, category} = props
-console.log("drawing props: ", props)
+  const { panels, title, category } = props
+  console.log("drawing props: ", props)
 
-const artistIdsArr = Object.keys(props.artists)
-console.log("artists on drawing: ", artistIdsArr)
-const result = panels
- ? <div className="container" className="dwg-container"> {/*fix this with css*/}<br/><br/><br/><br/><br/><h4>{`Title: ${title} Category: ${category} Artists: `}
- {
-   artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
-   Empty={() => 'Empty.'}
-   Render={(props) => ` ${props.username} `} />)
- }</h4><br/>{
-  sortedPanelIds(panels)
-       .map(id => <Map key={id} from={allPanels.doc(id)}
-             Empty={() => 'Empty.'}
-             Render={Panel} />)
-   } </div>
- : null
+  const artistIdsArr = Object.keys(props.artists)
+  console.log("artists on drawing: ", artistIdsArr)
+  const result = panels
+    ? <div className="container" className="dwg-container">
+      {
+       title && <div>
+          <h2>{title}</h2>
+          <h5>{`Category: ${category}`}</h5>
+          <h5>Artists: </h5>
+            {
+              artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
+                Empty={() => 'Empty.'}
+                Render={(props) => ` ${props.username} `} />)
+            }
+        </div>
+      }
+      {
+        sortedPanelIds(panels)
+          .map(id => <Map key={id} from={allPanels.doc(id)}
+            Empty={() => 'Empty.'}
+            Render={Panel} />)
+      } </div>
+    : null
 
- return result
-  }
+  return result
+}
 
 const Gallery = ({ _user: user }) => {
   if (!user) return null
   return (
     <div>
       <h2>All My Finished Drawings:</h2>
-    <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)} 
+      <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)}
         Loading={() => 'Loading...'}
-        Render={Drawing} 
+        Render={Drawing}
         Empty={() => <div>
           <h3>You don't have any finished drawings</h3>
           <Link to={`/new`}>Click here to Create a New Game
         </Link>
-        </div>}/> 
+        </div>} />
     </div>
   )
 }

@@ -18,7 +18,6 @@ export default function SignOut () {
 
   return(
       <div>
-        <br/>
         <p>You have been signed out! Ok byeeee!</p>
       </div>
     )
