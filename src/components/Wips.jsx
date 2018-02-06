@@ -25,7 +25,7 @@ const Wips = (props) => {
                 : <h3> Go to your panel</h3>
               }
             </Link>
-          } else { return <h1>Old shitty one without an ID</h1> }
+          } else { return <h1>Sorry about that!</h1> }
         }}
         Empty={() => <div>
           <h3>You don't have any works in progress...</h3>

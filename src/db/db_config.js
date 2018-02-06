@@ -4,12 +4,12 @@ require("firebase/auth")
 
 
 var config = {
-  apiKey: 'AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc',
-  authDomain: 'exquisitecorpse-84ff1.firebaseapp.com',
-  databaseURL: 'https://exquisitecorpse-84ff1.firebaseio.com',
-  projectId: 'exquisitecorpse-84ff1',
-  storageBucket: 'exquisitecorpse-84ff1.appspot.com',
-  messagingSenderId: '349662282106'
+  apiKey: "AIzaSyCzElnjQ1hAfRA9yQ6NiM6BtHy-gcOlS4g",
+    authDomain: "exquisitegraveyard.firebaseapp.com",
+    databaseURL: "https://exquisitegraveyard.firebaseio.com",
+    projectId: "exquisitegraveyard",
+    storageBucket: "exquisitegraveyard.appspot.com",
+    messagingSenderId: "976218895180"
 }
 
 
