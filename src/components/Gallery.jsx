@@ -14,8 +14,6 @@ const Panel = (props) => {
 }
 
 function sortedPanelIds(dwgsPanels) {
-  //here we want to map through the panels object inside a drawing and sort them by their order
-  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
   console.log("SORTED IS RUNNING")
   const keyVals = Object.entries(dwgsPanels)
   const sortedKeyVals = keyVals.sort(([x, a], [y, b]) => {

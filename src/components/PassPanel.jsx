@@ -41,7 +41,7 @@ async createAndPassPanel() {
     //consider adding category and title onto panel for easier work??
   }
   console.log("checking post data contents in create and pass", postData.author, this.state.nextArtistId)
-  debugger
+  //debugger
   const newPanel = await db.collection("panels").add(postData)
 
   //console.log("this is supposed to be the new panel :/ ", newPanel.id)
