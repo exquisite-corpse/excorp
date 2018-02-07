@@ -3,50 +3,13 @@
   padding: 0;
   font-family: 'Roboto Slab', serif;
   background-color: #e0e2e5;
+  text-decoration-style: none;
 }
 
 form div {
   margin: 1em;
 }
 
-/* .navbar-container{
-  background-color: #dee1e3;
-}
-
-.nav-item {
-  margin: 1em;
-  display: inline-block;
-  list-style: none;
-  text-decoration: none;
-  font-family: 'Roboto Slab', serif;
-} */
-
-/* .nav-item :hover {
-  color: #004d84;
-} */
-
-/* .App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #222;
-  height: 7%;
-  padding: 2em;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-} */
-
-/*.drawing-buttons {
-  margin-top: 15em;
-}*/
 
 .Stage {
   display: flex;
@@ -211,14 +174,20 @@ form div {
   padding-left: 2em;
 }
 
-#body-container a {
+#navcontainer a {
   color: ghostwhite;
+  text-decoration: none;
+}
+
+#search-container a {
+  color: black;
   text-decoration: none;
 }
 
 
 #snippet img {
-  left: 370px;
+/*  margin:auto;
+  /*left: 370px;*/
 }
 
 #main-container h1, h2 {
@@ -243,8 +212,10 @@ form div {
   display: flex;
   justify-content: center;
   position: relative;
-  top: 200px;
-  left: 680px;
+  margin: auto;
+  margin-top:5em ;
+/*  top: 200px;
+  left: 680px;*/
 
 }
 
@@ -317,3 +288,11 @@ form div {
   text-decoration: underline;
 
 }
+
+.list-group {
+  color: black;
+  text-decoration-style: none;
+  /*text-decoration-color: black;*/
+}
+
+
