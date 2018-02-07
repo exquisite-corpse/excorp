@@ -4,6 +4,7 @@ import {TextInput, Bttn, Auth} from './index'
 import db from '../db/db_config'
 import firebase from 'firebase'
 import {withAuth} from 'fireview'
+import { Button } from 'react-bootstrap'
 
 class LoginSignup extends Component {
 
@@ -41,14 +42,19 @@ class LoginSignup extends Component {
   }
 
     return(
-      <div>
-
+      <div id="main-container-landing">
+        <div id="signingup">
         <span>
-          <Bttn value="Sign Up" onClick={this.handleSignupClick} />
-          <Bttn value="Log In" onClick={this.handleLoginClick} />
+          <div id="span-buttons">
+          <Button id="button" value="Sign Up" onClick={this.handleSignupClick}>Sign Up</Button>
+          <Button id="button" value="Log In" onClick={this.handleLoginClick}>Log In</Button>
+          </div>
+          <Auth className="Auth" signup={this.state.signup} />
         </span>
-        <Auth className="Auth" signup={this.state.signup} />
 
+        </div>
+
+        {/* Carousel */}
         <div id="myCarousel" className="carousel slide" data-ride="carousel">
           {/* <!-- Indicators --> */}
           <ol className="carousel-indicators">

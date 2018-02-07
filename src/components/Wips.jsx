@@ -13,7 +13,7 @@ const Wips = (props) => {
 
   if (!user) return null
   return (
-    <div>
+    <div id="main-container">
       <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
       <Map from={allPanels.where('completed', '==', false).where(`${user.uid}`, '==', true)}
         Loading={() => 'Loading...'}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { TextInput, Bttn, GoogleAuth } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
+import { Button } from 'react-bootstrap'
 
 const allUsers = db.collection('users')
 const emailProvider = new firebase.auth.EmailAuthProvider()
@@ -80,7 +81,7 @@ export default class Signup extends Component {
 
     return (
       <div>
-        <Bttn className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth} />
+        <Button id="button" className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth}>Sign Up or Log In with Google</Button>
         <form name="signup-login-form" onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}>
           <div className="authFields">
             <TextInput
@@ -110,7 +111,7 @@ export default class Signup extends Component {
               placeholder="password"
             />
           </div>
-          <Bttn className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"} />
+          <Button id="button" className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}</Button>
         </form>
       </div>
     )
