@@ -86,7 +86,7 @@ class Drawing extends Component {
     window.onload = function() {
 
       rv.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg"
-      context && context.drawImage(rv,0, 71, 104, 124, 21, 20, 87, 104)
+      context && context.drawImage(rv,0,0,700,350)
     }
     window.onload();
     return (
