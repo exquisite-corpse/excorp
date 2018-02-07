@@ -29,8 +29,21 @@ export default class PublicProfile extends Component{
     .then(doc => {
        this.setState({user: doc.data()})
     })
-  })
-  }
+
+    db.collection('users').doc(userId).collection('requests').where("id", "==", user.uid)
+     .get()
+     .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+          //console.log('aaa', doc.id, " => ", doc.data());
+          if(doc.exists)
+          this.setState({requested: true})
+      });
+     })
+     .catch(function(error) {
+      console.log("Error getting documents: ", error);
+     });
+    })
+   }
 
   handleClick = () => {
     const userId = this.props.match.params.userId;
