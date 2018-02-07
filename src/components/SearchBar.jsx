@@ -86,7 +86,7 @@ export default class SearchBar extends Component {
             onChange={this.handleChange}
           />
         </form>
-        <div className="list-group">
+        <div className="list-group" id="search-friends">
           {
             filteredUsers.map(user => {
               console.log(user.isFriend)

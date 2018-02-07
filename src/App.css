@@ -11,6 +11,11 @@ form div {
   margin: 1em;
 }
 
+#search-friends a {
+  color: black;
+  text-decoration-style: none;
+}
+
 /* .navbar-container{
   background-color: #dee1e3;
 }
@@ -213,7 +218,7 @@ form div {
   padding-left: 2em;
 }
 
-#body-container a {
+#navcontainer a {
   color: ghostwhite;
   text-decoration: none;
 }
@@ -318,4 +323,9 @@ form div {
   padding: 30px;
   text-decoration: underline;
 
+}
+
+.list-group {
+  color: black;
+  text-decoration-style: none;
 }
