@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bluebird": "^3.5.1",
     "bootstrap": "^4.0.0",
     "firebase": "^4.9.0",
     "firebaseui": "^2.5.1",

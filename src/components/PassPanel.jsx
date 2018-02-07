@@ -88,7 +88,8 @@ class PassPanel extends Component {
 
   render() {
     console.log(this.state.artistSelected)
-    return (
+    if (!this.props._user) return null
+
       <div id="main-container">
         <h3>Pass Along Your Panel to the Next Artist</h3>
         <form id="signingup" name="pass-your-panel" onSubmit={this.handleSubmit}>
@@ -98,11 +99,11 @@ class PassPanel extends Component {
                 Select A The Next Artist
               </option>
               <Map
-                from={db.collection("users")}
-                Loading={() => "Loading..."}
-                Render={Options}
-                Empty={() => <select>You don't have any friends...</select>}
-              />
+               from={db.collection("users").doc(this.props._user.uid).collection("friends")}
+               Loading={() => "Loading..."}
+               Render={Options}
+               Empty={() => <select>You don't have any friends...</select>}
+             />
             </select>
           </div>
           {this.state.artistSelected ? (
