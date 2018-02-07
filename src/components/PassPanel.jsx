@@ -87,9 +87,12 @@ class PassPanel extends Component {
   }
 
   render() {
+
+
+
     console.log(this.state.artistSelected)
     if (!this.props._user) return null
-
+  return(
       <div id="main-container">
         <h3>Pass Along Your Panel to the Next Artist</h3>
         <form id="signingup" name="pass-your-panel" onSubmit={this.handleSubmit}>
