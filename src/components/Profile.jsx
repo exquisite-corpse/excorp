@@ -103,7 +103,7 @@ export default class PublicProfile extends Component {
     const pickRandomProfile = this.pickRandomProfile
     console.log(user)
     return (
-      <div >
+      <div id="main-container">
         <div className="profile-header">
           <div className="profile-picture">
             <img src={pickRandomProfile()} />

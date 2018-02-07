@@ -3,8 +3,8 @@ import { Bttn, TextInput } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
 import { withAuth } from 'fireview'
-//switch redirects to use browser history...
-// import {BrowserHistory} from 'react-router-dom'
+// import { FormGroup, FormControl } from "../../../../Library/Caches/typescript/2.6/node_modules/@types/react-bootstrap";
+import { FormGroup, FormControl, form, ControlLabel, Button, Col } from 'react-bootstrap'
 
 class CreateGame extends Component {
     constructor() {
@@ -77,35 +77,62 @@ class CreateGame extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Create a New Game</h3>
-                <form name="create-new-game" onSubmit={this.handleSubmit}>
+            <form name="create-new-game" id="new-game-form" onSubmit={this.handleSubmit}>
+                <FormGroup controlId="formBasicText">
+                   <ControlLabel>Create a New Game</ControlLabel>
+                    <FormControl
+                        type="text"
+                        onChange={this.changeHandler}
+                        placeholder="Untitled"
+                        name="title"
+                    />
+                    <FormControl.Feedback />
+                </FormGroup>
 
-                    <div className="gameFields">
-                        <TextInput
-                            label="title: "
-                            name="title"
-                            type="text"
-                            onChange={this.changeHandler}
-                            placeholder="Untitled"
-                        />
+                {/* select category */}
+                <FormGroup onChange={this.changeHandler} controlId="formControlsSelect">
+                    <ControlLabel>Select a Category</ControlLabel>
+                    <FormControl name="category" componentClass="select" placeholder="select">
+                        <option defaultValue=""> </option>
+                        <option value="Animal">Animal</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Monster">Monster</option>
+                        <option value="Freeplay">Freeplay</option>
+                    </FormControl>
+                </FormGroup>
 
-                        <select
-                            id="category-select"
-                            name="category"
-                            onChange={this.changeHandler}
-                        >
-                            <option value="" selected disabled hidden>
-                                Select A Category</option>
-                            <option value="Animal">Animal</option>
-                            <option value="Nature">Nature</option>
-                            <option value="Monster">Monster</option>
-                            <option value="Freeplay">Freeplay</option>
-                        </select>
-                    </div>
-                    <Bttn className="btn btn-success" type="submit" value="make a new game" />
-                </form>
-            </div>
+                <Button id="create-game-bttn" type="submit" value="Make a New Game">Make a New Game</Button>
+            </form>
+
+             // <div>
+            //     <h3>Create a New Game</h3>
+            //     <form name="create-new-game" onSubmit={this.handleSubmit}>
+
+            //         <div className="gameFields">
+            //             <TextInput */}
+            //                 label="title: "
+            //                 name="title"
+            //                 type="text"
+            //                 onChange={this.changeHandler}
+            //                 placeholder="Untitled"
+            //             />
+
+            //             <select
+            //                 id="category-select"
+            //                 name="category"
+            //                 onChange={this.changeHandler}
+            //             >
+            //                 <option value="" selected disabled hidden>
+            //                     Select A Category</option>
+            //                 <option value="Animal">Animal</option>
+            //                 <option value="Nature">Nature</option>
+            //                 <option value="Monster">Monster</option>
+            //                 <option value="Freeplay">Freeplay</option>
+            //             </select>
+            //         </div>
+            //         <Bttn className="btn btn-success" type="submit" value="make a new game" />
+            //     </form>
+            // </div>
         )
     }
 

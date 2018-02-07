@@ -69,20 +69,19 @@ render() {
   const { snippetSrc, panel, drawing, submitted } = this.state
   if (!submitted)
     return (
-      <div onContextMenu={e => e.preventDefault()}>
-        <div className="stage-container">
+      <div id="panel-cont" onContextMenu={e => e.preventDefault()}>
+        <div className="stage-container" id="main-container">
         {
          drawing.title && <div>
-            <h1>{`Drawing Title: ${drawing.title} Category: ${
-              drawing.category
-              }`}</h1>
+            <h1>{`Drawing Title: ${drawing.title}`}</h1>
+            <h1>{`Category: ${drawing.category}`}</h1>
             <h1>{`You're on panel ${panel.orderNum} of 3`}</h1>
           </div>
         }
           <div>
             {snippetSrc.length ? (
-              <div>
-                <img className="snippet" src={snippetSrc} width="700" />
+              <div id="snippet">
+                <img  className="snippet" src={snippetSrc} width="700" />
                 <Stage
                   className="Stage"
                   width={700}
@@ -112,7 +111,7 @@ render() {
               )}
           </div>
         </div>
-        <button className="submit-button" onClick={this.handleSubmit}>
+        <button id="submit-button" onClick={this.handleSubmit}>
           Submit Panel
           </button>
       </div>

@@ -2,9 +2,8 @@ import db from './db/db_config'
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { PageHeader } from 'react-bootstrap'
 import { Landing, NavBar, Gallery, CreateGame, LogOut, Wips, Panel, SearchBar, Profile, PublicProfile,FriendsProfile} from './components/index'
-
-import Img from 'react-image'
 
 class App extends Component {
   constructor() {
@@ -16,10 +15,10 @@ class App extends Component {
     return (
       <div className="App">
         <Router >
-          <div>
-            <header className="App-header">
-              <h1 className="App-title">Exquisite Corpse</h1>
-            </header>
+          <div id="navcontainer">
+            <PageHeader id="page-header">
+              Exquisite Graveyard
+            </PageHeader>
             <NavBar />
             <Switch>
               <Route exact path="/" component={Landing} />
