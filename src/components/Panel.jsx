@@ -151,13 +151,13 @@ export default class Panel extends Component {
                     Submit Panel
                   </button>
                 </div>
-            
             </div>
+        </div>
   </div>
   )
   return(
          <PassPanel panel={panel} drawing={drawing} />
   )
-        
+
   }
 }

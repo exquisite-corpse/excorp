@@ -173,6 +173,7 @@ form div {
 .panel-buttons-no-snippet{
   margin-top: 10em;
   position: relative;
+}
 
 #navlist {
   flex-direction: row;
