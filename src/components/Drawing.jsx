@@ -117,7 +117,6 @@ export default class Drawing extends Component {
                 width={700}
                 height={350}
                 stroke="grey"
-                fill="white"
 
                 onMouseDown={this.handleMouseDown}
                 onTouchStart={this.handleMouseDown}
