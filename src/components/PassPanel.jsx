@@ -76,7 +76,6 @@ class PassPanel extends Component {
         this.props.drawing.id
       }`
     )
-    debugger
     return (window.location.href = `/wips`)
   }
 
@@ -90,7 +89,7 @@ class PassPanel extends Component {
     if (!this.props._user) return null
     return (
       <div>
-        <h3>Pass Along Your Panel to the Next Artist</h3>
+        <h3>Choose a Friend to Pass Your Panel</h3>
         <form name="pass-your-panel" onSubmit={this.handleSubmit}>
           <div className="users-select">
             <select onChange={this.handleChange} name="nextArtist">
