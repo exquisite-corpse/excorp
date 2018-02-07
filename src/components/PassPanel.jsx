@@ -86,9 +86,10 @@ class PassPanel extends Component {
 
   render() {
     console.log(this.state.artistSelected)
+    if (!this.props._user) return null
     return (
       <div>
-        <h3>Pass Along Your Panel to the Next Artist</h3>
+        <h3>Choose a Friend to Pass Your Panel</h3>
         <form name="pass-your-panel" onSubmit={this.handleSubmit}>
           <div className="users-select">
             <select onChange={this.handleChange} name="nextArtist">
@@ -96,11 +97,11 @@ class PassPanel extends Component {
                 Select A The Next Artist
               </option>
               <Map
-                from={db.collection("users")}
-                Loading={() => "Loading..."}
-                Render={Options}
-                Empty={() => <select>You don't have any friends...</select>}
-              />
+               from={db.collection("users").doc(this.props._user.uid).collection("friends")}
+               Loading={() => "Loading..."}
+               Render={Options}
+               Empty={() => <select>You don't have any friends...</select>}
+             />
             </select>
           </div>
           {this.state.artistSelected ? (
