@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { render } from "react-dom"
 import { Redirect } from 'react-router-dom'
 import { Stage, Layer, Rect, Image, Group } from "react-konva"
-import Img from 'react-image'
 import db from '../db/db_config'
 import {PassPanel} from "./index"
 const allPanels = db.collection('panels')
@@ -12,9 +11,12 @@ export default class Drawing extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isDrawing: false
+            isDrawing: false,
+            strokeColor: "black",
+            strokeWidth: 2,
         }
     }
+
     componentDidMount() {
         const canvas = document.createElement("canvas")
         canvas.width = 700
@@ -23,6 +25,22 @@ export default class Drawing extends Component {
         this.setState({ canvas, context })
     }
 
+
+    componentWillReceiveProps(nextProps){
+        console.log("NEXT PROPS IN DWG", nextProps)
+
+
+        if(nextProps.eraserOn) {
+            this.setState({strokeColor: "white", strokeWidth: 20})
+        }else{
+            this.setState({strokeColor: "black", strokeWidth: 2})
+        }
+
+        if(nextProps.pencilSize !== this.state.strokeWidth) {
+            this.setState({strokeWidth: nextProps.pencilSize})
+        }
+
+    }
 
 
     handleMouseDown = (evt) => {
@@ -35,27 +53,27 @@ export default class Drawing extends Component {
         this.setState({ isDrawing: false })
     }
 
-    handleMouseMove = ( e ) => {
+    handleMouseMove = ( evt ) => {
         if (!this.state.isDrawing) {
           return
         }
 
-        const evt = e.evt
         const { context, isDrawing } = this.state
 
         if (isDrawing) {
-            context.strokeStyle = "black"
+            context.strokeStyle = this.state.strokeColor
             context.lineJoin = "round"
-            context.lineWidth = 2
+            context.lineWidth = this.state.strokeWidth
 
 
-            if (evt.buttons === 1) {
+            if (evt.evt.buttons === 1) {
                 context.globalCompositeOperation = "source-over"
             }
-            else if (e.type === "touchmove") {
+            else if (evt.evt.type === "touchmove") {
                 context.globalCompositeOperation = "source-over"
 
-            } else if (evt.buttons === 2) {
+            }
+            else if (evt.buttons === 2) {
                 context.globalCompositeOperation = "destination-out"
             }
             context.beginPath()
@@ -92,12 +110,14 @@ export default class Drawing extends Component {
         const { canvas } = this.state
 
         return (
+
             <Image
                 image={canvas}
                 ref={node => (this.image = node)}
                 width={700}
                 height={350}
                 stroke="grey"
+
                 onMouseDown={this.handleMouseDown}
                 onTouchStart={this.handleMouseDown}
 
@@ -110,6 +130,8 @@ export default class Drawing extends Component {
 
                 onMouseLeave={this.handleMouseUp}
             />
+
+
         )
     }
 }
