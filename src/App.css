@@ -44,8 +44,9 @@ form div {
   font-size: large;
 }
 
-.stage-container {
-  position: relative;
+.drawing-buttons {
+  margin-top: 15em;
+  /*position: relative;*/
 }
 
 .Stage {
@@ -54,6 +55,18 @@ form div {
   justify-content: center;
   z-index: 3;
   top: -300px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.Stage-no-snippet {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  z-index: 3;
+  top: 100px;
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -73,22 +86,10 @@ form div {
 }
 
 .submit-button {
-  top: 150px;
+  margin: 5em;
   position: relative;
-  margin-bottom: 100px;
 }
 
-.Stage-no-snippet {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  z-index: 3;
-  top: 100px;
-  position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
 
 .dwg-container {
   display: flex;
