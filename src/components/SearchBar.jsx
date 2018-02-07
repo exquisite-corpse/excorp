@@ -37,7 +37,7 @@ export default class SearchBar extends Component {
           //this.setState({ users: temp })
           return temp;
         })
-      })hjk
+      })
         .then(() => {
           temp.map((user, index) => {
             console.log(this.state.currentUser)
