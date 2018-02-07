@@ -4,8 +4,10 @@ import Bttn from "./Bttn"
 import { Redirect } from "react-router-dom"
 import firebase from "firebase"
 import { withAuth, Map } from "fireview"
+import { Button } from 'react-bootstrap'
 const allDrawings = db.collection("drawings")
 const allPanels = db.collection("panels")
+
 
 class PassPanel extends Component {
   constructor(props) {
@@ -87,12 +89,12 @@ class PassPanel extends Component {
   render() {
     console.log(this.state.artistSelected)
     return (
-      <div>
+      <div id="main-container">
         <h3>Pass Along Your Panel to the Next Artist</h3>
-        <form name="pass-your-panel" onSubmit={this.handleSubmit}>
+        <form id="signingup" name="pass-your-panel" onSubmit={this.handleSubmit}>
           <div className="users-select">
-            <select onChange={this.handleChange} name="nextArtist">
-              <option value="" selected disabled hidden>
+            <select id="signingup" onChange={this.handleChange} name="nextArtist">
+              <option id="signingup" value="" selected disabled hidden>
                 Select A The Next Artist
               </option>
               <Map
@@ -104,15 +106,16 @@ class PassPanel extends Component {
             </select>
           </div>
           {this.state.artistSelected ? (
-            <Bttn
+            <Button
+              id="span-buttons"
               className="btn btn-success"
               type="submit"
               value="pass your panel"
-            />
+            >Pass Your Panel</Button>
           ) : (
-            <button type="button" disabled>
+            <Button id="span-buttons" type="button" disabled>
               Please choose the next artist!
-            </button>
+            </Button>
           )}
         </form>
       </div>

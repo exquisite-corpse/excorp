@@ -27,8 +27,8 @@ const Wips = (props) => {
             </Link>
           } else { return <h1>This panel wasn't formatted properly...Sorry about that!</h1> }
         }}
-        Empty={() => <div>
-          <h3>You don't have any works in progress...</h3>
+        Empty={() => <div id="main-container-bodylinks">
+          <h3 >You don't have any works in progress...</h3>
           <Link to={`/new`}>Click here to Create a New Game
         </Link>
         </div>} />

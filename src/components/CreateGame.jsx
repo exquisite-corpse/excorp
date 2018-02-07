@@ -77,7 +77,6 @@ class CreateGame extends Component {
 
     render() {
         return (
-            <Col xs={12} md={8}>
             <form name="create-new-game" id="new-game-form" onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formBasicText">
                    <ControlLabel>Create a New Game</ControlLabel>
@@ -102,9 +101,9 @@ class CreateGame extends Component {
                     </FormControl>
                 </FormGroup>
 
-                <Button type="submit" value="Make a New Game">Make a New Game</Button>
+                <Button id="create-game-bttn" type="submit" value="Make a New Game">Make a New Game</Button>
             </form>
-            </Col>
+
              // <div>
             //     <h3>Create a New Game</h3>
             //     <form name="create-new-game" onSubmit={this.handleSubmit}>
