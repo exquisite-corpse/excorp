@@ -6,7 +6,7 @@ import Bttn from './Bttn'
 import firebase from 'firebase'
 // import {SOMECOMPONENT} from "./index.jsx"
 
-export default class PublicProfile extends Component {
+export default class FriendsProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,8 +15,7 @@ export default class PublicProfile extends Component {
         username: '',
         email: ''
       },
-      requests: [],
-      friends: [],
+      friends:[],
       profileImages: [
 
         `https://artofcollage.files.wordpress.com/2013/09/nikkal-exquisite-corpse-e1378737704164.jpg`,
@@ -34,12 +33,13 @@ export default class PublicProfile extends Component {
   }
 
   componentDidMount() {
+    const userId = this.props.match.params.userId;
     let temp = [];
     let tempFriends = []
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('user', user.uid)
-        db.collection('users').doc(user.uid).get()
+        db.collection('users').doc(userId).get()
           .then(doc => {
             console.log('data', doc.data().username)
             this.setState({
@@ -51,16 +51,7 @@ export default class PublicProfile extends Component {
             })
           })
           .then(() => {
-            db.collection('users').doc(user.uid).collection('requests')
-              .get().then(requests => {
-                requests.forEach(request => {
-                  temp.push({ requestId: request.data().requestId, id: request.data().id, username: request.data().username })
-                  this.setState({ requests: temp })
-                })
-              })
-          })
-          .then(() => {
-            db.collection('users').doc(user.uid).collection('friends')
+            db.collection('users').doc(userId).collection('friends')
               .get().then(friends => {
                 friends.forEach(friend => {
                   tempFriends.push({ id: friend.data().id, username: friend.data().username })
@@ -79,23 +70,6 @@ export default class PublicProfile extends Component {
     return profileImage[randomNum]
   }
 
-  handleClick = (request) => {
-    const userId = this.state.user.id;
-    console.log('aaaa', request)
-    db.collection('users').doc(userId).collection('friends').add({
-      id: request.id,
-      username: request.username
-    }).then(() => {
-      db.collection('users').doc(userId).collection('requests').doc(request.requestId).delete()
-    }).then(() => {
-      db.collection('users').doc(request.id).collection('friends').add({
-        id: userId,
-        username: this.state.user.username
-      })
-      window.location.href = '/profile'
-    })
-  }
-
   render() {
     const user = this.state.user
     const requests = this.state.requests
@@ -103,7 +77,7 @@ export default class PublicProfile extends Component {
     const pickRandomProfile = this.pickRandomProfile
     console.log(user)
     return (
-      <div id="main-container">
+      <div >
         <div className="profile-header">
           <div className="profile-picture">
             <img src={pickRandomProfile()} />
@@ -114,30 +88,6 @@ export default class PublicProfile extends Component {
           </div>
         </div>
         <div className="thumbnail">
-          {requests &&
-            <h5>
-              <span>Friend Requests</span>
-              <div className="list-group">
-                {
-                  requests.map(request => {
-                    return (
-                      <div className="list-group-item" key={request.id}>
-                        <Link to={`/users/${request.id}`}>{request.username}</Link>
-                        <section>
-                          <h4 className="text-muted"></h4>
-                          <h4>
-                            <button onClick={() => this.handleClick(request)} className="btn btn-primary btn-block">
-                              <span className="glyphicon glyphicon-plus"></span> Approve
-                      </button>
-                          </h4>
-                        </section>
-                      </div>
-
-                    );
-                  })
-                }
-              </div>
-            </h5>}
           {friends &&
             <h5>
               <span>Friends</span>

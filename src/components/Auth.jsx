@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { TextInput, Bttn, GoogleAuth } from "./index"
 import firebase from 'firebase'
 import db from '../db/db_config'
+import { Button, FormControl } from 'react-bootstrap'
+import { FormGroup, form, ControlLabel, Col } from 'react-bootstrap'
 
 const allUsers = db.collection('users')
 const emailProvider = new firebase.auth.EmailAuthProvider()
@@ -80,9 +82,41 @@ export default class Signup extends Component {
 
     return (
       <div>
-        <Bttn className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth} />
+        <Button id="button" className="btn btn-success" type="submit" value={"signup/login with Google"} onClick={GoogleAuth}>Sign Up or Log In with Google</Button>
         <form name="signup-login-form" onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}>
-          <div className="authFields">
+          <FormGroup controlId="formBasicText">
+          <ControlLabel>Email: </ControlLabel>
+            <FormControl
+              label="email: "
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.changeHandler}
+              placeholder="email" />
+            {signUpTrueBool &&
+            <FormGroup controlId="formBasicText">
+            <ControlLabel>Username: </ControlLabel>
+              <FormControl
+                label="username: "
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.changeHandler}
+                placeholder="username" />
+                </FormGroup>
+            }
+            <ControlLabel>Password: </ControlLabel>
+              <FormControl
+              label="password: "
+              name="password"
+              type="text"
+              value={this.state.password}
+              onChange={this.changeHandler}
+              placeholder="password" />
+           </FormGroup>
+          {/* // </div> */}
+          {/* } */}
+          {/* <div className="authFields">
             <TextInput
               label="email: "
               name="email"
@@ -90,8 +124,8 @@ export default class Signup extends Component {
               value={this.state.email}
               onChange={this.changeHandler}
               placeholder="email"
-            />
-            {signUpTrueBool &&
+            /> */}
+            {/* {signUpTrueBool &&
               <TextInput
                 label="username: "
                 name="username"
@@ -108,9 +142,12 @@ export default class Signup extends Component {
               value={this.state.password}
               onChange={this.changeHandler}
               placeholder="password"
-            />
+            /> */}
+
+
+          <div id="signingup">
+          <Button id="button" className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}</Button>
           </div>
-          <Bttn className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"} />
         </form>
       </div>
     )

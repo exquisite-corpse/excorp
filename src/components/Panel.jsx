@@ -97,16 +97,13 @@ export default class Panel extends Component {
 
   render() {
     const { snippetSrc, panel, drawing, submitted } = this.state
-
     const clssNm = (snippetSrc.length? "Stage" : "Stage-no-snippet")
     const isSnippy = (snippetSrc.length? "panel-buttons-snippet" : "panel-buttons-no-snippet")
-    console.log("my panel button conditional className", isSnippy)
+//     console.log("my panel button conditional className", isSnippy)
 
-    if (!submitted)
-      return (
-
-      <div onContextMenu={e => e.preventDefault()}>
-
+  if (!submitted)
+    return (
+      <div id="panel-cont" onContextMenu={e => e.preventDefault()}>
           {
             drawing.title &&
             (
@@ -121,8 +118,8 @@ export default class Panel extends Component {
             )
           }
 
-          <div>
-              <img className="snippet" src={snippetSrc} width="700" />
+          <div id="main-container">
+              <img id="snippet" className="snippet" src={snippetSrc} width="700" />
               <Stage
                 className= {clssNm}
                 width={700}
@@ -137,6 +134,7 @@ export default class Panel extends Component {
               </Stage>
           </div>
 
+
           <div className={isSnippy}>
             <div className="drawing-buttons" >
                 <button onClick={this.handleErase}>
@@ -149,23 +147,17 @@ export default class Panel extends Component {
                 <button onClick={this.handlePencil} >thick</button>
 
                 <div>
-                  <button className="submit-button" onClick={this.handleSubmit}>
+                  <button id="submit-button" className="submit-button" onClick={this.handleSubmit}>
                     Submit Panel
                   </button>
                 </div>
+            
             </div>
-            </div>
-
-      </div>
+  </div>
   )
-
   return(
-             <PassPanel panel={panel} drawing={drawing} />
+         <PassPanel panel={panel} drawing={drawing} />
   )
-
+        
   }
 }
-
-
-  // <button onClick={this.handleMed} >med</button>
-  //               <button onClick={this.handleThick}>thick</button>
