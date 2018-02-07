@@ -99,6 +99,8 @@ export default class Panel extends Component {
     const { snippetSrc, panel, drawing, submitted } = this.state
 
     const clssNm = (snippetSrc.length? "Stage" : "Stage-no-snippet")
+    const isSnippy = (snippetSrc.length? "panel-buttons-snippet" : "panel-buttons-no-snippet")
+    console.log("my panel button conditional className", isSnippy)
 
     if (!submitted)
       return (
@@ -135,6 +137,7 @@ export default class Panel extends Component {
               </Stage>
           </div>
 
+          <div className={isSnippy}>
             <div className="drawing-buttons" >
                 <button onClick={this.handleErase}>
                   {this.state.eraserOn? "PENCIL" : "ERASER"}
@@ -150,6 +153,7 @@ export default class Panel extends Component {
                     Submit Panel
                   </button>
                 </div>
+            </div>
             </div>
 
       </div>

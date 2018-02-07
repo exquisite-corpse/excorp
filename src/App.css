@@ -44,10 +44,9 @@ form div {
   font-size: large;
 }
 
-.drawing-buttons {
+/*.drawing-buttons {
   margin-top: 15em;
-  /*position: relative;*/
-}
+}*/
 
 .Stage {
   display: flex;
@@ -156,4 +155,21 @@ form div {
 .dwg-container {
   padding-bottom: 5em;
   padding-top: 2em;
+}
+
+.panel-buttons-snippet{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  z-index: 3;
+  top: -280px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.panel-buttons-no-snippet{
+  margin-top: 10em;
+  position: relative;
 }
