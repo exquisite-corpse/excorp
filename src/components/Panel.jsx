@@ -107,7 +107,7 @@ export default class Panel extends Component {
           {
             drawing.title &&
             (
-            <div>
+            <div id="panel-header">
               <h1>
                 {`Drawing Title: ${drawing.title} Category: ${drawing.category}`}
               </h1>
@@ -137,11 +137,11 @@ export default class Panel extends Component {
 
           <div className={isSnippy}>
             <div className="drawing-buttons" >
-                <button onClick={this.handleErase}>
+                <button id="eraser" onClick={this.handleErase}>
                   {this.state.eraserOn? "PENCIL" : "ERASER"}
                 </button>
 
-                <h5>pencil size</h5>
+                <h5>pencil sizes:</h5>
                 <button onClick={this.handlePencil} >thin</button>
                 <button onClick={this.handlePencil} >med</button>
                 <button onClick={this.handlePencil} >thick</button>

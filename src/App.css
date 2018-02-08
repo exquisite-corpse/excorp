@@ -10,6 +10,22 @@ form div {
   margin: 1em;
 }
 
+#eraser{
+  margin-bottom: 2em;
+}
+
+#panel-header {
+  padding-top: 3em;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.drawing-buttons{
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
 
 .Stage {
   display: flex;
@@ -184,12 +200,6 @@ form div {
   text-decoration: none;
 }
 
-
-#snippet img {
-/*  margin:auto;
-  /*left: 370px;*/
-}
-
 #main-container h1, h2 {
   display: flex;
   justify-content: center;
@@ -214,9 +224,6 @@ form div {
   position: relative;
   margin: auto;
   margin-top:5em ;
-/*  top: 200px;
-  left: 680px;*/
-
 }
 
 #panel-cont {
@@ -233,7 +240,6 @@ form div {
   margin: 10px;
   display: flex;
   justify-content: center;
-  /* border: 1px solid blue; */
 }
 
 #signingup {
@@ -242,9 +248,8 @@ form div {
   align-content: center;
   padding-top: 30px;
   padding-bottom: 20px;
-  /* left: 600px; */
-
 }
+
 #span-buttons {
   display: flex;
   justify-content: center;
@@ -265,7 +270,6 @@ form div {
   justify-content: center;
   width: 1000px;
   padding-left: 500px;
-  /* border: 1px solid green; */
 }
 
 #create-game-bttn {
@@ -292,7 +296,4 @@ form div {
 .list-group {
   color: black;
   text-decoration-style: none;
-  /*text-decoration-color: black;*/
 }
-
-
