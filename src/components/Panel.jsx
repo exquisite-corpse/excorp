@@ -158,6 +158,5 @@ export default class Panel extends Component {
   return(
          <PassPanel panel={panel} drawing={drawing} />
   )
-
   }
 }
