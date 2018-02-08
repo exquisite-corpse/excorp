@@ -92,8 +92,8 @@ export default class SearchBar extends Component {
               console.log(user.isFriend)
               if (user.isFriend) {
                 return (
-                  <div className="list-group-item" key={user.id}>
-                    <Link to={`/profiles/${user.id}`}>{user.userName}</Link>
+                  <div className="col-xs" className="list-group-item" key={user.id}>
+                    <Link className="search-friends" to={`/profiles/${user.id}`}>{user.userName}</Link>
                   </div>
                 );
               }
