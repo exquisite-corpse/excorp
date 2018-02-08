@@ -291,6 +291,7 @@ form div {
 }
 
 #main-container-bodylinks {
+  margin-top: 2em;
   color: black;
 }
 
@@ -329,4 +330,12 @@ form div {
   margin: 5em;
   justify-content: center;
   align-content: center;
+}
+
+#you-dont-have-gallery{
+  margin-top: 3em;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  color: black;
 }
