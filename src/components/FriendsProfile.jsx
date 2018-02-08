@@ -66,7 +66,6 @@ class FriendsProfile extends Component {
         username: '',
         email: ''
       },
-      friends:[],
       profileImages: [
 
         `https://artofcollage.files.wordpress.com/2013/09/nikkal-exquisite-corpse-e1378737704164.jpg`,
@@ -109,7 +108,6 @@ class FriendsProfile extends Component {
               .get().then(friends => {
                 friends.forEach(friend => {
                   tempFriends.push({ id: friend.data().id, username: friend.data().username })
-                  this.setState({ friends: tempFriends })
                 })
               })
           })
@@ -123,6 +121,8 @@ class FriendsProfile extends Component {
     let randomNum = Math.floor(Math.random() * Math.floor(length))
     return profileImage[randomNum]
   }
+
+
 
   render() {
     const user = this.state.user
@@ -142,35 +142,16 @@ class FriendsProfile extends Component {
             <h5><strong>Email: </strong>{user.email}</h5>
           </div>
         </div>
-        <div className="thumbnail">
-          {friends &&
-            <h5>
-              <span>Friends</span>
-              <div className="list-group">
-                {
-                  friends.map(friend => {
-                    if(friend.id == currentUserId)
-                    return (
-                      <div className="list-group-item" key={friend.id}>
-                        <Link to={"/profile"}>{friend.username}</Link>
-                      </div>
-
-                    );
-                    else
-                    return (
-                      <div className="list-group-item" key={friend.id}>
-                        <Link to={`/users/${friend.id}`}>{friend.username}</Link>
-                      </div>
-
-                    );
-                  })
-                }
-              </div>
-            </h5>}
-        </div>
+        {this.state.user.id &&
+        <Map
+               from={db.collection("users").doc(this.state.user.id).collection("friends")}
+               Loading={() => "Loading..."}
+               Render={Friends}
+               Empty={() => <select>You don't have any friends...</select>}
+             />}
        { user.id &&  <div>
       <h1 id="allmy-header">{`All ${user.username}'s Drawings:`}</h1>
-      
+
       <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.id}`, '==', true)}
         Render={Drawing}
         Empty={() => <div id="you-dont-have-gallery">
@@ -187,5 +168,26 @@ class FriendsProfile extends Component {
 
 }
 
-
 export default withAuth(FriendsProfile)
+
+const Friends = props => {
+  console.log("this option has a value of: ", props)
+
+  // if(props.id == props._ref.id)
+  // return (
+  //   <div className="list-group-item" key={props.id}>
+  //     <Link to={"/profile"}>{props.username}</Link>
+  //   </div>
+
+  // );
+  // else
+  return (
+    <div className="list-group-item" key={props.id}>
+      <Link to={`/users/${props.id}`}>{props.username}</Link>
+    </div>
+
+  );
+}
+
+
+withAuth(Friends);
