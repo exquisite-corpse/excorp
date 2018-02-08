@@ -96,12 +96,26 @@ export default class PublicProfile extends Component {
     })
   }
 
+  handleDecline = (request) => {
+    console.log('I am hereee', request)
+    const userId = this.state.user.id;
+
+
+      db.collection('users').doc(userId).collection('requests').doc(request.requestId).delete()
+      .then(() => {
+        window.location.href = '/profile'
+      })
+
+
+  }
+
+
   render() {
     const user = this.state.user
     const requests = this.state.requests
     const friends = this.state.friends
     const pickRandomProfile = this.pickRandomProfile
-    console.log(user)
+    //console.log(user)
     return (
       <div id="main-container">
         <div className="profile-header">
@@ -131,6 +145,14 @@ export default class PublicProfile extends Component {
                       </button>
                           </h4>
                         </section>
+                        <section>
+                          <h4 className="text-muted"></h4>
+                          <h4>
+                            <button onClick={() => this.handleDecline(request)} className="btn btn-primary btn-block">
+                              <span className="glyphicon glyphicon-plus"></span> Decline
+                      </button>
+                          </h4>
+                        </section>
                       </div>
 
                     );
@@ -146,7 +168,7 @@ export default class PublicProfile extends Component {
                   friends.map(friend => {
                     return (
                       <div className="list-group-item" key={friend.id}>
-                        <Link to={`/users/${friend.id}`}>{friend.username}</Link>
+                        <Link to={`/profiles/${friend.id}`}>{friend.username}</Link>
                       </div>
 
                     );

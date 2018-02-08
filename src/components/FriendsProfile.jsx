@@ -28,7 +28,8 @@ export default class FriendsProfile extends Component {
 
         `http://jackwitcomb-experimentalstorytelling.weebly.com/uploads/1/4/0/9/14092804/5138755_orig.jpg?0`
 
-      ]
+      ],
+      currentUserId: ''
     }
   }
 
@@ -39,12 +40,14 @@ export default class FriendsProfile extends Component {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('user', user.uid)
+        this.setState({currentUserId: user.uid})
+
         db.collection('users').doc(userId).get()
           .then(doc => {
             console.log('data', doc.data().username)
             this.setState({
               user: {
-                id: user.uid,
+                id: userId,
                 username: doc.data().username,
                 email: doc.data().email
               }
@@ -75,6 +78,7 @@ export default class FriendsProfile extends Component {
     const requests = this.state.requests
     const friends = this.state.friends
     const pickRandomProfile = this.pickRandomProfile
+    const currentUserId = this.state.currentUserId
     console.log(user)
     return (
       <div >
@@ -94,6 +98,14 @@ export default class FriendsProfile extends Component {
               <div className="list-group">
                 {
                   friends.map(friend => {
+                    if(friend.id == currentUserId)
+                    return (
+                      <div className="list-group-item" key={friend.id}>
+                        <Link to={"/profile"}>{friend.username}</Link>
+                      </div>
+
+                    );
+                    else
                     return (
                       <div className="list-group-item" key={friend.id}>
                         <Link to={`/users/${friend.id}`}>{friend.username}</Link>
