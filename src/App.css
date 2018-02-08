@@ -6,12 +6,26 @@
   text-decoration-style: none;
 }
 
+#allmy-header{
+  margin-top: 2em;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
 form div {
   margin: 1em;
 }
 
 #eraser{
   margin-bottom: 2em;
+}
+
+#gallery-header{
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 #panel-header {
@@ -195,11 +209,6 @@ form div {
   text-decoration: none;
 }
 
-#search-container a {
-  color: black;
-  text-decoration: none;
-}
-
 #main-container h1, h2 {
   display: flex;
   justify-content: center;
@@ -265,11 +274,13 @@ form div {
 }
 
 #new-game-form {
+  display: flex;
   font-size: 16px;
   display: block;
-  justify-content: center;
-  width: 1000px;
-  padding-left: 500px;
+ justify-content: center; 
+  align-content: center;
+  text-align: center;
+  margin: auto;
 }
 
 #create-game-bttn {
@@ -280,6 +291,7 @@ form div {
 }
 
 #main-container-bodylinks {
+  margin-top: 2em;
   color: black;
 }
 
@@ -296,4 +308,34 @@ form div {
 .list-group {
   color: black;
   text-decoration-style: none;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+#search-container a {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+#user-header {
+  margin: 3em;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+#search-cols{
+  margin: 5em;
+  justify-content: center;
+  align-content: center;
+}
+
+#you-dont-have-gallery{
+  margin-top: 3em;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  color: black;
 }

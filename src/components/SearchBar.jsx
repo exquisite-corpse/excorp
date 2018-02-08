@@ -77,16 +77,17 @@ export default class SearchBar extends Component {
     const filteredUsers = users.filter(user => user.userName && user.userName.match(this.state.inputValue)).filter(user => user.userName && !user.userName.match(this.state.currentUser.username))
     console.log(users)
     return (
-      <div>
-        <h3>Users</h3>
-        <form className="form-group" style={{ marginTop: '20px' }}>
+      <div >
+        <h2 id="user-header">Find a Friend:</h2>
+        <div id="search-cols">
+        <form className="form-group" className="col-sm-3">
           <input
             className="form-control"
-            placeholder="Enter a name"
+            placeholder="Search for a user"
             onChange={this.handleChange}
           />
         </form>
-        <div id="search-container" className="list-group">
+        <div id="search-container" className="list-group" className="col-sm-6">
           {
             filteredUsers.map(user => {
               console.log(user.isFriend)
@@ -106,6 +107,7 @@ export default class SearchBar extends Component {
               }
             })
           }
+          </div>
         </div>
       </div>
     )

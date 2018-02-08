@@ -16,7 +16,6 @@ const Wips = (props) => {
     <div id="main-container">
       <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
       <Map from={allPanels.where('completed', '==', false).where(`${user.uid}`, '==', true)}
-        Loading={() => 'Loading...'}
         Render={(props) => {
           if (props.id) {
             return <Link key={props.id} to={`/panels/${props.id}`}>

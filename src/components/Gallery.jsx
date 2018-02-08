@@ -31,7 +31,7 @@ const Drawing = (props) => {
   const result = panels
     ? <div className="container" className="dwg-container">
       {
-       title && <div>
+       title && <div id="gallery-header">
           <h2>{title}</h2>
           <h5>{`Category: ${category}`}</h5>
           <h5>Artists: </h5>
@@ -57,15 +57,14 @@ const Gallery = ({ _user: user }) => {
   if (!user) return null
   return (
     <div>
-      <h2>All My Finished Drawings:</h2>
+      <h1 id="allmy-header">All My Finished Drawings:</h1>
       <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)}
-        Loading={() => 'Loading...'}
         Render={Drawing}
-        Empty={() => <div>
-          <h3>You don't have any finished drawings</h3>
-          <Link to={`/new`}>Click here to Create a New Game
-        </Link>
-        </div>} />
+        Empty={() => <div id="you-dont-have-gallery">
+        <h3 >You don't have any finished drawings...</h3>
+        <Link to={`/new`}>Click here to Create a New Game
+      </Link>
+      </div>} />
     </div>
   )
 }
