@@ -7,12 +7,12 @@ import { Map, withAuth } from 'fireview'
 const allPanels = db.collection('panels')
 const allDrawings = db.collection('drawings')
 
-const Panel = (props) => {
+export const Panel = (props) => {
   const { src } = props
   return <img src={src} height="350" />
 }
 
-function sortedPanelIds(dwgsPanels) {
+export function sortedPanelIds(dwgsPanels) {
   //here we want to map through the panels object inside a drawing and sort them by their order
   console.log("SORTED IS RUNNING")
   const keyVals = Object.entries(dwgsPanels)
@@ -22,7 +22,7 @@ function sortedPanelIds(dwgsPanels) {
   return sortedKeyVals.map(([key, value]) => key)
 }
 
-const Drawing = (props) => {
+export const Drawing = (props) => {
   const { panels, title, category } = props
   console.log("drawing props: ", props)
 
