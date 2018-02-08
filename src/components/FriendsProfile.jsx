@@ -3,59 +3,11 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import db from '../db/db_config';
 import Bttn from './Bttn'
+import {Panel, Drawing, sortedPanelIds} from './Gallery'
 import firebase from 'firebase'
 import { Map, withAuth } from 'fireview'
 const allPanels = db.collection('panels')
 const allDrawings = db.collection('drawings')
-
-const Panel = (props) => {
-  const { src } = props
-  return <img src={src} height="350" />
-}
-
-function sortedPanelIds(dwgsPanels) {
-  //here we want to map through the panels object inside a drawing and sort them by their order
-  console.log("SORTED IS RUNNING")
-  const keyVals = Object.entries(dwgsPanels)
-  const sortedKeyVals = keyVals.sort(([x, a], [y, b]) => {
-    return (a - b)
-  })
-  return sortedKeyVals.map(([key, value]) => key)
-}
-
-const Drawing = (props) => {
-  const { panels, title, category } = props
-  console.log("drawing props: ", props)
-
-  const artistIdsArr = Object.keys(props.artists)
-  console.log("artists on drawing: ", artistIdsArr)
-  const result = panels
-    ? <div className="container" className="dwg-container">
-      {
-       title && <div id="gallery-header">
-          <h2>{title}</h2>
-          <h5>{`Category: ${category}`}</h5>
-          <h5>Artists: </h5>
-            {
-              artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
-                Empty={() => 'Empty.'}
-                Render={(props) => ` ${props.username} `} />)
-            }
-        </div>
-      }
-      {
-        sortedPanelIds(panels)
-          .map(id => <Map key={id} from={allPanels.doc(id)}
-            Empty={() => 'Empty.'}
-            Render={Panel} />)
-      } </div>
-    : null
-
-  return result
-}
-
-
-
 
 class FriendsProfile extends Component {
   constructor(props) {
