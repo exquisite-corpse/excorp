@@ -81,7 +81,7 @@ export default class PublicProfile extends Component {
 
   handleClick = (request) => {
     const userId = this.state.user.id;
-    console.log('aaaa', request)
+    // console.log('aaaa', request)
     db.collection('users').doc(userId).collection('friends').add({
       id: request.id,
       username: request.username
@@ -103,58 +103,61 @@ export default class PublicProfile extends Component {
     const pickRandomProfile = this.pickRandomProfile
     console.log(user)
     return (
-      <div id="main-container">
-        <div className="profile-header">
-          <div className="profile-picture">
-            <img src={pickRandomProfile()} />
-          </div>
-          <div className="profile-info">
-            <h5><strong>Name: </strong>{user.username}</h5>
-            <h5><strong>Email: </strong>{user.email}</h5>
-          </div>
-        </div>
-        <div className="thumbnail">
-          {requests &&
-            <h5>
-              <span>Friend Requests</span>
-              <div className="list-group">
-                {
-                  requests.map(request => {
-                    return (
-                      <div className="list-group-item" key={request.id}>
-                        <Link to={`/users/${request.id}`}>{request.username}</Link>
-                        <section>
-                          <h4 className="text-muted"></h4>
-                          <h4>
-                            <button onClick={() => this.handleClick(request)} className="btn btn-primary btn-block">
-                              <span className="glyphicon glyphicon-plus"></span> Approve
-                      </button>
-                          </h4>
-                        </section>
-                      </div>
+      <div id="main-container-profile" className="row justify-content-center">
 
-                    );
-                  })
-                }
+            <div className="profile-header" className="col-xs-4" >
+              <div className="profile-picture">
+                <img src={pickRandomProfile()} />
               </div>
-            </h5>}
-          {friends &&
-            <h5>
-              <span>Friends</span>
-              <div className="list-group">
-                {
-                  friends.map(friend => {
-                    return (
-                      <div className="list-group-item" key={friend.id}>
-                        <Link to={`/users/${friend.id}`}>{friend.username}</Link>
-                      </div>
+              <div className="profile-info">
+                <h5><strong>Name: </strong>{user.username}</h5>
+                <h5><strong>Email: </strong>{user.email}</h5>
+              </div>
+            </div>
 
-                    );
-                  })
-                }
-              </div>
-            </h5>}
-        </div>
+            <div className="col-xs-4">
+              {requests &&
+                <h5>
+                  <p className="friendReqs">Friend Requests:</p>
+                  <div className="list-group">
+                    {
+
+                      requests.map(request => {
+                        return (
+                          <div className="list-group-item" key={request.id}>
+                            <Link to={`/users/${request.id}`}>{request.username}</Link>
+                            <section>
+                              <h4 className="text-muted"></h4>
+                              <h4>
+                                <button onClick={() => this.handleClick(request)} className="btn btn-primary btn-block">
+                                  <span className="glyphicon glyphicon-plus"></span> Approve
+                          </button>
+                              </h4>
+                            </section>
+                          </div>
+
+                        );
+                      })
+                    }
+                  </div>
+                </h5>}
+              {friends &&
+                <h5>
+                  <p className="myFriends">My Friends:</p>
+                  <div className="list-group">
+                    {
+                      friends.map(friend => {
+                        return (
+                          <div className="list-group-item" key={friend.id}>
+                            <Link to={`/users/${friend.id}`}>{friend.username}</Link>
+                          </div>
+
+                        );
+                      })
+                    }
+                  </div>
+                </h5>}
+            </div>
       </div>
     )
   }

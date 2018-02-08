@@ -3,7 +3,8 @@
   padding: 0;
   font-family: 'Roboto Slab', serif;
   background-color: #e0e2e5;
-  text-decoration-style: none;
+  text-decoration: none;
+  text-align: center;
 }
 
 #allmy-header{
@@ -89,11 +90,11 @@ form div {
   align-items: center;
 }
 
-.profile-container {
+/*.profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+}*/
 
 .profile-header {
   display: flex;
@@ -125,23 +126,36 @@ form div {
   padding-left: 10%;
 }
 
-#myCarousel {
+/*#myCarousel {
   text-decoration: none;
   height: 53em;
   margin-top: 1em;
   margin-bottom: 2em;
+}*/
+
+/*.carousel-inner {
+  width: 200px;
+  height: 800px;
+}*/
+
+.carousel-inner > .item > img{
+margin:auto;
+width:80%
 }
 
-.carousel-item {
+/*.carousel-item {
+  margin: auto;
   width: 200px;
   height: 400px;
-}
+}*/
 
 .carousel-control.left {
+  width: auto;
   background-image: none;
 }
 
 .carousel-control.right {
+  width: auto;
   background-image: none;
 }
 
@@ -168,12 +182,24 @@ form div {
   position: relative;
 }
 
+#navlistleft{
+  flex-direction: row;
+  color: ghostwhite;
+  text-decoration: none;
+}
+
 #navlist {
   flex-direction: row;
-  margin: 0;
-  padding: 0;
-  color: black;
+  color: ghostwhite;
+  text-decoration: none;
 }
+
+.nav-item{
+  flex-direction: row;
+  color: ghostwhite;
+  text-decoration: none;
+}
+
 
 #navlist .container-fluid {
   flex-wrap: nowrap;
@@ -183,6 +209,18 @@ form div {
   letter-spacing: 1px;
   padding-top: 5px;
   padding-bottom: 5px;
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+#navlist a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+.navbar-default {
+    background-color: #5d6268;
+    border-color: #5d6268;
 }
 
 #page-header {
@@ -204,9 +242,33 @@ form div {
   padding-left: 2em;
 }
 
-#navcontainer a {
+/*#navlist a {
   color: ghostwhite;
   text-decoration: none;
+}
+*/
+
+.friendReqs{
+  margin: 2em;
+}
+.myFriends{
+  margin: 2em;
+}
+
+#main-container-profile {
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-container-wips {
+ margin: 3em;
+}
+
+#main-container-bodylinks {
+ margin: 3em;
 }
 
 #main-container h1, h2 {
@@ -270,23 +332,16 @@ form div {
 }
 
 #create-game-bttn {
-  left: 20px;
+  margin: 3em;
 }
 
 #new-game-form {
-  display: flex;
   font-size: 16px;
-  display: block;
- justify-content: center; 
-  align-content: center;
   text-align: center;
-  margin: auto;
+  margin: 0 auto;
 }
 
 #create-game-bttn {
-  display: flex;
-  position: relative;
-  left: 180px;
   font-size: 16px;
 }
 
@@ -330,3 +385,14 @@ form div {
   justify-content: center;
   align-content: center;
 }
+
+.App a{
+  text-align: center;
+  text-decoration: none;
+}
+
+#root a{
+  text-align: center;
+  text-decoration: none;
+}
+

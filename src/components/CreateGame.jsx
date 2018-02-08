@@ -77,7 +77,8 @@ class CreateGame extends Component {
 
     render() {
         return (
-            <form name="create-new-game" id="new-game-form" className="col-xs-5"onSubmit={this.handleSubmit}>
+            <div  className="row justify-content-md-center" >
+            <form name="create-new-game" id="new-game-form" className="col-xs-5" onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formBasicText">
                    <ControlLabel>Create a New Game</ControlLabel>
                     <FormControl
@@ -100,9 +101,11 @@ class CreateGame extends Component {
                         <option value="Freeplay">Freeplay</option>
                     </FormControl>
                 </FormGroup>
-
+<div class="row justify-content-center">
                 <Button id="create-game-bttn" type="submit" value="Make a New Game">Make a New Game</Button>
+                </div>
             </form>
+            </div>
         )
     }
 

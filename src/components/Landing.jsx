@@ -64,7 +64,7 @@ class LoginSignup extends Component {
           </ol>
 
           {/* <!-- Wrapper for slides --> */}
-          <div className="carousel-inner">
+          <div  className="carousel-inner">
             <div className="item active">
               <img src="https://78.media.tumblr.com/e93e045188d10b71a20f9fb453e9df68/tumblr_p3qt7hSwIc1x55t66o1_500.png" />
             </div>

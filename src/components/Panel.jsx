@@ -118,7 +118,7 @@ export default class Panel extends Component {
             )
           }
 
-          <div id="main-container">
+          <div id="main-container-panel">
               <img id="snippet" className="snippet" src={snippetSrc} width="700" />
               <Stage
                 className= {clssNm}

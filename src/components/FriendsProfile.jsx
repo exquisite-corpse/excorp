@@ -77,25 +77,25 @@ export default class FriendsProfile extends Component {
     const pickRandomProfile = this.pickRandomProfile
     console.log(user)
     return (
-      <div >
-        <div className="profile-header">
-          <div className="profile-picture">
-            <img src={pickRandomProfile()} />
-          </div>
+      <div id="friends-profile" className="row justify-content-center">
+
+        <div className="profile-header" className="col-xs-5">
+          <img className="profile-picture" src={pickRandomProfile()} />
           <div className="profile-info">
             <h5><strong>Name: </strong>{user.username}</h5>
             <h5><strong>Email: </strong>{user.email}</h5>
           </div>
         </div>
-        <div className="thumbnail">
+
+        <div  className="col-xs-5" >
           {friends &&
             <h5>
               <span>Friends</span>
-              <div className="list-group">
+              <div className="list-group" >
                 {
                   friends.map(friend => {
                     return (
-                      <div className="list-group-item" key={friend.id}>
+                      <div className="list-group-item" className="col-xs-6" key={friend.id}>
                         <Link to={`/users/${friend.id}`}>{friend.username}</Link>
                       </div>
 

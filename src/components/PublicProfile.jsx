@@ -79,7 +79,7 @@ export default class PublicProfile extends Component{
       <div>
         <h3>username: { user.username }</h3>
      </div>
-     <div className="thumbnail">
+     <div className="thumbnail" className="col-xs-5">
        <h5>
           <span>mail: { user.email }</span>
        </h5>
