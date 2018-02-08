@@ -1,11 +1,15 @@
-# Exquisite Corpse
+# Exquisite Graveyard
 
-Welcome to Exquisite Corpse. Based on a drawing exercise invented by surrealists, players draw on a sheet of paper, folded to conceal the previous parts of the drawing, and passed on to the next player for a further contribution.
+Welcome to Exquisite Graveyard. 
+
+Exquisite Graveyard is a progressive web application based on a drawing exercise invented by surrealists in the 1920s.
+
+Each player adds to a drawing in sequence without seeing the previous contributions, except for a snippet of the previous drawing. When the drawing is complete, it's then revealed to all the players.
 
 
 ## Getting Started
 
-Follow the instructions below to run Exquisite Corpse on your local machine for development and testing purposes.
+Follow the instructions below to run Exquisite Graveyard on your local machine for development and testing purposes.
 
 ### Install
 
@@ -32,7 +36,7 @@ npm run test
 ```
 ## Deployment
 
-[Deployed App]()
+[Exquisite Graveyard](https://exquisitegraveyard.firebaseapp.com/)
 
 ## Built With
 
