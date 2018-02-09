@@ -126,28 +126,17 @@ form div {
   padding-left: 10%;
 }
 
-/*#myCarousel {
-  text-decoration: none;
-  height: 53em;
-  margin-top: 1em;
-  margin-bottom: 2em;
-}*/
+.carousel-indicators{
+  cursor: default;
+  pointer-events: none;
+}
 
-/*.carousel-inner {
-  width: 200px;
-  height: 800px;
-}*/
 
 .carousel-inner > .item > img{
 margin:auto;
 width:80%
 }
 
-/*.carousel-item {
-  margin: auto;
-  width: 200px;
-  height: 400px;
-}*/
 
 .carousel-control.left {
   width: auto;
@@ -178,7 +167,7 @@ width:80%
 }
 
 .panel-buttons-no-snippet{
-  margin-top: 10em;
+  margin-top: 13em;
   position: relative;
 }
 
@@ -204,11 +193,11 @@ width:80%
 #navlist .container-fluid {
   flex-wrap: nowrap;
   background-color: #5d6268;
-  font-size: 18px;
+  font-size: 15px;
   margin: 0;
   letter-spacing: 1px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+/*  padding-top: 5px;
+  padding-bottom: 5px;*/
   color: ghostwhite;
   text-decoration: none;
 }
@@ -263,6 +252,16 @@ width:80%
   align-items: center;
 }
 
+
+#friends-container-profile {
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 #main-container-wips {
  margin: 3em;
 }
@@ -297,6 +296,30 @@ width:80%
   margin-top:5em ;
 }
 
+.aprvDecline{
+  margin: 1em;
+  border-radius: 50%;
+/*  background-color: #5f6e78;*/
+/*  text-decoration: none;*/
+}
+
+
+/*width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;*/
+
+.pencilbutton{
+  margin: 1em;
+  /*padding: 1em;*/
+  border-radius: 50%;
+  background-color: #5f6e78;
+  text-decoration: none;
+}
+
 #panel-cont {
   padding-bottom: 100px;
 }
@@ -324,7 +347,7 @@ width:80%
 #span-buttons {
   display: flex;
   justify-content: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #signingup Button, span {
@@ -346,6 +369,7 @@ width:80%
 }
 
 #main-container-bodylinks {
+  margin-top: 2em;
   color: black;
 }
 
@@ -386,6 +410,7 @@ width:80%
   align-content: center;
 }
 
+
 .App a{
   text-align: center;
   text-decoration: none;
@@ -394,5 +419,13 @@ width:80%
 #root a{
   text-align: center;
   text-decoration: none;
+}
+
+#you-dont-have-gallery{
+  margin-top: 3em;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  color: black;
 }
 

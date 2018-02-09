@@ -13,6 +13,7 @@ const Wips = (props) => {
 
   if (!user) return null
   return (
+
     <div id="main-container-wips" >
       <h2>Here are Your Beautiful Works In Progress (WIPs)</h2>
       <Map from={allPanels.where('completed', '==', false).where(`${user.uid}`, '==', true)}
@@ -22,7 +23,7 @@ const Wips = (props) => {
               return <Link key={props.id} to={`/panels/${props.id}`}>
                 {props.src !== ''
                   ? <Img src={props.src} />
-                  : <h3> Go to your panel</h3>
+                  : <h3> Go to this panel</h3>
                 }
               </Link>
             } else { return <h1>This panel wasn't formatted properly...Sorry about that!</h1> }

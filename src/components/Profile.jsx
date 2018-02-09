@@ -96,13 +96,28 @@ export default class PublicProfile extends Component {
     })
   }
 
+  handleDecline = (request) => {
+    console.log('I am hereee', request)
+    const userId = this.state.user.id;
+
+
+      db.collection('users').doc(userId).collection('requests').doc(request.requestId).delete()
+      .then(() => {
+        window.location.href = '/profile'
+      })
+
+
+  }
+
+
   render() {
     const user = this.state.user
     const requests = this.state.requests
     const friends = this.state.friends
     const pickRandomProfile = this.pickRandomProfile
-    console.log(user)
+    //console.log(user)
     return (
+
       <div id="main-container-profile" className="row justify-content-center">
 
             <div className="profile-header" className="col-xs-4" >
@@ -110,56 +125,69 @@ export default class PublicProfile extends Component {
                 <img src={pickRandomProfile()} />
               </div>
               <div className="profile-info">
-                <h5><strong>Name: </strong>{user.username}</h5>
-                <h5><strong>Email: </strong>{user.email}</h5>
+                <h5>Name: {user.username}</h5>
+                <h5>Email: {user.email}</h5>
               </div>
             </div>
 
-            <div className="col-xs-4">
-              {requests &&
-                <h5>
-                  <p className="friendReqs">Friend Requests:</p>
-                  <div className="list-group">
-                    {
+      <div className="col-xs-4"  >
+          {requests &&
+            <div >
 
-                      requests.map(request => {
-                        return (
-                          <div className="list-group-item" key={request.id}>
-                            <Link to={`/users/${request.id}`}>{request.username}</Link>
-                            <section>
-                              <h4 className="text-muted"></h4>
-                              <h4>
-                                <button onClick={() => this.handleClick(request)} className="btn btn-primary btn-block">
-                                  <span className="glyphicon glyphicon-plus"></span> Approve
-                          </button>
-                              </h4>
-                            </section>
-                          </div>
-
-                        );
-                      })
-                    }
-                  </div>
-                </h5>}
-              {friends &&
-                <h5>
-                  <p className="myFriends">My Friends:</p>
-                  <div className="list-group">
-                    {
-                      friends.map(friend => {
-                        return (
-                          <div className="list-group-item" key={friend.id}>
-                            <Link to={`/users/${friend.id}`}>{friend.username}</Link>
-                          </div>
-
-                        );
-                      })
-                    }
-                  </div>
-                </h5>}
+            <div className="row justify-content-left">
+              <p className="friendReqs" >Friend Requests:</p>
             </div>
-      </div>
-    )
-  }
 
+              <div className="row justify-content-left">
+                {
+                  requests.map(request => {
+                    return (
+
+
+                      <div className="friendReqs" key={request.id}>
+                        <Link  to={`/users/${request.id}`}>{`${request.username} would like to follow you:`}</Link>
+
+
+
+                         <span >
+                            <button onClick={() => this.handleClick(request)} className="btn btn-sm btn-primary aprvDecline">
+                              <span className="glyphicon glyphicon-plus"></span> Approve
+                            </button>
+
+                            <button onClick={() => this.handleDecline(request)} className="btn btn-sm btn-primary btn-danger aprvDecline">
+                              <span className="glyphicon glyphicon-plus"></span> Decline
+                            </button>
+                          </span>
+
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>}
+          {friends &&
+            <div>
+            <div className="row justify-content-left">
+              <p className="myFriends">My Friends:</p>
+            </div>
+
+              <div className="list-group">
+                {
+                  friends.map(friend => {
+                    return (
+                      <div className="list-group-item" key={friend.id}>
+                        <Link to={`/profiles/${friend.id}`}>{friend.username}</Link>
+                      </div>
+                    )
+                  })
+                }
+            </div>
+            </div>
+          }
+
+          </div>
+        </div>
+        )
+  }
 }
+

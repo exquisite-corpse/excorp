@@ -3,10 +3,13 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import db from '../db/db_config';
 import Bttn from './Bttn'
+import {Panel, Drawing, sortedPanelIds} from './Gallery'
 import firebase from 'firebase'
-// import {SOMECOMPONENT} from "./index.jsx"
+import { Map, withAuth } from 'fireview'
+const allPanels = db.collection('panels')
+const allDrawings = db.collection('drawings')
 
-export default class FriendsProfile extends Component {
+class FriendsProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,7 +31,8 @@ export default class FriendsProfile extends Component {
 
         `http://jackwitcomb-experimentalstorytelling.weebly.com/uploads/1/4/0/9/14092804/5138755_orig.jpg?0`
 
-      ]
+      ],
+      currentUserId: ''
     }
   }
 
@@ -39,12 +43,14 @@ export default class FriendsProfile extends Component {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('user', user.uid)
+        this.setState({currentUserId: user.uid})
+
         db.collection('users').doc(userId).get()
           .then(doc => {
             console.log('data', doc.data().username)
             this.setState({
               user: {
-                id: user.uid,
+                id: userId,
                 username: doc.data().username,
                 email: doc.data().email
               }
@@ -75,27 +81,40 @@ export default class FriendsProfile extends Component {
     const requests = this.state.requests
     const friends = this.state.friends
     const pickRandomProfile = this.pickRandomProfile
-    console.log(user)
+    const currentUserId = this.state.currentUserId
+    // console.log(user)
     return (
-      <div id="friends-profile" className="row justify-content-center">
 
-        <div className="profile-header" className="col-xs-5">
-          <img className="profile-picture" src={pickRandomProfile()} />
-          <div className="profile-info">
+      <div id="friends-container-profile" className="row justify-content-center">
+
+
+      <div className="profile-header" className="col-xs-4" >
+        <div className="profile-picture" >
+            <img src={pickRandomProfile()} />
+        </div>
+        <div className="profile-info">
             <h5><strong>Name: </strong>{user.username}</h5>
             <h5><strong>Email: </strong>{user.email}</h5>
           </div>
         </div>
 
-        <div  className="col-xs-5" >
+        <div  className="col-xs-4" >
           {friends &&
             <h5>
-              <span>Friends</span>
+              <p className="friendReqs">Your Friend's Friends:</p>
               <div className="list-group" >
                 {
                   friends.map(friend => {
+                    if(friend.id == currentUserId)
                     return (
-                      <div className="list-group-item" className="col-xs-6" key={friend.id}>
+                            null
+                      // <div className="list-group-item" key={friend.id}>
+                      //   <Link to={"/profile"}>{friend.username}</Link>
+                      // </div>
+                    )
+                    else
+                    return (
+                      <div className="list-group-item"  key={friend.id}>
                         <Link to={`/users/${friend.id}`}>{friend.username}</Link>
                       </div>
 
@@ -105,8 +124,23 @@ export default class FriendsProfile extends Component {
               </div>
             </h5>}
         </div>
+       { user.id &&  <div>
+      <h1 id="allmy-header">{`All ${user.username}'s Drawings:`}</h1>
+
+      <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.id}`, '==', true)}
+        Render={Drawing}
+        Empty={() => <div id="you-dont-have-gallery">
+        <h3 >{`Your friend ${user.username} doesn't have any finished drawings...`}</h3>
+        <Link to={`/new`}> {`Click here to start a new game so you can send it to ${user.username}`}</Link>
+      </div>} />
+
+
+    </div>}
       </div>
     )
   }
 
 }
+
+
+export default withAuth(FriendsProfile)

@@ -137,17 +137,17 @@ export default class Panel extends Component {
 
           <div className={isSnippy}>
             <div className="drawing-buttons" >
-                <button id="eraser" onClick={this.handleErase}>
+                <button className="btn btn-sm btn-secondary pencilbutton" id="eraser" onClick={this.handleErase}>
                   {this.state.eraserOn? "PENCIL" : "ERASER"}
                 </button>
 
                 <h5>pencil sizes:</h5>
-                <button onClick={this.handlePencil} >thin</button>
-                <button onClick={this.handlePencil} >med</button>
-                <button onClick={this.handlePencil} >thick</button>
+                <button className="btn btn-sm btn-secondary pencilbutton" onClick={this.handlePencil} >thin</button>
+                <button className="btn btn-sm btn-secondary pencilbutton" onClick={this.handlePencil} >med</button>
+                <button className="btn btn-sm btn-secondary pencilbutton" onClick={this.handlePencil} >thick</button>
 
                 <div>
-                  <button id="submit-button" className="submit-button" onClick={this.handleSubmit}>
+                  <button id="submit-button" className="btn  btn-primary pencilbutton"  onClick={this.handleSubmit}>
                     Submit Panel
                   </button>
                 </div>

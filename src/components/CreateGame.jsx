@@ -78,7 +78,7 @@ class CreateGame extends Component {
     render() {
         return (
             <div  className="row justify-content-md-center" >
-            <form name="create-new-game" id="new-game-form" className="col-xs-5" onSubmit={this.handleSubmit}>
+            <form name="create-new-game" id="new-game-form" className="col-xs-3" onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formBasicText">
                    <ControlLabel>Create a New Game</ControlLabel>
                     <FormControl
@@ -102,7 +102,14 @@ class CreateGame extends Component {
                     </FormControl>
                 </FormGroup>
 <div class="row justify-content-center">
-                <Button id="create-game-bttn" type="submit" value="Make a New Game">Make a New Game</Button>
+                <button
+                    id="create-game-bttn"
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    value="Make a New Game"
+                >
+                    Make a New Game
+                </button>
                 </div>
             </form>
             </div>

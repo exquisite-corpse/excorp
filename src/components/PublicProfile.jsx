@@ -75,27 +75,30 @@ export default class PublicProfile extends Component{
     const user = this.state.user
     const requested = this.state.requested
     return(
-      <div >
-      <div>
-        <h3>username: { user.username }</h3>
-     </div>
-     <div className="thumbnail" className="col-xs-5">
-       <h5>
-          <span>mail: { user.email }</span>
-       </h5>
-     </div>
 
-    <section>
-   <h4 className="text-muted"></h4>
-   <h4>
-   {requested
-      ? <span className="glyphicon glyphicon-plus"> Requested</span>
-      : <button onClick ={this.handleClick} className="btn btn-primary btn-block">
-        <span className="glyphicon glyphicon-plus"></span> follow
-      </button>}
-   </h4>
-   </section>
-   </div>
+        <div id="follow-friend" className="row justify-content-center">
+        <div className="col-xs-4">
+            <div className="col-xs-4" className="list-group-item" >
+              <p className="col-xs-4" className="friendReqs">username: { user.username }</p>
+              <p className="friendReqs">email: { user.email }</p>
+            </div>
+
+            <section>
+              <h4 className="text-muted"></h4>
+
+                {requested
+                ? <span className="glyphicon glyphicon-plus"> Requested</span>
+                : <button
+                    className="col-xs-2"
+                    onClick ={this.handleClick}
+                    className="btn btn-primary btn-block"
+                  >
+                  <span className="glyphicon glyphicon-plus"></span>
+                    follow
+                  </button>}
+            </section>
+        </div>
+      </div>
     )
   }
 

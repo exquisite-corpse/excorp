@@ -56,37 +56,58 @@ class LoginSignup extends Component {
 
         {/* Carousel */}
         <div id="myCarousel" className="carousel slide" data-ride="carousel">
-          {/* <!-- Indicators --> */}
-          <ol className="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-          </ol>
+
 
           {/* <!-- Wrapper for slides --> */}
+
           <div  className="carousel-inner">
+
             <div className="item active">
-              <img src="https://78.media.tumblr.com/e93e045188d10b71a20f9fb453e9df68/tumblr_p3qt7hSwIc1x55t66o1_500.png" />
+              <img src="https://image.ibb.co/h2gXmH/12.png" />
             </div>
 
             <div className="item">
-              <img src="https://78.media.tumblr.com/b41a8b4e2d62b76fe07e976d6af3ee20/tumblr_p3qx4sZoJc1x55t66o1_500.png" />
+              <img src="https://image.ibb.co/iVRbDx/7.png" />
             </div>
 
             <div className="item">
-              <img src="https://78.media.tumblr.com/b2bd4063d0b3a69eb0372cf66657a0df/tumblr_p3qtbsooVX1x55t66o1_540.png" />
+              <img src="https://image.ibb.co/nj6yRH/8.png" />
             </div>
 
             <div className="item">
-              <img src="https://78.media.tumblr.com/06deb1840f164980b3d1793a0046a040/tumblr_p3qtlfuarR1x55t66o1_500.png" />
+              <img src="https://image.ibb.co/d1x56H/10.png" />
             </div>
 
             <div className="item">
-              <img src="https://78.media.tumblr.com/bf5e6a53de8eb888d9e2c61f31b2e475/tumblr_p3qx79jm9N1x55t66o1_500.png" />
+              <img src="https://image.ibb.co/dKTCmH/4.png" />
             </div>
 
             <div className="item">
-              <img src="https://78.media.tumblr.com/5a4ce01e570471c94f908e3c5f3b590e/tumblr_p3qx9sBGkK1x55t66o1_500.png" />
+              <img src="https://image.ibb.co/kitpYx/1.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/hmByRH/2.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/kdLgfc/5.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/dZ8pYx/3.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/krfQ6H/11.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/hhdpYx/6.png" />
+            </div>
+
+            <div className="item">
+              <img src="https://image.ibb.co/nGj7Lc/9.png" />
             </div>
 
           </div>
