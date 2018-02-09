@@ -15,11 +15,11 @@ class App extends Component {
     return (
       <div className="App">
         <Router >
-          <div id="navcontainer">
+          <div >
             <PageHeader id="page-header">
               Exquisite Graveyard
             </PageHeader>
-            <NavBar />
+            <NavBar id="navcontainer"/>
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/panels/:panelId" component={Panel} />

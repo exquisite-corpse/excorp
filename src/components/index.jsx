@@ -1,6 +1,5 @@
 export {default as Bttn} from './Bttn'
 export {default as CreateGame} from './CreateGame'
-export {default as FriendsFeed} from './FriendsFeed'
 export {default as Gallery} from './Gallery'
 export {default as GoogleAuth} from './GoogleAuth'
 export {default as LogOut} from './LogOut'

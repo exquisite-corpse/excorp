@@ -82,35 +82,39 @@ class FriendsProfile extends Component {
     const friends = this.state.friends
     const pickRandomProfile = this.pickRandomProfile
     const currentUserId = this.state.currentUserId
-    console.log(user)
+    // console.log(user)
     return (
-      <div >
-        <div className="profile-header">
-          <div className="profile-picture">
+
+      <div id="friends-container-profile" className="row justify-content-center">
+
+
+      <div className="profile-header" className="col-xs-4" >
+        <div className="profile-picture" >
             <img src={pickRandomProfile()} />
-          </div>
-          <div className="profile-info">
+        </div>
+        <div className="profile-info">
             <h5><strong>Name: </strong>{user.username}</h5>
             <h5><strong>Email: </strong>{user.email}</h5>
           </div>
         </div>
-        <div className="thumbnail">
+
+        <div  className="col-xs-4" >
           {friends &&
             <h5>
-              <span>Friends</span>
-              <div className="list-group">
+              <p className="friendReqs">Your Friend's Friends:</p>
+              <div className="list-group" >
                 {
                   friends.map(friend => {
                     if(friend.id == currentUserId)
                     return (
-                      <div className="list-group-item" key={friend.id}>
-                        <Link to={"/profile"}>{friend.username}</Link>
-                      </div>
-
-                    );
+                            null
+                      // <div className="list-group-item" key={friend.id}>
+                      //   <Link to={"/profile"}>{friend.username}</Link>
+                      // </div>
+                    )
                     else
                     return (
-                      <div className="list-group-item" key={friend.id}>
+                      <div className="list-group-item"  key={friend.id}>
                         <Link to={`/users/${friend.id}`}>{friend.username}</Link>
                       </div>
 
@@ -122,13 +126,12 @@ class FriendsProfile extends Component {
         </div>
        { user.id &&  <div>
       <h1 id="allmy-header">{`All ${user.username}'s Drawings:`}</h1>
-      
+
       <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.id}`, '==', true)}
         Render={Drawing}
         Empty={() => <div id="you-dont-have-gallery">
         <h3 >{`Your friend ${user.username} doesn't have any finished drawings...`}</h3>
-        <Link to={`/new`}>Click here to Create a New Game To Send Them
-      </Link>
+        <Link to={`/new`}> {`Click here to start a new game so you can send it to ${user.username}`}</Link>
       </div>} />
 
 

@@ -22,7 +22,7 @@ const NavBar = ({ _user: user }) => {
       </Navbar.Header>
         <Navbar.Collapse>
 
-          <Nav id="navlist">
+          <Nav id="navlistleft" pullLeft>
             <NavItem className="nav-item">
               <Link to="/gallery">Gallery</Link>
             </NavItem>
@@ -39,7 +39,7 @@ const NavBar = ({ _user: user }) => {
               <Link to="/users">Find Your Friends</Link>
             </NavItem>
           </Nav>
-          <Nav id="navlist" pullRight>
+          <Nav id="navlistright" pullRight>
             <NavItem id="logging" className="nav-item">
               Hi there, {user.email}!
               <Link id="logoutPadding" to="/logout">Log Out</Link>
