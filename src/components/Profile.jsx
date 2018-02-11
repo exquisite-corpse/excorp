@@ -139,6 +139,8 @@ export default class PublicProfile extends Component {
             </div>
 
               <div className="row justify-content-left">
+
+
                 {
                   requests.map(request => {
                     return (
@@ -163,6 +165,8 @@ export default class PublicProfile extends Component {
                     )
                   })
                 }
+
+
               </div>
             </div>}
           {friends &&

@@ -29,14 +29,13 @@ export default class Drawing extends Component {
     componentWillReceiveProps(nextProps){
         console.log("NEXT PROPS IN DWG", nextProps)
 
-
         if(nextProps.eraserOn) {
             this.setState({strokeColor: "white", strokeWidth: 20})
         }else{
             this.setState({strokeColor: "black", strokeWidth: 2})
         }
 
-        if(nextProps.pencilSize !== this.state.strokeWidth) {
+        if(nextProps.pencilSize && !nextProps.eraserOn) {
             this.setState({strokeWidth: nextProps.pencilSize})
         }
 
@@ -116,7 +115,6 @@ export default class Drawing extends Component {
                 ref={node => (this.image = node)}
                 width={700}
                 height={350}
-                stroke="grey"
                 fill="white"
 
                 onMouseDown={this.handleMouseDown}
