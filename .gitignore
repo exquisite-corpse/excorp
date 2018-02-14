@@ -9,7 +9,6 @@ package-lock.json
 
 # production
 /build
-secrets.js
 
 # misc
 .DS_Store
@@ -25,4 +24,4 @@ yarn-error.log*
 
 package-lock.json
 .eslintrc.json
-app-env
+

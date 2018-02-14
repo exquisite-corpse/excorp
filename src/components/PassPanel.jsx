@@ -17,8 +17,6 @@ class PassPanel extends Component {
       artistSelected: false
     }
     this.createAndPassPanel = this.createAndPassPanel.bind(this)
-    //this.handleSubmit = this.handleSubmit.bind(this)
-    //this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange = e => {
