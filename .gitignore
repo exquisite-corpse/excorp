@@ -9,7 +9,6 @@ package-lock.json
 
 # production
 /build
-secrets.js
 
 # misc
 .DS_Store
@@ -22,7 +21,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
 package-lock.json
 .eslintrc.json
-app-env
+
+/corpses
+/custom_dwg
