@@ -1,0 +1,6 @@
+process.env.APIKEY =  'AIzaSyD_Q0PDm-RFJY-nz4EmUEj0EXbkLRrEIIc'
+process.env.AUTHDOMAIN =  'exquisitecorpse-84ff1.firebaseapp.com'
+process.env.DATABASEURL =  'https://exquisitecorpse-84ff1.firebaseio.com'
+process.env.PROJECTID = 'exquisitecorpse-84ff1'
+process.env.STORAGEBUCKET = 'exquisitecorpse-84ff1.appspot.com'
+process.env.MESSAGINGSENDERID = '349662282106'
