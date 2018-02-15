@@ -97,7 +97,7 @@ class PassPanel extends Component {
           <div className="users-select">
             <select id="signingup" onChange={this.handleChange} name="nextArtist">
               <option id="signingup" value="" selected disabled hidden>
-                Select A The Next Artist
+                Select A Friend
               </option>
               <Map
                from={db.collection("users").doc(this.props._user.uid).collection("friends")}
@@ -105,6 +105,19 @@ class PassPanel extends Component {
                Render={Options}
                Empty={() => <select>You don't have any friends...</select>}
              />
+            </select>
+          </div>
+          <div className="users-select">
+            <select onChange={this.handleChange} name="nextArtist">
+              <option value="" selected disabled hidden>
+                Select A Random User
+              </option>
+              <Map
+                from={db.collection("users")}
+                Loading={() => "Loading..."}
+                Render={Options}
+                Empty={() => <select>Hmm there aren't any users...</select>}
+              />
             </select>
           </div>
           {this.state.artistSelected ? (
