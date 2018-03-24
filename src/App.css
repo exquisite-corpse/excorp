@@ -90,12 +90,6 @@ form div {
   align-items: center;
 }
 
-/*.profile-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}*/
-
 .profile-header {
   display: flex;
   flex-direction: row;
@@ -137,15 +131,16 @@ margin:auto;
 width:80%
 }
 
-
 .carousel-control.left {
   width: auto;
   background-image: none;
+  color: white;
 }
 
 .carousel-control.right {
   width: auto;
   background-image: none;
+  color: white;
 }
 
 .dwg-container {
@@ -171,7 +166,13 @@ width:80%
   position: relative;
 }
 
-#navlistleft{
+
+#logo-small{
+  z-index: 20000;
+  color: white;
+}
+
+/*#navlistleft{
   flex-direction: row;
   color: ghostwhite;
   text-decoration: none;
@@ -198,7 +199,7 @@ width:80%
   letter-spacing: 1px;
 /*  padding-top: 5px;
   padding-bottom: 5px;*/
-  color: ghostwhite;
+ /* color: ghostwhite;
   text-decoration: none;
 }
 
@@ -211,6 +212,36 @@ width:80%
     background-color: #5d6268;
     border-color: #5d6268;
 }
+*/
+/*--------------kb nav edits------------------*/
+/*button.navbar-toggle .collapsed {
+    margin-left: 1em;
+}
+.navbar>.container, .navbar>.container-fluid {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+span.icon-bar{
+  width: 40px;
+  height: 6px;
+  padding:2px;
+}
+button.navbar-toggle {
+  position: relative;
+  float: center;
+  padding: 5px 5px;
+  margin: 5px;
+  background-color: lightgrey;
+  border: none;
+  border-radius: 4px;
+}*/
+/*--------------kb nav edits------------------*/
+
 
 #page-header {
   display: flex;
@@ -231,11 +262,6 @@ width:80%
   padding-left: 2em;
 }
 
-/*#navlist a {
-  color: ghostwhite;
-  text-decoration: none;
-}
-*/
 
 .friendReqs{
   margin: 2em;
@@ -243,6 +269,8 @@ width:80%
 .myFriends{
   margin: 2em;
 }
+
+
 
 #main-container-profile {
   margin: 3em;
@@ -299,22 +327,11 @@ width:80%
 .aprvDecline{
   margin: 1em;
   border-radius: 50%;
-/*  background-color: #5f6e78;*/
-/*  text-decoration: none;*/
 }
 
 
-/*width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.42857;*/
-
 .pencilbutton{
   margin: 1em;
-  /*padding: 1em;*/
   border-radius: 50%;
   background-color: #5f6e78;
   text-decoration: none;
@@ -328,31 +345,83 @@ width:80%
   background-color: white;
 }
 
-#button {
-  font-size: 20px;
-  padding: 50px;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
+/*----------------------------*/
+#main-container-landing {
+  background: linear-gradient(to bottom right, #4665C9, yellow);
+}
+#main-container-landing h1{
+  margin-top: 3em;
 }
 
-#signingup {
+#landing {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:1em auto;
+  width: 90vw;
+}
+
+#google-auth{
+  margin-top: 2em;
+  padding-right:2em;
+}
+
+#signinup {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding-left: 3em;
+  border-left: 1px solid white;
 }
 
-#span-buttons {
+.signinup-form-item{
   display: flex;
-  justify-content: center;
-  font-size: 14px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#signingup Button, span {
-  padding: 10px;
+.signinup-form-item p{
+  font-size: 14px;
+  margin-right: .5em;
 }
+.signinup-form-item input{
+  width: 175px;
+}
+
+/*----------------------------*/
+#radioButtons {
+  display: flex;
+  width: 275px;
+  padding-bottom: 20px;
+  color: white;
+  /*margin-left: 2em;*/
+}
+#radioLogin {
+  width: 50%;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+#radioSignup {
+  width: 50%;
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.authtrue{
+  background-color: #4665C9;
+}
+.authfalse{
+  background-color: #A7A5C6;
+  color: grey;
+}
+.authfalse:hover {
+  color: #d7e02f;
+}
+/*----------------------------*/
 
 #create-game-bttn {
   margin: 3em;
@@ -362,6 +431,8 @@ width:80%
   font-size: 16px;
   text-align: center;
   margin: 0 auto;
+  width: 50%;
+  max-width: 400px;
 }
 
 #create-game-bttn {

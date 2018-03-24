@@ -16,9 +16,10 @@ class App extends Component {
       <div className="App">
         <Router >
           <div >
-            <PageHeader id="page-header">
+{/*            <PageHeader id="page-header">
               Exquisite Graveyard
             </PageHeader>
+*/}
             <NavBar id="navcontainer"/>
             <Switch>
               <Route exact path="/" component={Landing} />

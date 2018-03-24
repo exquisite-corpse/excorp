@@ -82,64 +82,58 @@ export default class Signup extends Component {
     let signUpTrueBool = this.props.signup
 
     return (
-      <div>
-          <Button
-            id="button"
-            className="btn btn-success"
-            type="submit" value={"signup/login with Google"}
-            onClick={GoogleAuth}>Sign Up or Log In with Google
-          </Button>
+      <div id="auth-container">
 
+          <div id="non-google-auth">
           <form
             name="signup-login-form"
             onSubmit={signUpTrueBool ? this.handleSignup : this.handleLogin}
           >
 
-            <FormGroup controlId="formBasicText">
-              <ControlLabel>Email: </ControlLabel>
-
-                <FormControl
-                  label="email: "
-                  name="email"
-                  type="text"
-                  value={this.state.email}
-                  onChange={this.changeHandler}
-                  placeholder="email"
-                  />
-
+            <div className="signinup-form-item">
+              <p>Email: </p>
+              <FormControl
+                label="email: "
+                name="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.changeHandler}
+                placeholder="email"
+              />
+            </div>
                 {
                   signUpTrueBool &&
-                  <div>
-                  <ControlLabel>Username:</ControlLabel>
-                    <FormControl
-                      label="username: "
-                      name="username"
-                      type="text"
-                      value={this.state.username}
-                      onChange={this.changeHandler}
-                      placeholder="username"
-                    />
+                  <div className="signinup-form-item">
+                  <p>Username:</p>
+                  <FormControl
+                    label="username:"
+                    name="username"
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.changeHandler}
+                    placeholder="username"
+                  />
                   </div>
                 }
-
-                <ControlLabel>Password: </ControlLabel>
-                    <FormControl
-                      label="password: "
-                      name="password"
-                      type="password"
-                      value={this.state.password}
-                      secret={this.state.email}
-                      onChange={this.changeHandler}
-                      placeholder="password"
-                    />
-              </FormGroup>
+              <div className="signinup-form-item">
+                <p>Password: </p>
+                <FormControl
+                  label="password:"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  secret={this.state.email}
+                  onChange={this.changeHandler}
+                  placeholder="password"
+                />
+              </div>
 
             <div id="signingup">
-              <Button id="button" className="btn btn-success" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}
+              <Button className="btn btn-primary btn-block" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}
               </Button>
             </div>
-
           </form>
+          </div>
       </div>
     )
   }

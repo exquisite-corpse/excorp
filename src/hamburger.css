@@ -1,0 +1,141 @@
+/*for location of hamburger menu within main menu box*/
+#menuToggle{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #404d63;
+  color:white;
+  z-index: 99;
+}
+
+
+/*for text items in hamburger menu*/
+#websiteLinks p{
+  /*font-family: sans-serif;*/
+  font-size: 30px;
+  margin-bottom: .5em;
+}
+
+
+
+#userSection{
+  margin-top: 2em;
+}
+
+#userLinks p{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1em;
+  /*margin-left: 3em;*/
+  /*font-family: monospace;*/
+  font-size: 25px;
+}
+
+/*for text items in hamburger menu*/
+#menuToggle a:hover {
+  color: #ffd589;
+}
+#userLinks a:hover {
+  color: #f9fc97;
+}
+
+#menuToggle a{
+  color: white;
+}
+
+#spanContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height:35px;
+  position: relative;
+}
+
+
+/*for each line in hamburger menu*/
+#menuToggle span {
+  display: block;
+  width: 35px;
+  height: 5px;
+  margin-bottom: 2.5px;
+  margin-top: 2.5px;
+  position: relative;
+  background: #cdcdcd;
+  background: white;
+  border-radius: 3px;
+  z-index: 1;
+  -webkit-transform-origin: 3px 1.5px;
+  -webkit-transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0),
+                      background 0.35s cubic-bezier(0.77,0.2,0.05,1.0),
+                      opacity 0.55s ease;
+  transform-origin: 3px 1.5px;
+  transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.35s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle  .toggled .bar1
+{
+  -webkit-transform: rotate(45deg) translate(0px, 0px);
+          transform: rotate(45deg) translate(0px, 0px);
+}
+
+#menuToggle .toggled .bar3
+{
+  -webkit-transform: rotate(-45deg) translate(0px, 0px);
+          transform: rotate(-45deg) translate(0px, 0px);
+}
+
+/* hide the middle line*/
+#menuToggle .toggled .bar2
+{
+  opacity: 0;
+  -webkit-transform: rotate(0deg) scale(0.2, 0.2);
+          transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+
+/*positon of open burgermenu*/
+#menu
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-left: 3em;
+  width: 100vw;
+  height: 100vh;
+  background: #496696;
+  color: white;
+  list-style-type: none;
+    /* to stop flickering of text in safari */
+  -webkit-font-smoothing: antialiased;
+    /* */
+
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  /* to position menu when open/checked */
+  -webkit-transform: translate(0, -110vh);
+          transform: translate(0, -110vh);
+  -webkit-transition: transform 1s cubic-bezier(0.77,0.2,0.05,1.0);
+          transition: transform 1s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+/* to animate menu down in open position */
+#menuToggle .toggled ~ ul
+{
+  -webkit-transform: scale(1.0, 1.0);
+          transform: scale(1.0, 1.0);
+  opacity: 1;
+}
+

@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { BrowswerRouter as Router, Route } from 'react-router-dom'
-import {TextInput, Bttn, Auth} from './index'
+import {TextInput, Bttn, GoogleAuth, Auth} from './index'
 import db from '../db/db_config'
 import firebase from 'firebase'
 import {withAuth} from 'fireview'
-import { Button } from 'react-bootstrap'
+import { Button, ButtonToolbar, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
 
 class LoginSignup extends Component {
 
@@ -12,7 +12,7 @@ class LoginSignup extends Component {
     super()
     this.state = {
       signup: false,
-      login: true
+      login: true,
     }
     this.handleSignupClick = this.handleSignupClick.bind(this)
     this.handleLoginClick = this.handleLoginClick.bind(this)
@@ -43,25 +43,36 @@ class LoginSignup extends Component {
 
     return(
       <div id="main-container-landing">
-        <div id="signingup">
-        <span>
-          <div id="span-buttons">
-          <Button id="button" value="Sign Up" onClick={this.handleSignupClick}>Sign Up</Button>
-          <Button id="button" value="Log In" onClick={this.handleLoginClick}>Log In</Button>
-          </div>
-          <Auth className="Auth" signup={this.state.signup} />
-        </span>
-
+            <div id="logo">
+              <img src="./ex-grave-logo.svg" />
+            </div>
+    <div id="landing">
+        <div id="google-auth">
+        <p>Sign Up or Log In with Google: </p>
+          <Button
+            className="btn btn-primary btn-block"
+            type="submit" value={"signup/login with Google"}
+            onClick={GoogleAuth}>
+              Google Verify
+          </Button>
         </div>
 
+        <div id="signinup">
+          <div id="radioButtons">
+            <div onClick={this.handleLoginClick} className="kbRadio" className={`auth${this.state.signup}`} id="radioLogin">
+              login
+            </div>
+            <div onClick={this.handleSignupClick} className="kbRadio" className={`auth${this.state.login}`} id="radioSignup">
+              signup
+            </div>
+          </div>
+          <Auth className="Auth" signup={this.state.signup} />
+        </div>
+    </div>
         {/* Carousel */}
         <div id="myCarousel" className="carousel slide" data-ride="carousel">
-
-
           {/* <!-- Wrapper for slides --> */}
-
           <div  className="carousel-inner">
-
             <div className="item active">
               <img src="https://image.ibb.co/h2gXmH/12.png" />
             </div>
@@ -109,9 +120,7 @@ class LoginSignup extends Component {
             <div className="item">
               <img src="https://image.ibb.co/nGj7Lc/9.png" />
             </div>
-
           </div>
-
           {/* <!-- Left and right controls --> */}
           <a className="left carousel-control" href="#myCarousel" data-slide="prev">
             <span className="glyphicon glyphicon-chevron-left"></span>
@@ -122,6 +131,7 @@ class LoginSignup extends Component {
             <span className="sr-only">Next</span>
           </a>
         </div>
+
 
       </div>
     )
