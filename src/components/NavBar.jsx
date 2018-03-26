@@ -32,8 +32,8 @@ class Hamburger extends Component {
         <nav>
           <div id="menuToggle" className={toggled}>
 
-             <div id="logo-small">
-              <img src="./ex-grave-logo.svg" />
+            <div id="logo-small">
+              <img src="./ex-grave-logo-white.svg" />
             </div>
 
             <div onClick={this.handleMenuToggle} className={toggled}>

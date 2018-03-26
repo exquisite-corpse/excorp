@@ -27,7 +27,8 @@
 
 
 #userSection{
-  margin-top: 2em;
+  margin-top: 3em;
+  color: #FFF275;
 }
 
 #userLinks p{
@@ -35,9 +36,15 @@
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 1em;
+  font-color: #FFF275;
+
   /*margin-left: 3em;*/
   /*font-family: monospace;*/
   font-size: 25px;
+}
+
+#userLinks link{
+  color: #FF8C42;
 }
 
 /*for text items in hamburger menu*/
@@ -45,7 +52,7 @@
   color: #ffd589;
 }
 #userLinks a:hover {
-  color: #f9fc97;
+  color: #FF8C42;
 }
 
 #menuToggle a{

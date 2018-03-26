@@ -8,7 +8,7 @@
 }
 
 #allmy-header{
-  margin-top: 2em;
+  margin-top: 1em;
   align-content: center;
   justify-content: center;
   text-align: center;
@@ -120,24 +120,33 @@ form div {
   padding-left: 10%;
 }
 
+#myCarousel{
+  margin-top: 4em;
+}
+
 .carousel-indicators{
   cursor: default;
   pointer-events: none;
 }
 
-
 .carousel-inner > .item > img{
 margin:auto;
-width:80%
+width:100%
 }
 
 .carousel-control.left {
+  position: relative;
+  left: -3em;
+  top: -10em;
   width: auto;
   background-image: none;
   color: white;
 }
 
 .carousel-control.right {
+  position: relative;
+  right: -20em;
+  top: -10em;
   width: auto;
   background-image: none;
   color: white;
@@ -168,80 +177,9 @@ width:80%
 
 
 #logo-small{
-  z-index: 20000;
-  color: white;
+  /*z-index: 9999;*/
+  width:  300px;
 }
-
-/*#navlistleft{
-  flex-direction: row;
-  color: ghostwhite;
-  text-decoration: none;
-}
-
-#navlist {
-  flex-direction: row;
-  color: ghostwhite;
-  text-decoration: none;
-}
-
-.nav-item{
-  flex-direction: row;
-  color: ghostwhite;
-  text-decoration: none;
-}
-
-
-#navlist .container-fluid {
-  flex-wrap: nowrap;
-  background-color: #5d6268;
-  font-size: 15px;
-  margin: 0;
-  letter-spacing: 1px;
-/*  padding-top: 5px;
-  padding-bottom: 5px;*/
- /* color: ghostwhite;
-  text-decoration: none;
-}
-
-#navlist a {
-  color: ghostwhite;
-  text-decoration: none;
-}
-
-.navbar-default {
-    background-color: #5d6268;
-    border-color: #5d6268;
-}
-*/
-/*--------------kb nav edits------------------*/
-/*button.navbar-toggle .collapsed {
-    margin-left: 1em;
-}
-.navbar>.container, .navbar>.container-fluid {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-span.icon-bar{
-  width: 40px;
-  height: 6px;
-  padding:2px;
-}
-button.navbar-toggle {
-  position: relative;
-  float: center;
-  padding: 5px 5px;
-  margin: 5px;
-  background-color: lightgrey;
-  border: none;
-  border-radius: 4px;
-}*/
-/*--------------kb nav edits------------------*/
-
 
 #page-header {
   display: flex;
@@ -348,9 +286,8 @@ button.navbar-toggle {
 /*----------------------------*/
 #main-container-landing {
   background: linear-gradient(to bottom right, #4665C9, yellow);
-}
-#main-container-landing h1{
-  margin-top: 3em;
+  height: 100%;
+  min-height: 100vh;
 }
 
 #landing {
@@ -358,7 +295,8 @@ button.navbar-toggle {
   justify-content: center;
   align-items: center;
   margin:1em auto;
-  width: 90vw;
+  font-size: 14px;
+  width: 100vw;
 }
 
 #google-auth{
@@ -375,6 +313,9 @@ button.navbar-toggle {
   margin-bottom: 1em;
   padding-left: 3em;
   border-left: 1px solid white;
+  font-size: 14px;
+  width: 60%;
+  max-width: 400px;
 }
 
 .signinup-form-item{
@@ -387,14 +328,14 @@ button.navbar-toggle {
   font-size: 14px;
   margin-right: .5em;
 }
-.signinup-form-item input{
-  width: 175px;
+.signinup-form-item input {
+  width: 210px;
 }
 
 /*----------------------------*/
 #radioButtons {
   display: flex;
-  width: 275px;
+  width: 100%;
   padding-bottom: 20px;
   color: white;
   /*margin-left: 2em;*/
@@ -416,7 +357,7 @@ button.navbar-toggle {
 }
 .authfalse{
   background-color: #A7A5C6;
-  color: grey;
+  color: #4665C9;
 }
 .authfalse:hover {
   color: #d7e02f;

@@ -4,7 +4,7 @@ import {TextInput, Bttn, GoogleAuth, Auth} from './index'
 import db from '../db/db_config'
 import firebase from 'firebase'
 import {withAuth} from 'fireview'
-import { Button, ButtonToolbar, ToggleButton, ToggleButtonGroup} from 'react-bootstrap'
+import { Button, ButtonToolbar} from 'react-bootstrap'
 
 class LoginSignup extends Component {
 
@@ -46,11 +46,11 @@ class LoginSignup extends Component {
             <div id="logo">
               <img src="./ex-grave-logo.svg" />
             </div>
-    <div id="landing">
+      <div id="landing">
         <div id="google-auth">
         <p>Sign Up or Log In with Google: </p>
           <Button
-            className="btn btn-primary btn-block"
+            className="btn btn-lg btn-primary btn-block"
             type="submit" value={"signup/login with Google"}
             onClick={GoogleAuth}>
               Google Verify
@@ -59,10 +59,10 @@ class LoginSignup extends Component {
 
         <div id="signinup">
           <div id="radioButtons">
-            <div onClick={this.handleLoginClick} className="kbRadio" className={`auth${this.state.signup}`} id="radioLogin">
+            <div onClick={this.handleSignupClick} className="kbRadio" className={`auth${this.state.signup}`} id="radioLogin">
               login
             </div>
-            <div onClick={this.handleSignupClick} className="kbRadio" className={`auth${this.state.login}`} id="radioSignup">
+            <div onClick={this.handleLoginClick} className="kbRadio" className={`auth${this.state.login}`} id="radioSignup">
               signup
             </div>
           </div>

@@ -129,7 +129,7 @@ export default class Signup extends Component {
               </div>
 
             <div id="signingup">
-              <Button className="btn btn-primary btn-block" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}
+              <Button className="btn btn-primary btn-lg btn-block" type="submit" value={signUpTrueBool ? "Create Account" : "Log In"}>{signUpTrueBool ? "Create Account" : "Log In"}
               </Button>
             </div>
           </form>
