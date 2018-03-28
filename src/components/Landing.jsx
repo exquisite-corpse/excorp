@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { BrowswerRouter as Router, Route } from 'react-router-dom'
-import {TextInput, Bttn, GoogleAuth, Auth} from './index'
+import {TextInput, Bttn, GoogleAuth, Auth, About} from './index'
 import db from '../db/db_config'
 import firebase from 'firebase'
 import {withAuth} from 'fireview'
@@ -47,6 +47,7 @@ class LoginSignup extends Component {
               <img src="./ex-grave-logo.svg" />
             </div>
       <div id="landing">
+      <About />
         <div id="google-auth">
         <p>Sign Up or Log In with Google: </p>
           <Button
@@ -55,6 +56,7 @@ class LoginSignup extends Component {
             onClick={GoogleAuth}>
               Google Verify
           </Button>
+
         </div>
 
         <div id="signinup">

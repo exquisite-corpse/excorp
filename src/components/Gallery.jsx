@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import firebase from 'firebase'
 import db from '../db/db_config'
 import { Map, withAuth } from 'fireview'
 
