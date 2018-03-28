@@ -61,10 +61,10 @@ class LoginSignup extends Component {
 
         <div id="signinup">
           <div id="radioButtons">
-            <div onClick={this.handleSignupClick} className="kbRadio" className={`auth${this.state.signup}`} id="radioLogin">
+            <div onClick={this.handleLoginClick} className="kbRadio" className={`auth${this.state.login}`} id="radioLogin">
               login
             </div>
-            <div onClick={this.handleLoginClick} className="kbRadio" className={`auth${this.state.login}`} id="radioSignup">
+            <div onClick={this.handleSignupClick} className="kbRadio" className={`auth${this.state.signup}`} id="radioSignup">
               signup
             </div>
           </div>
