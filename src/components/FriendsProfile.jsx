@@ -85,32 +85,31 @@ class FriendsProfile extends Component {
     // console.log(user)
     return (
 
-      <div id="friends-container-profile" className="row justify-content-center">
+      <div id="friends-container-profile">
 
 
-      <div className="profile-header" className="col-xs-4" >
+      <div className="profile-header-container">
         <div className="profile-picture" >
             <img src={pickRandomProfile()} />
         </div>
         <div className="profile-info">
-            <h5><strong>Name: </strong>{user.username}</h5>
-            <h5><strong>Email: </strong>{user.email}</h5>
+            <h2>Name:{user.username}</h2>
+            <h2>Email:{user.email}</h2>
           </div>
         </div>
 
-        <div  className="col-xs-4" >
+        <div >
           {friends &&
-            <h5>
-              <p className="friendReqs">Your Friend's Friends:</p>
+
               <div className="list-group" >
+              <div className="profile-header">
+                <h2 >Your Friend's Friends:</h2>
+              </div>
                 {
                   friends.map(friend => {
                     if(friend.id == currentUserId)
                     return (
                             null
-                      // <div className="list-group-item" key={friend.id}>
-                      //   <Link to={"/profile"}>{friend.username}</Link>
-                      // </div>
                     )
                     else
                     return (
@@ -122,20 +121,20 @@ class FriendsProfile extends Component {
                   })
                 }
               </div>
-            </h5>}
+            }
         </div>
-       { user.id &&  <div>
-      <h1 id="allmy-header">{`All ${user.username}'s Drawings:`}</h1>
-
-      <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.id}`, '==', true)}
-        Render={Drawing}
-        Empty={() => <div id="you-dont-have-gallery">
-        <h3 >{`Your friend ${user.username} doesn't have any finished drawings...`}</h3>
-        <Link to={`/new`}> {`Click here to start a new game so you can send it to ${user.username}`}</Link>
-      </div>} />
-
-
-    </div>}
+       {
+          user.id &&
+          <div className="profile-header" >
+            <h2 >{`All of ${user.username}'s Drawings:`}</h2>
+            <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.id}`, '==', true)}
+            Render={Drawing}
+            Empty={() => <div id="you-dont-have-gallery">
+            <h3 >{`Your friend ${user.username} doesn't have any finished drawings...`}</h3>
+            <Link to={`/new`}> {`Click here to start a new game so you can send it to ${user.username}`}</Link>
+            </div>} />
+          </div>
+        }
       </div>
     )
   }

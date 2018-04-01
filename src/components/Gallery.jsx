@@ -13,7 +13,7 @@ export const Panel = (props) => {
 
 export function sortedPanelIds(dwgsPanels) {
   //here we want to map through the panels object inside a drawing and sort them by their order
-  console.log("SORTED IS RUNNING")
+  // console.log("SORTED IS RUNNING")
   const keyVals = Object.entries(dwgsPanels)
   const sortedKeyVals = keyVals.sort(([x, a], [y, b]) => {
     return (a - b)
@@ -31,9 +31,9 @@ export const Drawing = (props) => {
     ? <div className="container" className="dwg-container">
       {
        title && <div id="gallery-header">
-          <h2>{title}</h2>
-          <h5>{`Category: ${category}`}</h5>
-          <h5>Artists: </h5>
+          <h3>{title}</h3>
+          <h4>{`Category: ${category}`}</h4>
+          <h4>Artists: </h4>
             {
               artistIdsArr.map(id => <Map key={id} from={db.collection('users').doc(id)}
                 Empty={() => 'Empty.'}
@@ -60,7 +60,7 @@ const Gallery = ({ _user: user }) => {
       <Map from={allDrawings.where('completed', '==', true).where(`artists.${user.uid}`, '==', true)}
         Render={Drawing}
         Empty={() => <div id="you-dont-have-gallery">
-        <h3 >You don't have any finished drawings...</h3>
+        <h1 >You don't have any finished drawings...</h1>
         <Link to={`/new`}>Click here to Create a New Game
       </Link>
       </div>} />

@@ -118,27 +118,27 @@ export default class PublicProfile extends Component {
     //console.log(user)
     return (
 
-      <div id="main-container-profile" className="row justify-content-center">
+      <div id="main-container-profile">
 
-            <div className="profile-header" className="col-xs-4" >
+            <div className="profile-header-container" >
               <div className="profile-picture">
                 <img src={pickRandomProfile()} />
               </div>
               <div className="profile-info">
-                <h5>Name: {user.username}</h5>
-                <h5>Email: {user.email}</h5>
+                <h2>Name: {user.username}</h2>
+                <h2>Email: {user.email}</h2>
               </div>
             </div>
 
-      <div className="col-xs-4"  >
+      <div >
           {requests &&
             <div >
 
-            <div className="row justify-content-left">
-              <p className="friendReqs" >Friend Requests:</p>
+            <div className="profile-header">
+              <h2 >Friend Requests:</h2>
             </div>
 
-              <div className="row justify-content-left">
+              <div >
 
 
                 {
@@ -152,11 +152,11 @@ export default class PublicProfile extends Component {
 
 
                          <span >
-                            <button onClick={() => this.handleClick(request)} className="btn btn-sm btn-primary aprvDecline">
+                            <button onClick={() => this.handleClick(request)} className="btn btn-lg btn-primary aprvDecline">
                               <span className="glyphicon glyphicon-plus"></span> Approve
                             </button>
 
-                            <button onClick={() => this.handleDecline(request)} className="btn btn-sm btn-primary btn-danger aprvDecline">
+                            <button onClick={() => this.handleDecline(request)} className="btn btn-primary btn-danger aprvDecline">
                               <span className="glyphicon glyphicon-plus"></span> Decline
                             </button>
                           </span>
@@ -171,8 +171,8 @@ export default class PublicProfile extends Component {
             </div>}
           {friends &&
             <div>
-            <div className="row justify-content-left">
-              <p className="myFriends">My Friends:</p>
+            <div className="profile-header">
+              <h2>My Friends:</h2>
             </div>
 
               <div className="list-group">

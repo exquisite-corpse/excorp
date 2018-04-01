@@ -128,7 +128,7 @@ class PassPanel extends Component {
               value="pass your panel"
             >Pass Your Panel</Button>
           ) : (
-            <Button id="span-buttons" type="button" disabled>
+            <Button className="btn-lg" id="span-buttons" type="button" disabled>
               Please choose the next artist!
             </Button>
           )}

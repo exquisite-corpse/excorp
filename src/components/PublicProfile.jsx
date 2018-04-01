@@ -77,9 +77,9 @@ export default class PublicProfile extends Component{
     return(
 
         <div id="follow-friend" className="row justify-content-center">
-        <div className="col-xs-4">
-            <div className="col-xs-4" className="list-group-item" >
-              <p className="col-xs-4" className="friendReqs">username: { user.username }</p>
+        <div >
+            <div  className="list-group-item" >
+              <p  className="friendReqs">username: { user.username }</p>
               <p className="friendReqs">email: { user.email }</p>
             </div>
 
@@ -89,9 +89,8 @@ export default class PublicProfile extends Component{
                 {requested
                 ? <span className="glyphicon glyphicon-plus"> Requested</span>
                 : <button
-                    className="col-xs-2"
                     onClick ={this.handleClick}
-                    className="btn btn-primary btn-block"
+                    className="btn btn-lg btn-primary btn-block"
                   >
                   <span className="glyphicon glyphicon-plus"></span>
                     follow

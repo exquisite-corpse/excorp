@@ -80,14 +80,14 @@ export default class SearchBar extends Component {
       <div >
         <h2 id="user-header">Find a Friend:</h2>
         <div id="search-cols">
-        <form className="form-group" className="col-sm-3">
+        <form className="form-group">
           <input
             className="form-control"
             placeholder="Search for a user"
             onChange={this.handleChange}
           />
         </form>
-        <div id="search-container" className="list-group" className="col-sm-6">
+        <div id="search-container" className="list-group">
           {
             filteredUsers.map(user => {
               console.log(user.isFriend)

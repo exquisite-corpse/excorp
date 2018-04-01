@@ -1,4 +1,4 @@
- #body-container {
+#body-container {
   margin: 0;
   padding: 0;
   font-family: 'Roboto Slab', serif;
@@ -90,22 +90,6 @@ form div {
   align-items: center;
 }
 
-.profile-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 10px;
-}
-
-.profile-picture img {
-  width: 100px;
-  height: 150px;
-}
-
-.profile-info {
-  padding: 10px;
-  text-align: left;
-}
 
 .slide {
   margin: 0 auto;
@@ -135,18 +119,14 @@ width:100%
 }
 
 .carousel-control.left {
-  position: relative;
-  left: -3em;
-  top: -10em;
+  margin: -2em;
   width: auto;
   background-image: none;
   color: white;
 }
 
 .carousel-control.right {
-  position: relative;
-  right: -20em;
-  top: -10em;
+  margin: -2em;
   width: auto;
   background-image: none;
   color: white;
@@ -178,7 +158,8 @@ width:100%
 
 #logo-small{
   /*z-index: 9999;*/
-  width:  300px;
+  width:  600px;
+  margin-right: 1em;
 }
 
 #page-header {
@@ -201,31 +182,6 @@ width:100%
 }
 
 
-.friendReqs{
-  margin: 2em;
-}
-.myFriends{
-  margin: 2em;
-}
-
-
-
-#main-container-profile {
-  margin: 3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-
-#friends-container-profile {
-  margin: 3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 
 #main-container-wips {
@@ -366,16 +322,22 @@ width:100%
 }
 /*----------------------------*/
 
-#create-game-bttn {
+/*#create-game-bttn {
   margin: 3em;
-}
+}*/
+
+
 
 #new-game-form {
-  font-size: 16px;
+  font-size: 30px;
   text-align: center;
   margin: 0 auto;
   width: 50%;
   max-width: 400px;
+}
+
+#new-game-form input{
+  font-size: 20px;
 }
 
 #create-game-bttn {
@@ -394,7 +356,6 @@ width:100%
   font-size: 20px;
   padding: 30px;
   text-decoration: underline;
-
 }
 
 .list-group {
@@ -403,6 +364,11 @@ width:100%
   justify-content: center;
   align-content: center;
   text-align: center;
+  font-size: 20px;
+}
+
+.list-group-item{
+  font-size: 20px;
 }
 
 #search-container a {
@@ -411,26 +377,111 @@ width:100%
   text-align: center;
 }
 
+#search-container{
+  width:100%;
+  font-size: 16px;
+}
+.profile-header h2{
+  font-size: 30px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  font-size: 30px;
+  text-align: center;
+}
+
 #user-header {
-  margin: 3em;
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  font-size: 30px;
   justify-content: center;
   align-content: center;
   text-align: center;
 }
 
+#search-cols input{
+  font-size: 20px;
+  text-align: center;
+}
 #search-cols{
-  margin: 5em;
-  justify-content: center;
+  max-width: 375px;
+  font-size: 24px;
+/*  margin-left: 5em;
+  margin-right: 5em;*/
+  margin: auto;
+  display: flex;
+  flex-direction: column;
   align-content: center;
+  /*justify-content: center;*/
+  /*align-items: center;*/
+}
+
+.friendReqs{
+  margin: 2em;
+}
+.myFriends{
+  margin: 2em;
+}
+
+#main-container-profile {
+  margin: 3em auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  max-width: 500px;
+  /*align-items: center;*/
+}
+.profile-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  font-size: 20px;
+}
+.profile-picture img {
+  width: 100px;
+  height: 150px;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  text-align: left;
+}
+
+#friends-container-profile {
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#follow-friend{
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
-.App a{
+
+
+/*#search-cols{
+  margin: 5em;
+  justify-content: center;
+  align-content: center;
+}*/
+
+
+a.App{
   text-align: center;
   text-decoration: none;
 }
 
-#root a{
+a#root{
   text-align: center;
   text-decoration: none;
 }
@@ -443,3 +494,6 @@ width:100%
   color: black;
 }
 
+button {
+  font-size: 22px;
+}
