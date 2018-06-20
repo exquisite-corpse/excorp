@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import * as firebase from 'firebase'
@@ -16,9 +15,3 @@ ReactDOM.render(
 registerServiceWorker()
 
 export default firebase
-
-
-
-{/* <BrowserRouter>
-<App />
-</BrowserRouter> */}

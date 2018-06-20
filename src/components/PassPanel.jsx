@@ -1,11 +1,10 @@
 import React, { Component } from "react"
 import db from "../db/db_config"
-import Bttn from "./Bttn"
-import { Redirect } from "react-router-dom"
+
 import firebase from "firebase"
 import { withAuth, Map } from "fireview"
 import { Button } from 'react-bootstrap'
-const allDrawings = db.collection("drawings")
+// const allDrawings = db.collection("drawings")
 const allPanels = db.collection("panels")
 
 
